@@ -77,43 +77,7 @@ export default {
       max: 30000
     };
   },
-  methods: {
-    test() {
-      console.log(this.sidewalk);
-      return this.sidewalk;
-    }
-  },
   computed: {
-    calculatePeople: function() {
-      // var counter = 0;
-      // if (this.offsetArray.length == 0) {
-      //   return 0;
-      // } else {
-      //   for (var i = 0; i < this.offsetArray.length; i++) {
-      //     if (this.offsetArray[i].fill == "grey") {
-      //       counter++;
-      //     }
-      //   }
-      //   var total = this.sidewalk * counter * 2;
-      //   //total = (total / this.max) * 100;
-      //   return total;
-      // }
-    },
-    calculateBikeLane: function() {
-      var counter = 0;
-      // if (this.offsetArray.length == 0) {
-      //   return 0;
-      // } else {
-      //   this.counter = 0;
-      //   for (var i = 0; i < this.offsetArray.length; i++) {
-      //     if (this.offsetArray[i].fill == "blue") {
-      //       counter++;
-      //     }
-      //   }
-      //   var total = this.bike * counter * 2;
-      //   return total;
-      // }
-    },
     calculateTransit: function() {
       var counter = 0;
       if (this.offsetArray.length == 0) {

@@ -1,92 +1,274 @@
 <template>
   <div id="roadwayDesigner">
-    <modal name="hello-world" width="700px" height=auto :scrollable="true">
+    <modal name="hello-world" width="700px" height="auto" :scrollable="true">
       <Info :infoType="infoType"></Info>
     </modal>
     <div id="elementPicker">
-      <slider id="slider" v-if="slideHide" :totalWidth="this.totalWidth" :name="this.name" v-on:onClick="updateTotal($event, color, name)" v-on:backbtn="back($event)" :style="{height: (window.height*0.3)+'px'}"></slider>
+      <slider
+        id="slider"
+        v-if="slideHide"
+        :totalWidth="this.totalWidth"
+        :name="this.name"
+        v-on:onClick="updateTotal($event, color, name)"
+        v-on:backbtn="back($event)"
+        :style="{height: (window.height*0.3)+'px'}"
+      ></slider>
       <div id="elementBtn" v-if="!slideHide">
         <b>
           <p>Select Road Element:</p>
         </b>
         <v-btn fab dark small color="grey" @click="show('sidewalkInfo')">
-         <v-icon >i</v-icon>
-        </v-btn>
-        Sidewalk Elements:
+          <v-icon>i</v-icon>
+        </v-btn>Sidewalk Elements:
         <br>
-        <b-button @click="smartButtons('Commercial Use Extension'); slideHide = !slideHide; clearUndo();" id="Sidewalk" class="buttonStyle" :variant="commercialExtensionVarient" :disabled="disabled.CommercialExtension">Commercial Use Extension</b-button>
-        <b-button @click="smartButtons('Residential'); slideHide = !slideHide; clearUndo();" id="Sidewalk" class="buttonStyle" :variant="residentialVarient" :disabled="disabled.Residential">Residential</b-button>
-        <b-button @click="smartButtons('Commercial'); slideHide = !slideHide; clearUndo();" id="Sidewalk" class="buttonStyle" :variant="commercialVarient" :disabled="disabled.Commercial">Commercial</b-button>
-        <b-button @click="smartButtons('Street Furniture Zone'); slideHide = !slideHide; clearUndo();" id="Sidewalk" class="buttonStyle" :variant="furnitureVarient" :disabled="disabled.StreetFurniture">Street Furniture Zone</b-button>
+        <b-button
+          @click="smartButtons('Commercial Use Extension'); slideHide = !slideHide; clearUndo();"
+          id="Sidewalk"
+          class="buttonStyle"
+          :variant="commercialExtensionVarient"
+          :disabled="disabled.CommercialExtension"
+        >Commercial Use Extension</b-button>
+        <b-button
+          @click="smartButtons('Residential'); slideHide = !slideHide; clearUndo();"
+          id="Sidewalk"
+          class="buttonStyle"
+          :variant="residentialVarient"
+          :disabled="disabled.Residential"
+        >Residential</b-button>
+        <b-button
+          @click="smartButtons('Commercial'); slideHide = !slideHide; clearUndo();"
+          id="Sidewalk"
+          class="buttonStyle"
+          :variant="commercialVarient"
+          :disabled="disabled.Commercial"
+        >Commercial</b-button>
+        <b-button
+          @click="smartButtons('Street Furniture Zone'); slideHide = !slideHide; clearUndo();"
+          id="Sidewalk"
+          class="buttonStyle"
+          :variant="furnitureVarient"
+          :disabled="disabled.StreetFurniture"
+        >Street Furniture Zone</b-button>
         <!-- <b-button @click="naming('Line'), smartButtons()" class="buttonStyle" :variant="'outline-secondary'"  >Line</b-button> -->
         <br>
         <v-btn fab dark small color="green" @click="show('bufferInfo')">
-         <v-icon >i</v-icon>
-        </v-btn>
-        Buffer Zone:
+          <v-icon>i</v-icon>
+        </v-btn>Buffer Zone:
         <br>
-        <b-button @click="smartButtons('Utilities'); slideHide = !slideHide; clearUndo();" id="Landscaping (Trees)" class="buttonStyle" :variant="bufferVarient" :disabled="disabled.Utilities">Utilities</b-button>
-        <b-button @click="smartButtons('No Vegetation'); slideHide = !slideHide; clearUndo();" class="buttonStyle" :variant="bufferVarient" :disabled="disabled.NoVegetation">No Vegetation</b-button>
-        <b-button @click="smartButtons('Vegetation'); slideHide = !slideHide; clearUndo();" id="Landscaping (Trees)" class="buttonStyle" :variant="bufferVarient" :disabled="disabled.Vegetation">Vegetation</b-button>
+        <b-button
+          @click="smartButtons('Utilities'); slideHide = !slideHide; clearUndo();"
+          id="Landscaping (Trees)"
+          class="buttonStyle"
+          :variant="bufferVarient"
+          :disabled="disabled.Utilities"
+        >Utilities</b-button>
+        <b-button
+          @click="smartButtons('No Vegetation'); slideHide = !slideHide; clearUndo();"
+          class="buttonStyle"
+          :variant="bufferVarient"
+          :disabled="disabled.NoVegetation"
+        >No Vegetation</b-button>
+        <b-button
+          @click="smartButtons('Vegetation'); slideHide = !slideHide; clearUndo();"
+          id="Landscaping (Trees)"
+          class="buttonStyle"
+          :variant="bufferVarient"
+          :disabled="disabled.Vegetation"
+        >Vegetation</b-button>
         <br>
         <v-btn fab dark small color="blue" @click="show('cycleInfo')">
-         <v-icon >i</v-icon>
-        </v-btn>
-        Cycling Elements:
+          <v-icon>i</v-icon>
+        </v-btn>Cycling Elements:
         <br>
-        <b-button @click="smartButtons('Cycle Lane'); slideHide = !slideHide; clearUndo();" class="buttonStyle" :variant="cycleVarient" :disabled="disabled.CycleLane">Cycle Lane</b-button>
-        <b-button @click="smartButtons('Cycle Track'); slideHide = !slideHide; clearUndo();" class="buttonStyle" :variant="cycleVarient" :disabled="disabled.CycleTrack">Cycle Track</b-button>
-        <b-button @click="smartButtons('Cycle Street'); slideHide = !slideHide; clearUndo();" class="buttonStyle" :variant="cycleVarient" :disabled="disabled.CycleStreet">Cycle Street</b-button>
-        <b-button @click="smartButtons('Protected Cycle Track'); slideHide = !slideHide; clearUndo();" class="buttonStyle" :variant="cycleVarient" :disabled="disabled.ProtectedCycleTrack">Protected Cycle Track</b-button>
-        <b-button @click="smartButtons('Bidirectional Cycle Track'); slideHide = !slideHide; clearUndo();" class="buttonStyle" :variant="cycleVarient" :disabled="disabled.BidirectionalCycleTrack">Bidirectional Cycle Track</b-button>
-        <b-button @click="smartButtons('Raised Cycle Track'); slideHide = !slideHide; clearUndo();" class="buttonStyle" :variant="cycleVarient" :disabled="disabled.RaisedCycleTrack">Raised Cycle Track</b-button>
-        <b-button @click="smartButtons('Curbside Buffered Cycle Lane'); slideHide = !slideHide; clearUndo();" class="buttonStyle" :variant="cycleVarient" :disabled="disabled.CurbsideBufferedCycleLane">Curbside Buffered Cycle Lane</b-button>
-        <b-button @click="smartButtons('Contraflow Cycle Street'); slideHide = !slideHide; clearUndo();" class="buttonStyle" :variant="cycleVarient" :disabled="disabled.ContraflowCycleStreet">Contraflow Cycle Street</b-button>
+        <b-button
+          @click="smartButtons('Cycle Lane'); slideHide = !slideHide; clearUndo();"
+          class="buttonStyle"
+          :variant="cycleVarient"
+          :disabled="disabled.CycleLane"
+        >Cycle Lane</b-button>
+        <b-button
+          @click="smartButtons('Cycle Track'); slideHide = !slideHide; clearUndo();"
+          class="buttonStyle"
+          :variant="cycleVarient"
+          :disabled="disabled.CycleTrack"
+        >Cycle Track</b-button>
+        <b-button
+          @click="smartButtons('Cycle Street'); slideHide = !slideHide; clearUndo();"
+          class="buttonStyle"
+          :variant="cycleVarient"
+          :disabled="disabled.CycleStreet"
+        >Cycle Street</b-button>
+        <b-button
+          @click="smartButtons('Protected Cycle Track'); slideHide = !slideHide; clearUndo();"
+          class="buttonStyle"
+          :variant="cycleVarient"
+          :disabled="disabled.ProtectedCycleTrack"
+        >Protected Cycle Track</b-button>
+        <b-button
+          @click="smartButtons('Bidirectional Cycle Track'); slideHide = !slideHide; clearUndo();"
+          class="buttonStyle"
+          :variant="cycleVarient"
+          :disabled="disabled.BidirectionalCycleTrack"
+        >Bidirectional Cycle Track</b-button>
+        <b-button
+          @click="smartButtons('Raised Cycle Track'); slideHide = !slideHide; clearUndo();"
+          class="buttonStyle"
+          :variant="cycleVarient"
+          :disabled="disabled.RaisedCycleTrack"
+        >Raised Cycle Track</b-button>
+        <b-button
+          @click="smartButtons('Curbside Buffered Cycle Lane'); slideHide = !slideHide; clearUndo();"
+          class="buttonStyle"
+          :variant="cycleVarient"
+          :disabled="disabled.CurbsideBufferedCycleLane"
+        >Curbside Buffered Cycle Lane</b-button>
+        <b-button
+          @click="smartButtons('Contraflow Cycle Street'); slideHide = !slideHide; clearUndo();"
+          class="buttonStyle"
+          :variant="cycleVarient"
+          :disabled="disabled.ContraflowCycleStreet"
+        >Contraflow Cycle Street</b-button>
         <br>
         <v-btn fab dark small color="orange" @click="show('transitInfo')">
-         <v-icon >i</v-icon>
-        </v-btn>
-        Transit Elements:
+          <v-icon>i</v-icon>
+        </v-btn>Transit Elements:
         <br>
-        <b-button @click="smartButtons('Shared Transit Lane'); slideHide = !slideHide; clearUndo();" class="buttonStyle" :variant="transitVarient" :disabled="disabled.SharedTransitLane">Shared Transit Lane</b-button>
-        <b-button @click="smartButtons('Transit Stop'); slideHide = !slideHide; clearUndo();" class="buttonStyle" :variant="transitVarient" :disabled="disabled.TransitStop">Transit Stop</b-button>
-        <b-button @click="smartButtons('Side Running Dedicated Transit Lane'); slideHide = !slideHide; clearUndo();" class="buttonStyle" :variant="transitVarient" :disabled="disabled.SideRunningDedicatedTransitLane">Side Running Dedicated Transit Lane</b-button>
-        <b-button @click="smartButtons('Centre Running Transit Lane - Centre Boarding'); slideHide = !slideHide; clearUndo();" class="buttonStyle" :variant="centertransitVarient" :disabled="disabled.CenterRunningTransitLaneCenterBoarding">Centre Running Transit Lane - Centre Board</b-button>
-        <b-button @click="smartButtons('Centre Running Transit Lane – Side Boarding'); slideHide = !slideHide; clearUndo();" class="buttonStyle" :variant="centertransitVarient" :disabled="disabled.CenterRunningTransitLaneSideBoarding">Centre Running Transit Lane – Side Board</b-button>
+        <b-button
+          @click="smartButtons('Shared Transit Lane'); slideHide = !slideHide; clearUndo();"
+          class="buttonStyle"
+          :variant="transitVarient"
+          :disabled="disabled.SharedTransitLane"
+        >Shared Transit Lane</b-button>
+        <b-button
+          @click="smartButtons('Transit Stop'); slideHide = !slideHide; clearUndo();"
+          class="buttonStyle"
+          :variant="transitVarient"
+          :disabled="disabled.TransitStop"
+        >Transit Stop</b-button>
+        <b-button
+          @click="smartButtons('Side Running Dedicated Transit Lane'); slideHide = !slideHide; clearUndo();"
+          class="buttonStyle"
+          :variant="transitVarient"
+          :disabled="disabled.SideRunningDedicatedTransitLane"
+        >Side Running Dedicated Transit Lane</b-button>
+        <b-button
+          @click="smartButtons('Centre Running Transit Lane - Centre Boarding'); slideHide = !slideHide; clearUndo();"
+          class="buttonStyle"
+          :variant="centertransitVarient"
+          :disabled="disabled.CenterRunningTransitLaneCenterBoarding"
+        >Centre Running Transit Lane - Centre Board</b-button>
+        <b-button
+          @click="smartButtons('Centre Running Transit Lane – Side Boarding'); slideHide = !slideHide; clearUndo();"
+          class="buttonStyle"
+          :variant="centertransitVarient"
+          :disabled="disabled.CenterRunningTransitLaneSideBoarding"
+        >Centre Running Transit Lane – Side Board</b-button>
         <br>
         <v-btn fab dark small color="black" @click="show('roadInfo')">
-         <v-icon >i</v-icon>
-        </v-btn>
-        Vehicle Lanes:
+          <v-icon>i</v-icon>
+        </v-btn>Vehicle Lanes:
         <br>
-        <b-button @click="smartButtons('Curb Lane'); slideHide = !slideHide; clearUndo();" class="buttonStyle" :variant="curbLaneVarient" :disabled="disabled.CurbLane">Curb Lane</b-button>
-        <b-button @click="smartButtons('Passing Lane'); slideHide = !slideHide; clearUndo();" class="buttonStyle" :variant="passingLaneVarient" :disabled="disabled.PassingLane" >Passing Lane</b-button>
-        <b-button @click="smartButtons('Large Vehicle Lane'); slideHide = !slideHide; clearUndo();" class="buttonStyle" :variant="largeVehicleLaneVarient" :disabled="disabled.LargeVehicleLane" >Large Vehicle Lane</b-button>
-        <b-button @click="smartButtons('Bidirectional Travel Lane'); slideHide = !slideHide; clearUndo();" class="buttonStyle" :variant="bidirectionalTravelLaneVarient" :disabled="disabled.BidirectionalTravelLane" >Bidirectional Travel Lane</b-button>
-        <b-button @click="smartButtons('Turning Lane'); slideHide = !slideHide; clearUndo();" class="buttonStyle" :variant="turningLaneVarient" :disabled="disabled.TurningLane" >Turning Lane</b-button>
-        <b-button @click="smartButtons('Freight Travel Lane'); slideHide = !slideHide; clearUndo();" class="buttonStyle" :variant="freightTravelLaneVarient" :disabled="disabled.FreightTravelLane" >Freight Travel Lane</b-button>
-        <b-button @click="smartButtons('Parking Lane'); slideHide = !slideHide; clearUndo();" class="buttonStyle" :variant="parkingLaneVarient" :disabled="disabled.ParkingLane" >Parking Lane</b-button>
-        
+        <b-button
+          @click="smartButtons('Curb Lane'); slideHide = !slideHide; clearUndo();"
+          class="buttonStyle"
+          :variant="curbLaneVarient"
+          :disabled="disabled.CurbLane"
+        >Curb Lane</b-button>
+        <b-button
+          @click="smartButtons('Passing Lane'); slideHide = !slideHide; clearUndo();"
+          class="buttonStyle"
+          :variant="passingLaneVarient"
+          :disabled="disabled.PassingLane"
+        >Passing Lane</b-button>
+        <b-button
+          @click="smartButtons('Large Vehicle Lane'); slideHide = !slideHide; clearUndo();"
+          class="buttonStyle"
+          :variant="largeVehicleLaneVarient"
+          :disabled="disabled.LargeVehicleLane"
+        >Large Vehicle Lane</b-button>
+        <b-button
+          @click="smartButtons('Bidirectional Travel Lane'); slideHide = !slideHide; clearUndo();"
+          class="buttonStyle"
+          :variant="bidirectionalTravelLaneVarient"
+          :disabled="disabled.BidirectionalTravelLane"
+        >Bidirectional Travel Lane</b-button>
+        <b-button
+          @click="smartButtons('Turning Lane'); slideHide = !slideHide; clearUndo();"
+          class="buttonStyle"
+          :variant="turningLaneVarient"
+          :disabled="disabled.TurningLane"
+        >Turning Lane</b-button>
+        <b-button
+          @click="smartButtons('Freight Travel Lane'); slideHide = !slideHide; clearUndo();"
+          class="buttonStyle"
+          :variant="freightTravelLaneVarient"
+          :disabled="disabled.FreightTravelLane"
+        >Freight Travel Lane</b-button>
+        <b-button
+          @click="smartButtons('Parking Lane'); slideHide = !slideHide; clearUndo();"
+          class="buttonStyle"
+          :variant="parkingLaneVarient"
+          :disabled="disabled.ParkingLane"
+        >Parking Lane</b-button>
+
         <br>
         <v-btn fab dark small color="teal" @click="show('medianInfo')">
-         <v-icon >i</v-icon>
-        </v-btn>
-        Median:
+          <v-icon>i</v-icon>
+        </v-btn>Median:
         <br>
-        <b-button @click="smartButtons('Two-way left-turn Lane'); slideHide = !slideHide; clearUndo();" class="buttonStyle" :variant="medianVarient" :disabled="disabled.TwoWayLeftTurn">Two-way left-turn Lane</b-button>
-        <b-button @click="smartButtons('Pedestrian Refuge Island'); slideHide = !slideHide; clearUndo();" class="buttonStyle" :variant="medianVarient" :disabled="disabled.PedestrianRefugeIsland">Pedestrian Refuge Island</b-button>
-        <b-button @click="smartButtons('Boulevard (Vegetation)'); slideHide = !slideHide; clearUndo();" class="buttonStyle" :variant="medianVarient" :disabled="disabled.Boulevard">Boulevard (Vegetation)</b-button>
-        <b-button @click="smartButtons('Centre Line'); slideHide = !slideHide; clearUndo();" class="buttonStyle" :variant="medianVarient" :disabled="disabled.CenterLine">Center Line</b-button>
-        <b-button @click="smartButtons('Infrastructure'); slideHide = !slideHide; clearUndo();" class="buttonStyle" :variant="medianVarient" :disabled="disabled.Infrastructure">Infrastructure</b-button>
+        <b-button
+          @click="smartButtons('Two-way left-turn Lane'); slideHide = !slideHide; clearUndo();"
+          class="buttonStyle"
+          :variant="medianVarient"
+          :disabled="disabled.TwoWayLeftTurn"
+        >Two-way left-turn Lane</b-button>
+        <b-button
+          @click="smartButtons('Pedestrian Refuge Island'); slideHide = !slideHide; clearUndo();"
+          class="buttonStyle"
+          :variant="medianVarient"
+          :disabled="disabled.PedestrianRefugeIsland"
+        >Pedestrian Refuge Island</b-button>
+        <b-button
+          @click="smartButtons('Boulevard (Vegetation)'); slideHide = !slideHide; clearUndo();"
+          class="buttonStyle"
+          :variant="medianVarient"
+          :disabled="disabled.Boulevard"
+        >Boulevard (Vegetation)</b-button>
+        <b-button
+          @click="smartButtons('Centre Line'); slideHide = !slideHide; clearUndo();"
+          class="buttonStyle"
+          :variant="medianVarient"
+          :disabled="disabled.CenterLine"
+        >Center Line</b-button>
+        <b-button
+          @click="smartButtons('Infrastructure'); slideHide = !slideHide; clearUndo();"
+          class="buttonStyle"
+          :variant="medianVarient"
+          :disabled="disabled.Infrastructure"
+        >Infrastructure</b-button>
         <br>
         <v-btn fab dark small color="green" @click="show('greenInfo')">
-         <v-icon >i</v-icon>
-        </v-btn>
-        Green Infrastructure
+          <v-icon>i</v-icon>
+        </v-btn>Green Infrastructure
         <br>
-        <b-button @click="smartButtons('Swale'); slideHide = !slideHide; clearUndo();" class="buttonStyle" :variant="greenVarient" :disabled="disabled.Swale">Swale</b-button>
-        <b-button @click="smartButtons('Rain Garden'); slideHide = !slideHide; clearUndo();" class="buttonStyle" :variant="greenVarient" :disabled="disabled.RainGarden">Rain Garden</b-button>
-        <b-button @click="smartButtons('Permeable Paving'); slideHide = !slideHide; clearUndo();" class="buttonStyle" :variant="greenVarient" :disabled="disabled.PermeablePaving">Permeable Paving</b-button>
+        <b-button
+          @click="smartButtons('Swale'); slideHide = !slideHide; clearUndo();"
+          class="buttonStyle"
+          :variant="greenVarient"
+          :disabled="disabled.Swale"
+        >Swale</b-button>
+        <b-button
+          @click="smartButtons('Rain Garden'); slideHide = !slideHide; clearUndo();"
+          class="buttonStyle"
+          :variant="greenVarient"
+          :disabled="disabled.RainGarden"
+        >Rain Garden</b-button>
+        <b-button
+          @click="smartButtons('Permeable Paving'); slideHide = !slideHide; clearUndo();"
+          class="buttonStyle"
+          :variant="greenVarient"
+          :disabled="disabled.PermeablePaving"
+        >Permeable Paving</b-button>
         <br>
         <br>
       </div>
@@ -103,13 +285,21 @@
       <br>
       <span style="text-align: center;">
         Remaining Width
-        <span style="background-color: #694393; color: white; padding:5px;">{{totalWidth}}m</span>
+        <span
+          style="background-color: #694393; color: white; padding:5px;"
+        >{{totalWidth}}m</span>
       </span>
-      <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1500 400" preserveAspectRatio="none">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="100%"
+        height="100%"
+        viewBox="0 0 1500 400"
+        preserveAspectRatio="none"
+      >
         <rect fill="#6b6c6d" :x="0" :y="385" :width="1500" :height="100"></rect>
         <rect fill="black" :x="0" :y="385" :width="1500" :height="2"></rect>
         <svg v-for="(offset, index) in offsetList" :key="index">
-          <Sidewalk 
+          <Sidewalk
             :title="offset.fill"
             :x="offset.x"
             :y="260"
@@ -239,140 +429,149 @@
             :width="offset.width"
             height="25"
           ></rect>
-         <defs>
-          <marker
-            id="arrow"
-            viewBox="0 0 10 10"
-            refX="5"
-            refY="5"
-            markerWidth="3.5"
-            markerHeight="3.5"
-            orient="auto-start-reverse"
-          >
-            <path d="M 0 0 L 10 5 L 0 10 z"></path>
-          </marker>
-          <marker id = "cross" viewBox = "0 0 10 10" refX = "5" refY = "5" markerUnits = "strokeWidth" markerWidth = "3" markerHeight = "3" stroke = "black" stroke-width = "2" fill = "black" orient = "auto">
-            <path d = "M 0 0 L 10 10 M 0 10 L 10 0"/>
-        </marker>
-        </defs>
+          <defs>
+            <marker
+              id="arrow"
+              viewBox="0 0 10 10"
+              refX="5"
+              refY="5"
+              markerWidth="3.5"
+              markerHeight="3.5"
+              orient="auto-start-reverse"
+            >
+              <path d="M 0 0 L 10 5 L 0 10 z"></path>
+            </marker>
+            <marker
+              id="cross"
+              viewBox="0 0 10 10"
+              refX="5"
+              refY="5"
+              markerUnits="strokeWidth"
+              markerWidth="3"
+              markerHeight="3"
+              stroke="black"
+              stroke-width="2"
+              fill="black"
+              orient="auto"
+            >
+              <path d="M 0 0 L 10 10 M 0 10 L 10 0"></path>
+            </marker>
+          </defs>
 
-        <text
-        v-if="index==selectedElementId && selectedElement "
-          @click="changeSize('Deduct', selectedElementId)"
-          :x="offset.x+10"
-          :y="140-7"
-        >-</text>
-        <text
-        v-if="index==selectedElementId && selectedElement"  
-          @click="changeSize('Add', selectedElementId)"
-          :x="offset.x+offset.width-20"
-          :y="140-7"
-        >+</text>
-        <text
-        v-if="selectedElementId != index && !selectedElement" 
-          :x="offset.x+offset.width/2-15"
-          :y="140-7"
-        >{{((offset.width).toFixed(2)*100/((width).toFixed(2)*100)).toFixed(1)}}m</text>
-        <line
-         v-if="selectedElementId != index && !selectedElement" 
-          :x1="offset.x+3"
-          :y1="140"
-          :x2="offset.x+offset.width-3"
-          :y2="140"
-          style="stroke:rgb(255,250,250);stroke-width:2; opacity: 0.8;"
-          marker-end="url(#arrow)"
-          marker-start="url(#arrow)"
-        ></line>
-        <line
-          v-if="selectedElementId != index && !selectedElement" 
-          :x1="offset.x"
-          y1="90%"
-          :x2="offset.x"
-          :y2="140"
-          style="stroke:rgb(255,250,250);stroke-width:2; opacity: 0.5"
-        ></line>
-        <line
-         v-if="selectedElementId != index && !selectedElement" 
-          :x1="offset.x+offset.width"
-          y1="90%"
-          :x2="offset.x+offset.width"
-          :y2="140"
-          style="stroke:rgb(255,250,250);stroke-width:2; opacity: 0.5"
-        ></line>
-        <!-- sum demension lines -->
-         <line
-         v-if="selectedElementId != index && !selectedElement && index>1" 
-          :x1="offsetList[0].x+1"
-          y1="90%"
-          :x2="offsetList[0].x+1"
-          :y2="60"
-          style="stroke:rgb(255,250,250);stroke-width:2; opacity: 0.9"
-        ></line>
-        <line
-         v-if="selectedElementId != index && !selectedElement && index>1 && index==offsetList.length-1" 
-          :x1="offsetList[index].x+offsetList[index].width"
-          y1="90%"
-          :x2="offsetList[index].x+offsetList[index].width"
-          :y2="60"
-          style="stroke:rgb(255,250,250);stroke-width:2; opacity: 0.9"
-        ></line>
-        <text
-        v-if="selectedElementId != index && !selectedElement && index>1 && index==offsetList.length-1" 
-          :x="(offsetList[0].x+offsetList[index].x+offsetList[index].width)/2-15"
-          :y="60-7"
-        >{{(startWidth-totalWidth).toFixed(1)}}m
-        </text>
-        <line
-         v-if="selectedElementId != index && !selectedElement && index>1 && index==offsetList.length-1" 
-          :x1="offsetList[0].x+2"
-          :y1="60"
-          :x2="offsetList[index].x+offsetList[index].width-1"
-          :y2="60"
-          style="stroke:rgb(255,250,250);stroke-width:2; opacity: 0.8;"
-          marker-end="url(#cross)"
-          marker-start="url(#cross)"
-        ></line>
-        <!-- red lines for selected elements -->
-        <line
-        v-if="index==selectedElementId && selectedElement "  
-          :x1="offset.x+3"
-          :y1="140"
-          :x2="offset.x+offset.width-3"
-          :y2="140"
-          style="stroke:rgb(247, 28, 0);stroke-width:2; opacity: 0.8;"
-          marker-end="url(#arrow)"
-          marker-start="url(#arrow)"
-        ></line>
-       
-        <line
-        v-if="index==selectedElementId && selectedElement"  
-          :x1="offset.x"
-          y1="90%"
-          :x2="offset.x"
-          :y2="140"
-          style="stroke:rgb(247, 28, 0);stroke-width:2; opacity: 0.8"
-        ></line>
-        <line
-        class="draggable"
-        @mousedown="startDrago"
-        @mousemove="drago"
-        @mouseup="endDrago"
-        @mouseleave="endDrago"
-        v-if="index==selectedElementId && selectedElement"   
-          :x1="offset.x+offset.width"
-          y1="90%"
-          :x2="offset.x+offset.width"
-          :y2="140"
-          style="stroke:rgb(247, 28, 0);stroke-width:14; opacity: 0.8"
-        ></line>
-        <text
-        v-if="index==selectedElementId && selectedElement"  
-          :x="offset.x+offset.width/2-15"
-          :y="140-7"
-        >{{((offset.width).toFixed(2)/((width).toFixed(2))).toFixed(1)}}m
-        </text>
+          <text
+            v-if="index==selectedElementId && selectedElement "
+            @click="changeSize('Deduct', selectedElementId)"
+            :x="offset.x+10"
+            :y="140-7"
+          >-</text>
+          <text
+            v-if="index==selectedElementId && selectedElement"
+            @click="changeSize('Add', selectedElementId)"
+            :x="offset.x+offset.width-20"
+            :y="140-7"
+          >+</text>
+          <text
+            v-if="selectedElementId != index && !selectedElement"
+            :x="offset.x+offset.width/2-15"
+            :y="140-7"
+          >{{((offset.width).toFixed(2)*100/((width).toFixed(2)*100)).toFixed(1)}}m</text>
+          <line
+            v-if="selectedElementId != index && !selectedElement"
+            :x1="offset.x+3"
+            :y1="140"
+            :x2="offset.x+offset.width-3"
+            :y2="140"
+            style="stroke:rgb(255,250,250);stroke-width:2; opacity: 0.8;"
+            marker-end="url(#arrow)"
+            marker-start="url(#arrow)"
+          ></line>
+          <line
+            v-if="selectedElementId != index && !selectedElement"
+            :x1="offset.x"
+            y1="90%"
+            :x2="offset.x"
+            :y2="140"
+            style="stroke:rgb(255,250,250);stroke-width:2; opacity: 0.5"
+          ></line>
+          <line
+            v-if="selectedElementId != index && !selectedElement"
+            :x1="offset.x+offset.width"
+            y1="90%"
+            :x2="offset.x+offset.width"
+            :y2="140"
+            style="stroke:rgb(255,250,250);stroke-width:2; opacity: 0.5"
+          ></line>
+          <!-- sum demension lines -->
+          <line
+            v-if="selectedElementId != index && !selectedElement && index>1"
+            :x1="offsetList[0].x+1"
+            y1="90%"
+            :x2="offsetList[0].x+1"
+            :y2="60"
+            style="stroke:rgb(255,250,250);stroke-width:2; opacity: 0.9"
+          ></line>
+          <line
+            v-if="selectedElementId != index && !selectedElement && index>1 && index==offsetList.length-1"
+            :x1="offsetList[index].x+offsetList[index].width"
+            y1="90%"
+            :x2="offsetList[index].x+offsetList[index].width"
+            :y2="60"
+            style="stroke:rgb(255,250,250);stroke-width:2; opacity: 0.9"
+          ></line>
+          <text
+            v-if="selectedElementId != index && !selectedElement && index>1 && index==offsetList.length-1"
+            :x="(offsetList[0].x+offsetList[index].x+offsetList[index].width)/2-15"
+            :y="60-7"
+          >{{(startWidth-totalWidth).toFixed(1)}}m</text>
+          <line
+            v-if="selectedElementId != index && !selectedElement && index>1 && index==offsetList.length-1"
+            :x1="offsetList[0].x+2"
+            :y1="60"
+            :x2="offsetList[index].x+offsetList[index].width-1"
+            :y2="60"
+            style="stroke:rgb(255,250,250);stroke-width:2; opacity: 0.8;"
+            marker-end="url(#cross)"
+            marker-start="url(#cross)"
+          ></line>
+          <!-- red lines for selected elements -->
+          <line
+            v-if="index==selectedElementId && selectedElement "
+            :x1="offset.x+3"
+            :y1="140"
+            :x2="offset.x+offset.width-3"
+            :y2="140"
+            style="stroke:rgb(247, 28, 0);stroke-width:2; opacity: 0.8;"
+            marker-end="url(#arrow)"
+            marker-start="url(#arrow)"
+          ></line>
+
+          <line
+            v-if="index==selectedElementId && selectedElement"
+            :x1="offset.x"
+            y1="90%"
+            :x2="offset.x"
+            :y2="140"
+            style="stroke:rgb(247, 28, 0);stroke-width:2; opacity: 0.8"
+          ></line>
+          <line
+            class="draggable"
+            @mousedown="startDrago"
+            @mousemove="drago"
+            @mouseup="endDrago"
+            @mouseleave="endDrago"
+            v-if="index==selectedElementId && selectedElement"
+            :x1="offset.x+offset.width"
+            y1="90%"
+            :x2="offset.x+offset.width"
+            :y2="140"
+            style="stroke:rgb(247, 28, 0);stroke-width:14; opacity: 0.8"
+          ></line>
+          <text
+            v-if="index==selectedElementId && selectedElement"
+            :x="offset.x+offset.width/2-15"
+            :y="140-7"
+          >{{((offset.width).toFixed(2)/((width).toFixed(2))).toFixed(1)}}m</text>
         </svg>
-        
       </svg>
     </div>
     <div id="planView">
@@ -588,10 +787,6 @@
   </div>
 </template>
 <script>
-import projectPicker from "./projectPicker";
-import rowElement from "./Buttons";
-import svgElement from "./svg/svg.vue";
-import indicator from "./Indicators.vue";
 import BikeLane from "./svg/BikeLane";
 import BikeLaneBack from "./svg/BikeLaneBack";
 import BusLane from "./svg/BusLane";
@@ -600,9 +795,7 @@ import CarLane from "./svg/CarLane";
 import CarLaneBack from "./svg/CarLaneBack";
 import Landscaping from "./svg/LandscapeWTrees";
 import LandscapingBack from "./svg/LandscapeWTreeBack";
-import leftBuilding from "./svg/leftBuilding";
 import PavedMedian from "./svg/PavedMedian";
-import RightBuilding from "./svg/RightBuilding";
 import SharrowLane from "./svg/SharrowLane";
 import SharrowLaneBack from "./svg/SharrowLaneBack";
 import Sidewalk from "./svg/Sidewalk";
@@ -612,20 +805,15 @@ import Slider from "./Slider";
 import CarLineTop from "./svg/CarLineTop";
 import CarLineBottom from "./svg/CarLineBottom";
 import Info from "./Info";
-import XLSX from 'xlsx';
-const disabled = true;
+import XLSX from "xlsx";
 export default {
   name: "gio",
-  props:{
+  props: {
     getData: Object,
     convertedDataStorage: Object
   },
   components: {
-    projectPicker,
     Slider,
-    rowElement,
-    svgElement,
-    indicator,
     BikeLane,
     BikeLaneBack,
     BusLane,
@@ -634,9 +822,7 @@ export default {
     CarLaneBack,
     Landscaping,
     LandscapingBack,
-    leftBuilding,
     PavedMedian,
-    RightBuilding,
     SharrowLane,
     SharrowLaneBack,
     Sidewalk,
@@ -649,10 +835,10 @@ export default {
   data() {
     return {
       tempSlider: 0,
-      sliderValue:0,
+      sliderValue: 0,
       undoDelete: [],
-      undoReset:[],
-      undoCounter:0,
+      undoReset: [],
+      undoCounter: 0,
       commercialExtensionVarient: "secondary",
       residentialVarient: "secondary",
       commercialVarient: "secondary",
@@ -673,7 +859,7 @@ export default {
       backgroundLoading: "#22c16b",
       startWidth: 15,
       key: "",
-      disabled:{
+      disabled: {
         CommercialExtension: false,
         Residential: false,
         Commercial: false,
@@ -751,8 +937,8 @@ export default {
       sidewalkWidth: 0,
       infoType: null,
       data: [],
-      titleArray:[],
-      widthArray:[],
+      titleArray: [],
+      widthArray: []
     };
   },
   watch: {
@@ -767,56 +953,67 @@ export default {
     },
     startDrago(evt) {
       this.tempObjectWidth = this.offsetList[this.selectedElementId].width;
-       if (evt.target.classList.contains('draggable')) {
+      if (evt.target.classList.contains("draggable")) {
         this.selectedElementDrag = evt.target;
         this.offsetDrag = this.getMousePosition(evt);
-        this.offsetDrag.x -= parseFloat(this.selectedElementDrag.getAttributeNS(null, "x1"));       
-       }
-     },
-     drago(evt) {
-       if (this.selectedElementDrag) {
+        this.offsetDrag.x -= parseFloat(
+          this.selectedElementDrag.getAttributeNS(null, "x1")
+        );
+      }
+    },
+    drago(evt) {
+      if (this.selectedElementDrag) {
         evt.preventDefault();
         var coord = this.getMousePosition(evt);
-        this.selectedElementDrag.setAttributeNS(null, "x1", coord.x - this.offsetDrag.x);
-        this.selectedElementDrag.setAttributeNS(null, "x2", coord.x - this.offsetDrag.x);
+        this.selectedElementDrag.setAttributeNS(
+          null,
+          "x1",
+          coord.x - this.offsetDrag.x
+        );
+        this.selectedElementDrag.setAttributeNS(
+          null,
+          "x2",
+          coord.x - this.offsetDrag.x
+        );
         var newX = coord.x - this.offsetDrag.x;
         this.dragAdjust(newX);
-        }
-      },
-     endDrago(evt) {
-       this.selectedElementDrag = null;
-     },
-      dragAdjust(newX) {
-      
-      var modOfObjectWidth = (this.offsetList[this.selectedElementId].width+( newX - (this.offsetList[this.selectedElementId].x+this.offsetList[this.selectedElementId].width)) - this.tempObjectWidth)% this.width;
-      if (modOfObjectWidth < 0)
-      {
-        var numOfTimes = parseInt(modOfObjectWidth/(this.width*0.1)); // idk how to name this shit
-        for (var i = 0; i > numOfTimes; i--)
-        {
+      }
+    },
+    endDrago() {
+      this.selectedElementDrag = null;
+    },
+    dragAdjust(newX) {
+      var modOfObjectWidth =
+        (this.offsetList[this.selectedElementId].width +
+          (newX -
+            (this.offsetList[this.selectedElementId].x +
+              this.offsetList[this.selectedElementId].width)) -
+          this.tempObjectWidth) %
+        this.width;
+      if (modOfObjectWidth < 0) {
+        var numOfTimes = parseInt(modOfObjectWidth / (this.width * 0.1)); // idk how to name this shit
+        for (var i = 0; i > numOfTimes; i--) {
           this.changeSize("Deduct", this.selectedElementId);
         }
-      }else if ( modOfObjectWidth > 0)
-      {
-         var numOfTimes = parseInt(modOfObjectWidth/(this.width*0.1)); // idk how to call this shit
-        for (var i = 0; i < numOfTimes; i++)
-        {
+      } else if (modOfObjectWidth > 0) {
+        numOfTimes = parseInt(modOfObjectWidth / (this.width * 0.1)); // idk how to call this shit
+        for (i = 0; i < numOfTimes; i++) {
           this.changeSize("Add", this.selectedElementId);
         }
       }
-     },
-     getMousePosition(evt) {
-       var svg = evt.target;
-       var CTM = svg.getScreenCTM();
-       return {
-         x: (evt.clientX - CTM.e) / CTM.a,
-         y: (evt.clientY - CTM.f) / CTM.d
-       };
-     },
-    submit(){
-      for(var i=0;i<this.offsetList.length;i++){
+    },
+    getMousePosition(evt) {
+      var svg = evt.target;
+      var CTM = svg.getScreenCTM();
+      return {
+        x: (evt.clientX - CTM.e) / CTM.a,
+        y: (evt.clientY - CTM.f) / CTM.d
+      };
+    },
+    submit() {
+      for (var i = 0; i < this.offsetList.length; i++) {
         this.titleArray.push(this.offsetList[i].title);
-        var width = this.offsetList[i].width/this.width;
+        var width = this.offsetList[i].width / this.width;
         this.widthArray.push(width);
       }
       this.data.push(this.titleArray);
@@ -824,262 +1021,241 @@ export default {
       var worksheet = XLSX.utils.aoa_to_sheet(this.data);
       var new_workbook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(new_workbook, worksheet, "SheetJS");
-     if( confirm("This will download the spreadsheet")){
-       XLSX.writeFile(new_workbook, "sheetjs.xlsx");
-     }
-      
+      if (confirm("This will download the spreadsheet")) {
+        XLSX.writeFile(new_workbook, "sheetjs.xlsx");
+      }
+
       this.titleArray.splice(0, this.titleArray.length);
       this.widthArray.splice(0, this.widthArray.length);
       this.data.splice(0, this.data.length);
-      
-      
     },
-    drag: function(evt){
-      var svg = evt.target;
-      var selectedElement = false;
-      var offset;
-      var width = this.offsetList[this.offsetList.length-1].width/this.width;
-      
-      svg.addEventListener('mousedown', startDrag);
-      svg.addEventListener('mousemove', drag);
-      svg.addEventListener('mouseup', endDrag);
-      svg.addEventListener('mouseleave', endDrag);
-      function startDrag(evt) {
-        
-        if (evt.target.classList.contains('draggable')) {
-
-          selectedElement = evt.target;
-     offset = getMousePosition(evt);
-    offset.x -= parseFloat(selectedElement.getAttributeNS(null, "x1"));
-        }
-
-      }
-      function drag(evt) {
-        if (selectedElement) {
-            evt.preventDefault();
-            var coord = getMousePosition(evt);
-            selectedElement.setAttributeNS(null, "x1", coord.x - offset.x);
-            selectedElement.setAttributeNS(null, "x2", coord.x - offset.x);
-          }
-      }
-      function endDrag(evt) {
-        selectedElement = null;
-      }
-      function getMousePosition(evt) {
-        var CTM = svg.getScreenCTM();
-        return {
-          x: (evt.clientX - CTM.e) / CTM.a,
-          y: (evt.clientY - CTM.f) / CTM.d
-        };
-      }
-    },
-    
-    changeWidth(){
-      if(this.sliderValue==0){
+    changeWidth() {
+      if (this.sliderValue == 0) {
         this.tempSlider = 0;
       }
-      var width = this.offsetList[this.offsetList.length-1].width/this.width;
+      var width =
+        this.offsetList[this.offsetList.length - 1].width / this.width;
       var tempWidth = width;
-      if(this.sliderValue>this.tempSlider){
-      var add = (tempWidth+(this.sliderValue/10))*this.width;
-      this.offsetList[this.offsetList.length-1].width = add;
-      this.totalWidth = parseFloat((((this.totalWidth*10)/10) - (((this.sliderValue/10)*10)/10)).toFixed(1));
-      this.tempSlider = this.sliderValue;
-      }
-      else if(this.sliderValue<=this.tempSlider){
-      var sub = (tempWidth-(this.sliderValue/10))*this.width;
-      this.offsetList[this.offsetList.length-1].width = sub;
-      this.totalWidth = parseFloat((((this.totalWidth*10)/10) + (((this.sliderValue/10)*10)/10)).toFixed(1));
-      this.tempSlider = this.sliderValue;
+      if (this.sliderValue > this.tempSlider) {
+        var add = (tempWidth + this.sliderValue / 10) * this.width;
+        this.offsetList[this.offsetList.length - 1].width = add;
+        this.totalWidth = parseFloat(
+          (
+            (this.totalWidth * 10) / 10 -
+            ((this.sliderValue / 10) * 10) / 10
+          ).toFixed(1)
+        );
+        this.tempSlider = this.sliderValue;
+      } else if (this.sliderValue <= this.tempSlider) {
+        var sub = (tempWidth - this.sliderValue / 10) * this.width;
+        this.offsetList[this.offsetList.length - 1].width = sub;
+        this.totalWidth = parseFloat(
+          (
+            (this.totalWidth * 10) / 10 +
+            ((this.sliderValue / 10) * 10) / 10
+          ).toFixed(1)
+        );
+        this.tempSlider = this.sliderValue;
       }
     },
-    wait(ms){
-    var d = new Date();
-    var d2 = null;
-    do { d2 = new Date(); }
-    while(d2-d < ms);
+    wait(ms) {
+      var d = new Date();
+      var d2 = null;
+      do {
+        d2 = new Date();
+      } while (d2 - d < ms);
     },
-    clearUndo(){
+    clearUndo() {
       this.undoReset.splice(0, this.undoReset.length);
       this.undoDelete.splice(0, this.undoDelete.length);
     },
-    undo(){
-      if(this.undoDelete.length == 0 && this.undoReset == 0){
+    undo() {
+      if (this.undoDelete.length == 0 && this.undoReset == 0) {
         this.svgDelete();
-      }
-      else if(this.undoReset != 0){
-        for(var i = 0;i<this.undoReset.length;i++){
+      } else if (this.undoReset != 0) {
+        for (var i = 0; i < this.undoReset.length; i++) {
           var lastOffset = this.undoReset[i];
           this.offsetList.push(this.undoReset[i]);
-          this.totalWidth = parseFloat(((this.totalWidth*10 - (lastOffset.width*10/(this.width*10))*10)/10).toFixed(1));
+          this.totalWidth = parseFloat(
+            (
+              (this.totalWidth * 10 -
+                ((lastOffset.width * 10) / (this.width * 10)) * 10) /
+              10
+            ).toFixed(1)
+          );
           this.streetElementData.push(this.undoReset[i].title);
           this.smartButtons(this.streetElementData[i]);
         }
         this.undoReset.splice(0, this.undoReset.length);
-      }
-      else if(this.undoDelete.length != 0){
-        var lastOffset = this.undoDelete[this.undoDelete.length - 1];
+      } else if (this.undoDelete.length != 0) {
+        lastOffset = this.undoDelete[this.undoDelete.length - 1];
         this.offsetList.push(lastOffset);
-        this.totalWidth = parseFloat(((this.totalWidth*10 - (lastOffset.width*10/(this.width*10))*10)/10).toFixed(1));
-        this.streetElementData.push(this.undoDelete[this.undoDelete.length - 1].title);
-        this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
+        this.totalWidth = parseFloat(
+          (
+            (this.totalWidth * 10 -
+              ((lastOffset.width * 10) / (this.width * 10)) * 10) /
+            10
+          ).toFixed(1)
+        );
+        this.streetElementData.push(
+          this.undoDelete[this.undoDelete.length - 1].title
+        );
+        this.smartButtons(
+          this.streetElementData[this.streetElementData.length - 1]
+        );
         this.undoDelete.pop();
       }
-      
     },
-    show (infoType) {
-      this.$modal.show('hello-world');
+    show(infoType) {
+      this.$modal.show("hello-world");
       this.infoType = infoType;
     },
-    hide () {
-      this.$modal.hide('hello-world');
+    hide() {
+      this.$modal.hide("hello-world");
     },
-    sliderName(name){
-      this.name=name;
+    sliderName(name) {
+      this.name = name;
     },
-    Populate(){
-      this.startWidth = (this.getData.row)*10/10;
-      this.totalWidth = ((this.getData.row)*10)/10;
-      this.width = (750/this.totalWidth)*10/10;
-      for(var x in this.getData){
-        this.getData[x] = (parseFloat((this.getData[x])*10/10).toFixed(1));
-        if(this.getData[x]!=0){
-          if(x!="id"&&x!="row"&&x!="name"){
-            this.totalWidth = (parseFloat(this.totalWidth).toFixed(1))*10/10;
+    Populate() {
+      this.startWidth = (this.getData.row * 10) / 10;
+      this.totalWidth = (this.getData.row * 10) / 10;
+      this.width = ((750 / this.totalWidth) * 10) / 10;
+      for (var x in this.getData) {
+        this.getData[x] = parseFloat((this.getData[x] * 10) / 10).toFixed(1);
+        if (this.getData[x] != 0) {
+          if (x != "id" && x != "row" && x != "name") {
+            this.totalWidth =
+              (parseFloat(this.totalWidth).toFixed(1) * 10) / 10;
             this.svgPopulate(x);
-            this.updateTotal((this.getData[x]*10/10),this.color,this.streetElementData[this.streetElementData.length-1]);
+            this.updateTotal(
+              (this.getData[x] * 10) / 10,
+              this.color,
+              this.streetElementData[this.streetElementData.length - 1]
+            );
           }
         }
       }
       this.selectedElement = false;
       this.selectedElementId = null;
     },
-    dementionReset()
-    {
-     this.selectedElement = false;
-     this.selectedElementId = null;
+    dementionReset() {
+      this.selectedElement = false;
+      this.selectedElementId = null;
     },
-    RDPrepopulation(){
+    RDPrepopulation() {
       this.width = 750;
-      var objectLength = Object.keys(this.getData).length;
-
-      if(this.getData.Shape__Area==null){
+      if (this.getData.Shape__Area == null) {
         this.sidewalkWidth = 0;
         this.slideHide = !this.slideHide;
+      } else {
+        this.sidewalkWidth = parseFloat(
+          (this.getData.Shape__Area / this.getData.Shape__Length).toFixed(1)
+        );
       }
-      else{
-        this.sidewalkWidth = parseFloat((this.getData.Shape__Area/this.getData.Shape__Length).toFixed(1));
-        
-      }
-      this.totalWidth = parseFloat((((this.getData.RoadWidth/2)+this.sidewalkWidth)+0.1).toFixed(1));
-      this.width = this.width/this.totalWidth;
-      if (this.totalWidth!=0) {
-        switch(this.getData.ROADSEGM_1){
-        case "LEFT":
-          this.populateValues.fill = "url(#sidewalkTexture)";
-          this.populateValues.width = this.sidewalkWidth;
-          this.populateValues.title = "Sidewalk"
+      this.totalWidth = parseFloat(
+        (this.getData.RoadWidth / 2 + this.sidewalkWidth + 0.1).toFixed(1)
+      );
+      this.width = this.width / this.totalWidth;
+      if (this.totalWidth != 0) {
+        switch (this.getData.ROADSEGM_1) {
+          case "LEFT":
+            this.populateValues.fill = "url(#sidewalkTexture)";
+            this.populateValues.width = this.sidewalkWidth;
+            this.populateValues.title = "Sidewalk";
+            this.defaultPopulate.push(this.populateValues);
+            this.streetElementData.push(this.populateValues.title);
+            this.updateTotal(
+              this.defaultPopulate[0].width,
+              this.defaultPopulate[0].fill,
+              this.defaultPopulate[0].title
+            );
+            this.slideHide = !this.slideHide;
+            break;
+          case "RIGHT":
+            this.populateValues.fill = "url(#sidewalkTexture)";
+            this.populateValues.width = this.sidewalkWidth;
+            this.populateValues.title = "Sidewalk";
+            this.defaultPopulate.push(this.populateValues);
+            this.streetElementData.push(this.populateValues.title);
+            this.updateTotal(
+              this.defaultPopulate[0].width,
+              this.defaultPopulate[0].fill,
+              this.defaultPopulate[0].title
+            );
+            this.slideHide = !this.slideHide;
+            break;
+          default:
+            //clear the object of the sidewalk
+            this.defaultPopulate.pop();
+            break;
+        }
+        var roadWidth = this.getData.RoadWidth / this.getData.NumberofLa;
+        var numberofLanes = this.getData.NumberofLa / 2;
+        for (var i = 0; i < numberofLanes; i++) {
+          if (i == 0) {
+            this.populateValues.fill = "url(#roadTexture)";
+            this.populateValues.width = roadWidth;
+            this.populateValues.title = "Curb Lane";
+          } else {
+            this.populateValues.fill = "url(#roadTexture)";
+            this.populateValues.width = roadWidth;
+            this.populateValues.title = "Passing Lane";
+          }
           this.defaultPopulate.push(this.populateValues);
           this.streetElementData.push(this.populateValues.title);
+
           this.updateTotal(
-                this.defaultPopulate[0].width,
-                this.defaultPopulate[0].fill,
-                this.defaultPopulate[0].title
-          );
-          this.slideHide = !this.slideHide;
-          break;
-        case "RIGHT":
-          this.populateValues.fill = "url(#sidewalkTexture)";
-          this.populateValues.width = this.sidewalkWidth;
-          this.populateValues.title = "Sidewalk"
-          this.defaultPopulate.push(this.populateValues);
-          this.streetElementData.push(this.populateValues.title); 
-          this.updateTotal(
-                this.defaultPopulate[0].width,
-                this.defaultPopulate[0].fill,
-                this.defaultPopulate[0].title
-          );
-         this.slideHide = !this.slideHide;
-          break;
-        default: 
-          //clear the object of the sidewalk
-          this.defaultPopulate.pop();
-          break;
-      }
-      var roadWidth = this.getData.RoadWidth/this.getData.NumberofLa;
-      var numberofLanes = this.getData.NumberofLa/2
-      for(var i = 0;i<numberofLanes;i++){
-        if(i==0){
-          this.populateValues.fill = "url(#roadTexture)";
-          this.populateValues.width = roadWidth;
-          this.populateValues.title = "Curb Lane";
-        }
-        else{
-          this.populateValues.fill = "url(#roadTexture)";
-          this.populateValues.width = roadWidth;
-          this.populateValues.title = "Passing Lane";
-        }
-        this.defaultPopulate.push(this.populateValues);
-        this.streetElementData.push(this.populateValues.title);
-        
-        this.updateTotal(
             this.defaultPopulate[i].width,
             this.defaultPopulate[i].fill,
             this.defaultPopulate[i].title
           );
-      }
-      this.populateValues.fill = "white";
-      this.populateValues.width = 0.1;
-      this.populateValues.title = "Centre Line";
-      this.defaultPopulate.push(this.populateValues);
-      this.updateTotal(
-        this.defaultPopulate[i].width,
-        this.defaultPopulate[i].fill,
-        this.defaultPopulate[i].title
+        }
+        this.populateValues.fill = "white";
+        this.populateValues.width = 0.1;
+        this.populateValues.title = "Centre Line";
+        this.defaultPopulate.push(this.populateValues);
+        this.updateTotal(
+          this.defaultPopulate[i].width,
+          this.defaultPopulate[i].fill,
+          this.defaultPopulate[i].title
         );
-      this.slideHide= false;
-      }
-      else {
+        this.slideHide = false;
+      } else {
         this.rowReset();
       }
     },
     back(passed) {
       this.streetElementData.pop();
-      this.smartButtons(this.streetElementData[this.streetElementData.length - 1]); 
+      this.smartButtons(
+        this.streetElementData[this.streetElementData.length - 1]
+      );
       this.slideHide = passed;
     },
     changeSize(type, id) {
-      if (type == "Add"&& this.totalWidth != 0) {
-       const lastOffset = this.offsetList[id];
+      if (type == "Add" && this.totalWidth != 0) {
+        const lastOffset = this.offsetList[id];
 
-       lastOffset.width = lastOffset.width + this.width/10;
+        lastOffset.width = lastOffset.width + this.width / 10;
 
-       this.totalWidth = ((this.totalWidth*10) - 1) / 10;
+        this.totalWidth = (this.totalWidth * 10 - 1) / 10;
 
-       if((this.offsetList.length - 1) != id)
-         {
-           var i;
-           for (i = id+1; i < this.offsetList.length; i++)
-           {
-             const modifiedOffset = this.offsetList[i];
-             modifiedOffset.x = modifiedOffset.x + this.width/10;
-           }
-         }
-
-     } else if (type == "Deduct") {
-       const lastOffset = this.offsetList[id];
-       lastOffset.width = lastOffset.width - this.width/10;
-       this.totalWidth = ((this.totalWidth*10) + 1) / 10;
-       if((this.offsetList.length - 1) != id)
-         {
-           var i;
-           for (i = id+1; i < this.offsetList.length; i++)
-           {
-             const modifiedOffset = this.offsetList[i];
-             modifiedOffset.x = modifiedOffset.x - this.width/10;
-           }
-         }
-     }
+        if (this.offsetList.length - 1 != id) {
+          for (var i = id + 1; i < this.offsetList.length; i++) {
+            const modifiedOffset = this.offsetList[i];
+            modifiedOffset.x = modifiedOffset.x + this.width / 10;
+          }
+        }
+      } else if (type == "Deduct") {
+        const lastOffset = this.offsetList[id];
+        lastOffset.width = lastOffset.width - this.width / 10;
+        this.totalWidth = (this.totalWidth * 10 + 1) / 10;
+        if (this.offsetList.length - 1 != id) {
+          for (var j = id + 1; j < this.offsetList.length; j++) {
+            const modifiedOffset = this.offsetList[j];
+            modifiedOffset.x = modifiedOffset.x - this.width / 10;
+          }
+        }
+      }
     },
     sizeLines(id) {
       if (id == this.selectedElementId) {
@@ -1164,158 +1340,224 @@ export default {
           break;
         case "comm_ext": //0
           this.color = "url(#sidewalkTexture)";
-          this.streetElementData.push('Commercial Use Extension');
-          this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
+          this.streetElementData.push("Commercial Use Extension");
+          this.smartButtons(
+            this.streetElementData[this.streetElementData.length - 1]
+          );
           break;
         case "sdwlk_path_res": //0
           this.color = "url(#sidewalkTexture)";
-          this.streetElementData.push('Residential');
-          this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
+          this.streetElementData.push("Residential");
+          this.smartButtons(
+            this.streetElementData[this.streetElementData.length - 1]
+          );
           break;
         case "sdwlk_path_comm": //0
           this.color = "url(#sidewalkTexture)";
-          this.streetElementData.push('Commercial');
-          this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
+          this.streetElementData.push("Commercial");
+          this.smartButtons(
+            this.streetElementData[this.streetElementData.length - 1]
+          );
           break;
         case "sdwlk_str_frntr": //0
           this.color = "url(#sidewalkTexture)";
-          this.streetElementData.push('Street Furniture Zone');
-          this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
+          this.streetElementData.push("Street Furniture Zone");
+          this.smartButtons(
+            this.streetElementData[this.streetElementData.length - 1]
+          );
           break;
         case "sdwlk_landbuff_util": //0
           this.color = "url(#sidewalkTexture)";
-          this.streetElementData.push('Utilities');
-          this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
+          this.streetElementData.push("Utilities");
+          this.smartButtons(
+            this.streetElementData[this.streetElementData.length - 1]
+          );
           break;
         case "sdwlk_landbuff": //0
           this.color = "url(#sidewalkTexture)";
-          this.streetElementData.push('No Vegetation');
-          this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
+          this.streetElementData.push("No Vegetation");
+          this.smartButtons(
+            this.streetElementData[this.streetElementData.length - 1]
+          );
           break;
         case "sdwlk_landbuff_veg": //0
           this.color = "url(#grassTexture)";
-          this.streetElementData.push('Vegetation');
-          this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
+          this.streetElementData.push("Vegetation");
+          this.smartButtons(
+            this.streetElementData[this.streetElementData.length - 1]
+          );
           break;
         case "ped_isl": //0
           this.color = "url(#sidewalkTexture)";
-          this.streetElementData.push('Pedestrian Refuge Island');
-          this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
+          this.streetElementData.push("Pedestrian Refuge Island");
+          this.smartButtons(
+            this.streetElementData[this.streetElementData.length - 1]
+          );
           break;
         case "cycl_lane": //0
           this.color = "url(#bikeTexture)";
-          this.streetElementData.push('Cycle Lane');
-          this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
+          this.streetElementData.push("Cycle Lane");
+          this.smartButtons(
+            this.streetElementData[this.streetElementData.length - 1]
+          );
           break;
         case "cycl_trac": //0
           this.color = "url(#bikeTexture)";
-          this.streetElementData.push('Cycle Track');
-          this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
+          this.streetElementData.push("Cycle Track");
+          this.smartButtons(
+            this.streetElementData[this.streetElementData.length - 1]
+          );
           break;
         case "cycl_str": //0
           this.color = "url(#bikeTexture)";
-          this.streetElementData.push('Cycle Street');
-          this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
+          this.streetElementData.push("Cycle Street");
+          this.smartButtons(
+            this.streetElementData[this.streetElementData.length - 1]
+          );
           break;
         case "prot_cycl_trac": //0
           this.color = "url(#bikeTexture)";
-          this.streetElementData.push('Protected Cycle Track');
-          this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
+          this.streetElementData.push("Protected Cycle Track");
+          this.smartButtons(
+            this.streetElementData[this.streetElementData.length - 1]
+          );
           break;
         case "bi_cycl_trac": //0
           this.color = "url(#bikeTexture)";
-          this.streetElementData.push('Bidirectional Cycle Track');
-          this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
+          this.streetElementData.push("Bidirectional Cycle Track");
+          this.smartButtons(
+            this.streetElementData[this.streetElementData.length - 1]
+          );
           break;
         case "raise_cycl_trac": //0
           this.color = "url(#bikeTexture)";
-          this.streetElementData.push('Raised Cycle Track');
-          this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
+          this.streetElementData.push("Raised Cycle Track");
+          this.smartButtons(
+            this.streetElementData[this.streetElementData.length - 1]
+          );
           break;
         case "curbuff_cycl_lane": //0
           this.color = "url(#bikeTexture)";
-          this.streetElementData.push('Curbside Buffered Cycle Lane');
-          this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
+          this.streetElementData.push("Curbside Buffered Cycle Lane");
+          this.smartButtons(
+            this.streetElementData[this.streetElementData.length - 1]
+          );
           break;
         case "contra_cycle_str": //0
           this.color = "url(#bikeTexture)";
-          this.streetElementData.push('Contraflow Cycle Street');
-          this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
+          this.streetElementData.push("Contraflow Cycle Street");
+          this.smartButtons(
+            this.streetElementData[this.streetElementData.length - 1]
+          );
           break;
         case "tran_stp": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push('Transit Stop');
-          this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
+          this.streetElementData.push("Transit Stop");
+          this.smartButtons(
+            this.streetElementData[this.streetElementData.length - 1]
+          );
           break;
         case "side_ded_transln": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push('Side Running Dedicated Transit Lane');
-          this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
+          this.streetElementData.push("Side Running Dedicated Transit Lane");
+          this.smartButtons(
+            this.streetElementData[this.streetElementData.length - 1]
+          );
           break;
         case "cent_transln_cntbrd": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push('Centre Running Transit Lane - Centre Boarding');
-          this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
+          this.streetElementData.push(
+            "Centre Running Transit Lane - Centre Boarding"
+          );
+          this.smartButtons(
+            this.streetElementData[this.streetElementData.length - 1]
+          );
           break;
         case "cent_transln_pssgr": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push('Centre Running Transit Lane – Side Boarding');
-          this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
+          this.streetElementData.push(
+            "Centre Running Transit Lane – Side Boarding"
+          );
+          this.smartButtons(
+            this.streetElementData[this.streetElementData.length - 1]
+          );
           break;
         case "shr_transln": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push('Shared Transit Lane');
-          this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
+          this.streetElementData.push("Shared Transit Lane");
+          this.smartButtons(
+            this.streetElementData[this.streetElementData.length - 1]
+          );
           break;
         case "curb_ln": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push('Curb Lane');
-          this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
+          this.streetElementData.push("Curb Lane");
+          this.smartButtons(
+            this.streetElementData[this.streetElementData.length - 1]
+          );
           break;
         case "pass_ln": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push('Passing Lane');
-          this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
+          this.streetElementData.push("Passing Lane");
+          this.smartButtons(
+            this.streetElementData[this.streetElementData.length - 1]
+          );
           break;
         case "lrg_veh_ln": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push('Large Vehicle Lane');
-          this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
+          this.streetElementData.push("Large Vehicle Lane");
+          this.smartButtons(
+            this.streetElementData[this.streetElementData.length - 1]
+          );
           break;
         case "bi_trav_ln": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push('Bidirectional Travel Lane');
-          this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
+          this.streetElementData.push("Bidirectional Travel Lane");
+          this.smartButtons(
+            this.streetElementData[this.streetElementData.length - 1]
+          );
           break;
         case "turn_ln": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push('Turning Lane');
-          this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
+          this.streetElementData.push("Turning Lane");
+          this.smartButtons(
+            this.streetElementData[this.streetElementData.length - 1]
+          );
           break;
         case "frt_trav_ln": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push('Freight Travel Lane');
-          this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
+          this.streetElementData.push("Freight Travel Lane");
+          this.smartButtons(
+            this.streetElementData[this.streetElementData.length - 1]
+          );
           break;
         case "park_ln": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push('Parking Lane');
-          this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
+          this.streetElementData.push("Parking Lane");
+          this.smartButtons(
+            this.streetElementData[this.streetElementData.length - 1]
+          );
           break;
         case "swale": //0
           this.color = "url(#grassTexture)";
-          this.streetElementData.push('Swale');
-          this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
+          this.streetElementData.push("Swale");
+          this.smartButtons(
+            this.streetElementData[this.streetElementData.length - 1]
+          );
           break;
         case "rain_gdn": //0
           this.color = "url(#grassTexture)";
-          this.streetElementData.push('Rain Garden');
-          this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
+          this.streetElementData.push("Rain Garden");
+          this.smartButtons(
+            this.streetElementData[this.streetElementData.length - 1]
+          );
           break;
         case "perm_pav": //0
           this.color = "url(#sidewalkTexture)";
-          this.streetElementData.push('Permeable Paving');
-          this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
+          this.streetElementData.push("Permeable Paving");
+          this.smartButtons(
+            this.streetElementData[this.streetElementData.length - 1]
+          );
           break;
       }
     },
@@ -1357,18 +1599,11 @@ export default {
       this.disabled.RainGarden = true;
       this.disabled.PermeablePaving = true;
     },
-    processLastElements() {
-      var remainingSpace = false;
-      if (this.totalWidth >= 32) {
-        this.disabled[10] = false;
-        remainingSpace = true;
-      }
-    },
     smartButtons(elementCategory) {
-      this.name=elementCategory;
-      if(elementCategory==null){
+      this.name = elementCategory;
+      if (elementCategory == null) {
         this.disableAll();
-        this.commercialExtensionVarient = "secondary"
+        this.commercialExtensionVarient = "secondary";
         this.residentialVarient = "secondary";
         this.commercialVarient = "secondary";
         this.furnitureVarient = "outline-secondary";
@@ -1385,28 +1620,28 @@ export default {
         this.parkingLaneVarient = "outline-secondary";
         this.medianVarient = "outline-info";
         this.greenVarient = "outline-success";
-        this.disabled.CommercialExtension=false;
+        this.disabled.CommercialExtension = false;
         this.disabled.Commercial = false;
-        this.disabled.Residential=false;
-        this.disabled.Swale=false;
+        this.disabled.Residential = false;
+        this.disabled.Swale = false;
         this.streetElementData.push(elementCategory);
         this.svgPopulate(elementCategory);
-      }
-      else{
-        if(this.streetElementData[this.streetElementData.length - 1]==elementCategory){
+      } else {
+        if (
+          this.streetElementData[this.streetElementData.length - 1] ==
+          elementCategory
+        ) {
           this.streetElementData.pop();
           this.streetElementData.push(elementCategory);
-        }
-        else{
+        } else {
           this.streetElementData.push(elementCategory);
           this.svgPopulate(elementCategory);
         }
-        
       }
       switch (elementCategory) {
         case "Commercial Use Extension":
           this.disableAll();
-          this.commercialExtensionVarient = "outline-secondary"
+          this.commercialExtensionVarient = "outline-secondary";
           this.residentialVarient = "outline-secondary";
           this.commercialVarient = "secondary";
           this.furnitureVarient = "outline-secondary";
@@ -1424,10 +1659,10 @@ export default {
           this.medianVarient = "outline-info";
           this.greenVarient = "outline-success";
           this.disabled.Commercial = false;
-          break
+          break;
         case "Residential":
           this.disableAll();
-          this.commercialExtensionVarient = "outline-secondary"
+          this.commercialExtensionVarient = "outline-secondary";
           this.residentialVarient = "outline-secondary";
           this.commercialVarient = "outline-secondary";
           this.furnitureVarient = "outline-secondary";
@@ -1444,7 +1679,7 @@ export default {
           this.parkingLaneVarient = "secondary";
           this.medianVarient = "outline-info";
           this.greenVarient = "success";
-          
+
           this.disabled.Utilities = false;
           this.disabled.NoVegetation = false;
           this.disabled.Vegetation = false;
@@ -1468,7 +1703,7 @@ export default {
           break;
         case "Commercial":
           this.disableAll();
-          this.commercialExtensionVarient = "outline-secondary"
+          this.commercialExtensionVarient = "outline-secondary";
           this.residentialVarient = "outline-secondary";
           this.commercialVarient = "outline-secondary";
           this.furnitureVarient = "secondary";
@@ -1509,7 +1744,7 @@ export default {
           break;
         case "Street Furniture Zone":
           this.disableAll();
-          this.commercialExtensionVarient = "outline-secondary"
+          this.commercialExtensionVarient = "outline-secondary";
           this.residentialVarient = "outline-secondary";
           this.commercialVarient = "outline-secondary";
           this.furnitureVarient = "outline-secondary";
@@ -1551,8 +1786,11 @@ export default {
         case "No Vegetation":
         case "Vegetation":
           this.disableAll();
-          if(this.streetElementData[this.streetElementData.length-1]=="Cycle Lane"){
-            this.commercialExtensionVarient = "outline-secondary"
+          if (
+            this.streetElementData[this.streetElementData.length - 1] ==
+            "Cycle Lane"
+          ) {
+            this.commercialExtensionVarient = "outline-secondary";
             this.residentialVarient = "outline-secondary";
             this.commercialVarient = "outline-secondary";
             this.furnitureVarient = "outline-secondary";
@@ -1575,9 +1813,8 @@ export default {
             this.disabled.SideRunningDedicatedTransitLane = false;
             this.disabled.CurbLane = false;
             this.disabled.ParkingLane = false;
-          }
-          else{
-            this.commercialExtensionVarient = "outline-secondary"
+          } else {
+            this.commercialExtensionVarient = "outline-secondary";
             this.residentialVarient = "outline-secondary";
             this.commercialVarient = "outline-secondary";
             this.furnitureVarient = "outline-secondary";
@@ -1609,7 +1846,7 @@ export default {
             this.disabled.CurbLane = false;
             this.disabled.ParkingLane = false;
           }
-          
+
           break;
         case "Cycle Lane":
         case "Cycle Track":
@@ -1620,7 +1857,10 @@ export default {
         case "Curbside Buffered Cycle Lane":
         case "Contraflow Cycle Street":
           this.disableAll();
-          if(this.streetElementData[this.streetElementData.length-1]=="Utilities"){
+          if (
+            this.streetElementData[this.streetElementData.length - 1] ==
+            "Utilities"
+          ) {
             this.commercialExtensionVarient = "outline-secondary";
             this.residentialVarient = "outline-secondary";
             this.commercialVarient = "outline-secondary";
@@ -1643,9 +1883,8 @@ export default {
             this.disabled.SideRunningDedicatedTransitLane = false;
             this.disabled.CurbLane = false;
             this.disabled.ParkingLane = false;
-          }
-          else{
-            this.commercialExtensionVarient = "outline-secondary"
+          } else {
+            this.commercialExtensionVarient = "outline-secondary";
             this.residentialVarient = "outline-secondary";
             this.commercialVarient = "outline-secondary";
             this.furnitureVarient = "outline-secondary";
@@ -1738,7 +1977,7 @@ export default {
           this.disabled.RainGarden = false;
           this.disabled.Swale = false;
           this.disabled.PermeablePaving = false;
-          if(this.totalWidth ==0){
+          if (this.totalWidth == 0) {
             this.centerLineBool = true;
           }
           break;
@@ -1772,20 +2011,17 @@ export default {
           this.greenVarient = "outline-success";
           break;
       }
-
     },
     updateTotal(num, colour, title) {
-      num = num*10/10;
+      num = (num * 10) / 10;
       this.slideHide = !this.slideHide;
-      let height = num * this.ratio2D;
       if (num > this.totalWidth) {
         alert("no more room");
       } else {
-        let width = (this.width * num)*10/10;
+        let width = (this.width * num * 10) / 10;
         this.tempWidth.push(num);
-        this.totalWidth = ((this.totalWidth*10) - (num*10))/10;
+        this.totalWidth = (this.totalWidth * 10 - num * 10) / 10;
 
-        
         if (this.offsetList.length == 0) {
           this.offsetList.push({
             title: title,
@@ -1803,16 +2039,13 @@ export default {
           });
         }
       }
-      
     },
     svgDelete() {
       this.centerLineBool = false;
-      if (this.offsetList.length == 0){
-        alert("Youre at the beginning"); 
-      } 
-      else if (this.offsetList.length == 1) this.rowReset();
+      if (this.offsetList.length == 0) {
+        alert("Youre at the beginning");
+      } else if (this.offsetList.length == 1) this.rowReset();
       else {
-
         this.undoDelete.push(this.offsetList[this.offsetList.length - 1]);
 
         this.undoCounter = this.offsetList.length;
@@ -1820,25 +2053,31 @@ export default {
         const lastOffset = this.offsetList[this.offsetList.length - 1];
         this.offsetList.pop(lastOffset);
         this.counter--;
-        this.totalWidth = parseFloat((((this.totalWidth*10) + ((lastOffset.width*10)/(this.width*10))*10)/10).toFixed(1));
+        this.totalWidth = parseFloat(
+          (
+            (this.totalWidth * 10 +
+              ((lastOffset.width * 10) / (this.width * 10)) * 10) /
+            10
+          ).toFixed(1)
+        );
         this.tempWidth.pop();
         this.streetElementData.pop();
-        this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
+        this.smartButtons(
+          this.streetElementData[this.streetElementData.length - 1]
+        );
       }
     },
     rowReset() {
-      for(var i=0;i<this.offsetList.length;i++){
+      for (var i = 0; i < this.offsetList.length; i++) {
         this.undoReset.push(this.offsetList[i]);
       }
       this.dementionReset();
-      
-      if(this.getData.row==null||this.getData.row==0){
+
+      if (this.getData.row == null || this.getData.row == 0) {
         this.totalWidth = 15;
         this.width = 50;
-      }  
-      else{
-        console.log(this.getData.row);
-        this.totalWidth=this.getData.row;
+      } else {
+        this.totalWidth = this.getData.row;
       }
       this.offsetList.splice(0, this.offsetList.length);
       this.streetElementData.splice(0, this.streetElementData.length);
@@ -1855,64 +2094,64 @@ export default {
   cursor: move;
 }
 .slider {
-    -webkit-appearance: none;  /* Override default CSS styles */
-    appearance: none;
-    height: 25px; /* Specified height */
-    background: #d3d3d3; /* Grey background */
-    outline: none; /* Remove outline */
-    opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
-    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
-    transition: opacity .2s;
+  -webkit-appearance: none; /* Override default CSS styles */
+  appearance: none;
+  height: 25px; /* Specified height */
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: 0.2s; /* 0.2 seconds transition on hover */
+  transition: opacity 0.2s;
 }
 
 /* Mouse-over effects */
 .slider:hover {
-    opacity: 1; /* Fully shown on mouse-over */
+  opacity: 1; /* Fully shown on mouse-over */
 }
 
-/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */ 
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
 .slider::-webkit-slider-thumb {
-    -webkit-appearance: none; /* Override default look */
-    appearance: none;
-    width: 25px; /* Set a specific slider handle width */
-    height: 25px; /* Slider handle height */
-    background: #4CAF50; /* Green background */
-    cursor: pointer; /* Cursor on hover */
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #4caf50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
 }
 
 .slider::-moz-range-thumb {
-    width: 25px; /* Set a specific slider handle width */
-    height: 25px; /* Slider handle height */
-    background: #4CAF50; /* Green background */
-    cursor: pointer; /* Cursor on hover */
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #4caf50; /* Green background */
+  cursor: pointer; /* Cursor on hover */
 }
-#modal{
+#modal {
   height: auto;
   overflow-x: auto;
 }
-.test{
+.test {
   background-color: black;
 }
-#buttons{
+#buttons {
   padding-right: 3em;
 }
-#controls{
+#controls {
   position: fixed;
   left: 90%;
-  top:7%;
+  top: 7%;
 }
 .buttonStyle {
   margin-top: 0.15em;
   margin-bottom: 0.15em;
   min-width: 12em;
-  width: 80%; 
+  width: 80%;
   /* was 30% */
 }
 #commercialExtensionON {
   margin-top: 0.15em;
   margin-bottom: 0.15em;
   min-width: 12em;
-  width: 100%; 
+  width: 100%;
   /* was 30% */
 }
 .line1 {

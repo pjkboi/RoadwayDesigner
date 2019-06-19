@@ -60,7 +60,6 @@ export default {
             return headers;
         },
         fixdata(data) {
-            console.log(data);
             var o = "", l = 0, w = 10240;
             for(; l<data.byteLength/w; ++l) o+=String.fromCharCode.apply(null,new Uint8Array(data.slice(l*w,l*w+w)));
             o+=String.fromCharCode.apply(null, new Uint8Array(data.slice(l*w)));
@@ -79,7 +78,6 @@ export default {
         readerfunction(e){
             var results; 
             var data = e.target.result;
-            console.log(e);
             var fixedData = this.fixdata(data), 
             workbook=XLSX.read(btoa(fixedData), {type: 'base64'}), 
             firstSheetName = workbook.SheetNames[0], 
@@ -93,16 +91,11 @@ export default {
         handleDrop(e) {
             e.stopPropagation();
             e.preventDefault();
-            console.log("DROPPED");
             var files = e.dataTransfer.files, i, f;
-            console.log(files);
             for (i = 0; i < files.length; ++i) {
-                console.log(files.length);
                 f = files[i]; 
-                console.log(f);
                 var reader = new FileReader(),
                 name = f.name;
-                console.log(e);
                 reader.onload = this.readerfunction(e)
                 reader.readAsArrayBuffer(f);
             }

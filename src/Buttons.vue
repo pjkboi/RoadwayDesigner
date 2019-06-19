@@ -1,7 +1,13 @@
 <template>
   <span id="buttons">
     <span id="elementButtons">
-      <b-button class="buttonStyle" :disabled="disabled" :variant="variant" @click="hiding" style="margin: 5px">{{name}}</b-button>
+      <b-button
+        class="buttonStyle"
+        :disabled="disabled"
+        :variant="variant"
+        @click="hiding"
+        style="margin: 5px"
+      >{{name}}</b-button>
     </span>
   </span>
 </template>
