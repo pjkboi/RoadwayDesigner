@@ -1,6 +1,11 @@
 <template>
   <svg
-    v-if="title === 'Painted'||title === 'Raised'||title === 'Curb Serparated'||title === 'url(#bikeTexture)'"
+    v-if="
+      title === 'Painted' ||
+        title === 'Raised' ||
+        title === 'Curb Serparated' ||
+        title === 'url(#bikeTexture)'
+    "
     :x="x"
     :y="y"
     :width="width"
@@ -13,7 +18,15 @@
   >
     <title>BikeLane_Back</title>
     <g>
-      <rect x="11.53" y="34.74" width="2.11" height="24.75" rx="1.06" ry="1.06" fill="#181315"></rect>
+      <rect
+        x="11.53"
+        y="34.74"
+        width="2.11"
+        height="24.75"
+        rx="1.06"
+        ry="1.06"
+        fill="#181315"
+      ></rect>
       <polyline
         points="10.03 47.79 10.59 33.05 12.59 32.3 14.58 33.14 14.58 47.79"
         fill="none"
@@ -22,7 +35,13 @@
         stroke-linejoin="round"
         stroke-width="0.99"
       ></polyline>
-      <rect x="11.75" y="26.38" width="1.89" height="6.23" fill="#463a42"></rect>
+      <rect
+        x="11.75"
+        y="26.38"
+        width="1.89"
+        height="6.23"
+        fill="#463a42"
+      ></rect>
       <polyline
         points="0.49 24.55 12.59 26.38 25.34 25.96"
         fill="none"
@@ -31,12 +50,18 @@
         stroke-miterlimit="10"
         stroke-width="0.99"
       ></polyline>
-      <polygon points="17.02 38.87 14.9 38.87 14.9 35.35 17.49 35.35 17.02 38.87" fill="#ecbfa9"></polygon>
+      <polygon
+        points="17.02 38.87 14.9 38.87 14.9 35.35 17.49 35.35 17.02 38.87"
+        fill="#ecbfa9"
+      ></polygon>
       <polygon
         points="17.21 38.54 14.96 38.54 14.96 41.36 14.35 46.71 15.78 47.28 17.49 45.21 17.49 41.64 17.02 39.67 17.21 38.54"
         fill="#58595b"
       ></polygon>
-      <polygon points="6.13 38.87 5.85 45.21 7.54 45.21 8.88 39.53 6.13 38.87" fill="#ecbfa9"></polygon>
+      <polygon
+        points="6.13 38.87 5.85 45.21 7.54 45.21 8.88 39.53 6.13 38.87"
+        fill="#ecbfa9"
+      ></polygon>
       <path
         d="M11.75,27.38l3.11,3.08s-.09,2,0,3.67a10.24,10.24,0,0,1,0,2.16s2.54,1.27,2.87-.51c.25-1.32.61-3.48.61-3.48l.28-3.24L19,26s-2.07-5-3.53-5.83-7.16-.73-8,.34-1.65,5.22-1.65,6.15.37,1.68.47,2.91a13.09,13.09,0,0,1,.09,3.28,51.91,51.91,0,0,0-.56,6.58c0,1.12,3,.65,3,.65S9,35.91,9,34.78s1.22-3.28,1.31-4.13S10.58,30.23,11.75,27.38Z"
         fill="#818fa3"
@@ -78,6 +103,4 @@ export default {
   }
 };
 </script>
-<style>
-</style>
-
+<style></style>

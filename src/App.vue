@@ -5,18 +5,22 @@
       <b-navbar toggleable="md" type="dark" id="navbar">
         <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
         <b-navbar-brand href="#">VIDEA</b-navbar-brand>
-        <vue-xlsx-table @on-select-file="handleSelectedFile" v-show="openFilebtn">open dbf</vue-xlsx-table>
+        <vue-xlsx-table
+          @on-select-file="handleSelectedFile"
+          v-show="openFilebtn"
+          >open dbf</vue-xlsx-table
+        >
         <b-collapse is-nav id="nav_collapse">
           <b-navbar-nav class="ml-auto">
             <!-- at click call pageSwitcher -->
             <span class="nav-item" @click="pageSwitcher('ProjectPicker')">
-              <img src="./icons/map.png">Map
+              <img src="./icons/map.png" />Map
             </span>
             <span class="nav-item" @click="pageSwitcher('roadwayDesigner')">
-              <img src="./icons/roadway.png"> Roadway Designer
+              <img src="./icons/roadway.png" /> Roadway Designer
             </span>
             <span class="nav-item" @click="pageSwitcher('Dashboard')">
-              <img src="./icons/dashboard.png"> Dashboard
+              <img src="./icons/dashboard.png" /> Dashboard
             </span>
           </b-navbar-nav>
         </b-collapse>
@@ -36,7 +40,9 @@
       :convertedDataStorage="convertedDataStorage"
     ></RoadwayDesigner>
     <Admin v-if="adminPg" v-on:Admin="AdminSwitch($event)"></Admin>
-    <b-button id="adminbtn" v-show="adminbtn" @click="pageSwitcher('Admin')">Admin</b-button>
+    <b-button id="adminbtn" v-show="adminbtn" @click="pageSwitcher('Admin')"
+      >Admin</b-button
+    >
   </div>
 </template>
 

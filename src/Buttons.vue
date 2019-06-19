@@ -7,7 +7,8 @@
         :variant="variant"
         @click="hiding"
         style="margin: 5px"
-      >{{name}}</b-button>
+        >{{ name }}</b-button
+      >
     </span>
   </span>
 </template>

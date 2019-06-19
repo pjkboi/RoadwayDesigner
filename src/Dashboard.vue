@@ -2,19 +2,19 @@
   <div id="dashboard">
     <div id="dashboardRainbow">
       <div class="rainbow" style="background-color: #EFBBFF;">
-        <img src="./icons/human_capacity.svg" height="70%">
+        <img src="./icons/human_capacity.svg" height="70%" />
       </div>
       <div class="rainbow" style="background-color: #D896FF;">
-        <img src="./icons/bicycle.svg" height="70%">
+        <img src="./icons/bicycle.svg" height="70%" />
       </div>
       <div class="rainbow" style="background-color: #BE29EC;">
-        <img src="./icons/car.svg" height="70%">
+        <img src="./icons/car.svg" height="70%" />
       </div>
       <div class="rainbow" style="background-color: #800080;">
-        <img src="./icons/bus.svg" height="70%">
+        <img src="./icons/bus.svg" height="70%" />
       </div>
       <div class="rainbow" style="background-color: #660066;">
-        <img src="./icons/accesebility.svg" height="70%">
+        <img src="./icons/accesebility.svg" height="70%" />
       </div>
     </div>
     <div id="dashboardMain" class="dash">
@@ -44,20 +44,24 @@
       </svg>
 
       <div id="sidewalkCapacity">
-        <person id="qwerty" :value="this.sidewalkCapacityValue" :maxCapacity="10000"></person>
         <person
-          v-if="this.sidewalkCapacityValue>10000"
-          :value="this.sidewalkCapacityValue-10000"
+          id="qwerty"
+          :value="this.sidewalkCapacityValue"
           :maxCapacity="10000"
         ></person>
         <person
-          v-if="this.sidewalkCapacityValue>20000"
-          :value="this.sidewalkCapacityValue-20000"
+          v-if="this.sidewalkCapacityValue > 10000"
+          :value="this.sidewalkCapacityValue - 10000"
           :maxCapacity="10000"
         ></person>
         <person
-          v-if="this.sidewalkCapacityValue>30000"
-          :value="this.sidewalkCapacityValue-30000"
+          v-if="this.sidewalkCapacityValue > 20000"
+          :value="this.sidewalkCapacityValue - 20000"
+          :maxCapacity="10000"
+        ></person>
+        <person
+          v-if="this.sidewalkCapacityValue > 30000"
+          :value="this.sidewalkCapacityValue - 30000"
           :maxCapacity="10000"
         ></person>
       </div>
@@ -65,18 +69,18 @@
       <div id="bikeCapacity">
         <bike :value="this.bikeCapacityValue" :maxCapacity="10000"></bike>
         <bike
-          v-if="this.bikeCapacityValue>10000"
-          :value="this.bikeCapacityValue-10000"
+          v-if="this.bikeCapacityValue > 10000"
+          :value="this.bikeCapacityValue - 10000"
           :maxCapacity="10000"
         ></bike>
         <bike
-          v-if="this.bikeCapacityValue>20000"
-          :value="this.bikeCapacityValue-20000"
+          v-if="this.bikeCapacityValue > 20000"
+          :value="this.bikeCapacityValue - 20000"
           :maxCapacity="10000"
         ></bike>
         <bike
-          v-if="this.bikeCapacityValue>30000"
-          :value="this.bikeCapacityValue-30000"
+          v-if="this.bikeCapacityValue > 30000"
+          :value="this.bikeCapacityValue - 30000"
           :maxCapacity="10000"
         ></bike>
       </div>
@@ -84,18 +88,18 @@
       <div id="busCapacity">
         <bus :value="this.busCapacityValue" :maxCapacity="10000"></bus>
         <bus
-          v-if="this.busCapacityValue>10000"
-          :value="this.busCapacityValue-10000"
+          v-if="this.busCapacityValue > 10000"
+          :value="this.busCapacityValue - 10000"
           :maxCapacity="10000"
         ></bus>
         <bus
-          v-if="this.busCapacityValue>20000"
-          :value="this.busCapacityValue-20000"
+          v-if="this.busCapacityValue > 20000"
+          :value="this.busCapacityValue - 20000"
           :maxCapacity="10000"
         ></bus>
         <bus
-          v-if="this.busCapacityValue>30000"
-          :value="this.busCapacityValue-30000"
+          v-if="this.busCapacityValue > 30000"
+          :value="this.busCapacityValue - 30000"
           :maxCapacity="10000"
         ></bus>
       </div>
@@ -103,18 +107,18 @@
       <div id="carCapacity">
         <car :value="this.carCapacityValue" :maxCapacity="10000"></car>
         <car
-          v-if="this.carCapacityValue>10000"
-          :value="this.carCapacityValue-10000"
+          v-if="this.carCapacityValue > 10000"
+          :value="this.carCapacityValue - 10000"
           :maxCapacity="10000"
         ></car>
         <car
-          v-if="this.carCapacityValue>20000"
-          :value="this.carCapacityValue-20000"
+          v-if="this.carCapacityValue > 20000"
+          :value="this.carCapacityValue - 20000"
           :maxCapacity="10000"
         ></car>
         <car
-          v-if="this.carCapacityValue>30000"
-          :value="this.carCapacityValue-30000"
+          v-if="this.carCapacityValue > 30000"
+          :value="this.carCapacityValue - 30000"
           :maxCapacity="10000"
         ></car>
       </div>
@@ -126,17 +130,27 @@
           <h3>Total Capacity</h3>
           <div class="progressBar">
             <h5>Current</h5>
-            <v-progress-linear slot="progress" value="50" color="red" height="20"></v-progress-linear>
+            <v-progress-linear
+              slot="progress"
+              value="50"
+              color="red"
+              height="20"
+            ></v-progress-linear>
           </div>
           <div class="progressBar">
             <h5>Proposed</h5>
-            <v-progress-linear slot="progress" value="75" color="orange" height="20"></v-progress-linear>
+            <v-progress-linear
+              slot="progress"
+              value="75"
+              color="orange"
+              height="20"
+            ></v-progress-linear>
           </div>
         </div>
       </div>
     </div>
   </div>
-</template> 
+</template>
 
 <script>
 import person from "./svg/Person";

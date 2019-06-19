@@ -11,283 +11,466 @@
         :name="this.name"
         v-on:onClick="updateTotal($event, color, name)"
         v-on:backbtn="back($event)"
-        :style="{height: (window.height*0.3)+'px'}"
+        :style="{ height: window.height * 0.3 + 'px' }"
       ></slider>
       <div id="elementBtn" v-if="!slideHide">
         <b>
           <p>Select Road Element:</p>
         </b>
         <v-btn fab dark small color="grey" @click="show('sidewalkInfo')">
-          <v-icon>i</v-icon>
-        </v-btn>Sidewalk Elements:
-        <br>
+          <v-icon>i</v-icon> </v-btn
+        >Sidewalk Elements:
+        <br />
         <b-button
-          @click="smartButtons('Commercial Use Extension'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Commercial Use Extension');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           id="Sidewalk"
           class="buttonStyle"
           :variant="commercialExtensionVarient"
           :disabled="disabled.CommercialExtension"
-        >Commercial Use Extension</b-button>
+          >Commercial Use Extension</b-button
+        >
         <b-button
-          @click="smartButtons('Residential'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Residential');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           id="Sidewalk"
           class="buttonStyle"
           :variant="residentialVarient"
           :disabled="disabled.Residential"
-        >Residential</b-button>
+          >Residential</b-button
+        >
         <b-button
-          @click="smartButtons('Commercial'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Commercial');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           id="Sidewalk"
           class="buttonStyle"
           :variant="commercialVarient"
           :disabled="disabled.Commercial"
-        >Commercial</b-button>
+          >Commercial</b-button
+        >
         <b-button
-          @click="smartButtons('Street Furniture Zone'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Street Furniture Zone');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           id="Sidewalk"
           class="buttonStyle"
           :variant="furnitureVarient"
           :disabled="disabled.StreetFurniture"
-        >Street Furniture Zone</b-button>
+          >Street Furniture Zone</b-button
+        >
         <!-- <b-button @click="naming('Line'), smartButtons()" class="buttonStyle" :variant="'outline-secondary'"  >Line</b-button> -->
-        <br>
+        <br />
         <v-btn fab dark small color="green" @click="show('bufferInfo')">
-          <v-icon>i</v-icon>
-        </v-btn>Buffer Zone:
-        <br>
+          <v-icon>i</v-icon> </v-btn
+        >Buffer Zone:
+        <br />
         <b-button
-          @click="smartButtons('Utilities'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Utilities');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           id="Landscaping (Trees)"
           class="buttonStyle"
           :variant="bufferVarient"
           :disabled="disabled.Utilities"
-        >Utilities</b-button>
+          >Utilities</b-button
+        >
         <b-button
-          @click="smartButtons('No Vegetation'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('No Vegetation');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           class="buttonStyle"
           :variant="bufferVarient"
           :disabled="disabled.NoVegetation"
-        >No Vegetation</b-button>
+          >No Vegetation</b-button
+        >
         <b-button
-          @click="smartButtons('Vegetation'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Vegetation');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           id="Landscaping (Trees)"
           class="buttonStyle"
           :variant="bufferVarient"
           :disabled="disabled.Vegetation"
-        >Vegetation</b-button>
-        <br>
+          >Vegetation</b-button
+        >
+        <br />
         <v-btn fab dark small color="blue" @click="show('cycleInfo')">
-          <v-icon>i</v-icon>
-        </v-btn>Cycling Elements:
-        <br>
+          <v-icon>i</v-icon> </v-btn
+        >Cycling Elements:
+        <br />
         <b-button
-          @click="smartButtons('Cycle Lane'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Cycle Lane');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           class="buttonStyle"
           :variant="cycleVarient"
           :disabled="disabled.CycleLane"
-        >Cycle Lane</b-button>
+          >Cycle Lane</b-button
+        >
         <b-button
-          @click="smartButtons('Cycle Track'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Cycle Track');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           class="buttonStyle"
           :variant="cycleVarient"
           :disabled="disabled.CycleTrack"
-        >Cycle Track</b-button>
+          >Cycle Track</b-button
+        >
         <b-button
-          @click="smartButtons('Cycle Street'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Cycle Street');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           class="buttonStyle"
           :variant="cycleVarient"
           :disabled="disabled.CycleStreet"
-        >Cycle Street</b-button>
+          >Cycle Street</b-button
+        >
         <b-button
-          @click="smartButtons('Protected Cycle Track'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Protected Cycle Track');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           class="buttonStyle"
           :variant="cycleVarient"
           :disabled="disabled.ProtectedCycleTrack"
-        >Protected Cycle Track</b-button>
+          >Protected Cycle Track</b-button
+        >
         <b-button
-          @click="smartButtons('Bidirectional Cycle Track'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Bidirectional Cycle Track');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           class="buttonStyle"
           :variant="cycleVarient"
           :disabled="disabled.BidirectionalCycleTrack"
-        >Bidirectional Cycle Track</b-button>
+          >Bidirectional Cycle Track</b-button
+        >
         <b-button
-          @click="smartButtons('Raised Cycle Track'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Raised Cycle Track');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           class="buttonStyle"
           :variant="cycleVarient"
           :disabled="disabled.RaisedCycleTrack"
-        >Raised Cycle Track</b-button>
+          >Raised Cycle Track</b-button
+        >
         <b-button
-          @click="smartButtons('Curbside Buffered Cycle Lane'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Curbside Buffered Cycle Lane');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           class="buttonStyle"
           :variant="cycleVarient"
           :disabled="disabled.CurbsideBufferedCycleLane"
-        >Curbside Buffered Cycle Lane</b-button>
+          >Curbside Buffered Cycle Lane</b-button
+        >
         <b-button
-          @click="smartButtons('Contraflow Cycle Street'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Contraflow Cycle Street');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           class="buttonStyle"
           :variant="cycleVarient"
           :disabled="disabled.ContraflowCycleStreet"
-        >Contraflow Cycle Street</b-button>
-        <br>
+          >Contraflow Cycle Street</b-button
+        >
+        <br />
         <v-btn fab dark small color="orange" @click="show('transitInfo')">
-          <v-icon>i</v-icon>
-        </v-btn>Transit Elements:
-        <br>
+          <v-icon>i</v-icon> </v-btn
+        >Transit Elements:
+        <br />
         <b-button
-          @click="smartButtons('Shared Transit Lane'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Shared Transit Lane');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           class="buttonStyle"
           :variant="transitVarient"
           :disabled="disabled.SharedTransitLane"
-        >Shared Transit Lane</b-button>
+          >Shared Transit Lane</b-button
+        >
         <b-button
-          @click="smartButtons('Transit Stop'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Transit Stop');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           class="buttonStyle"
           :variant="transitVarient"
           :disabled="disabled.TransitStop"
-        >Transit Stop</b-button>
+          >Transit Stop</b-button
+        >
         <b-button
-          @click="smartButtons('Side Running Dedicated Transit Lane'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Side Running Dedicated Transit Lane');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           class="buttonStyle"
           :variant="transitVarient"
           :disabled="disabled.SideRunningDedicatedTransitLane"
-        >Side Running Dedicated Transit Lane</b-button>
+          >Side Running Dedicated Transit Lane</b-button
+        >
         <b-button
-          @click="smartButtons('Centre Running Transit Lane - Centre Boarding'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Centre Running Transit Lane - Centre Boarding');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           class="buttonStyle"
           :variant="centertransitVarient"
           :disabled="disabled.CenterRunningTransitLaneCenterBoarding"
-        >Centre Running Transit Lane - Centre Board</b-button>
+          >Centre Running Transit Lane - Centre Board</b-button
+        >
         <b-button
-          @click="smartButtons('Centre Running Transit Lane – Side Boarding'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Centre Running Transit Lane – Side Boarding');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           class="buttonStyle"
           :variant="centertransitVarient"
           :disabled="disabled.CenterRunningTransitLaneSideBoarding"
-        >Centre Running Transit Lane – Side Board</b-button>
-        <br>
+          >Centre Running Transit Lane – Side Board</b-button
+        >
+        <br />
         <v-btn fab dark small color="black" @click="show('roadInfo')">
-          <v-icon>i</v-icon>
-        </v-btn>Vehicle Lanes:
-        <br>
+          <v-icon>i</v-icon> </v-btn
+        >Vehicle Lanes:
+        <br />
         <b-button
-          @click="smartButtons('Curb Lane'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Curb Lane');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           class="buttonStyle"
           :variant="curbLaneVarient"
           :disabled="disabled.CurbLane"
-        >Curb Lane</b-button>
+          >Curb Lane</b-button
+        >
         <b-button
-          @click="smartButtons('Passing Lane'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Passing Lane');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           class="buttonStyle"
           :variant="passingLaneVarient"
           :disabled="disabled.PassingLane"
-        >Passing Lane</b-button>
+          >Passing Lane</b-button
+        >
         <b-button
-          @click="smartButtons('Large Vehicle Lane'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Large Vehicle Lane');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           class="buttonStyle"
           :variant="largeVehicleLaneVarient"
           :disabled="disabled.LargeVehicleLane"
-        >Large Vehicle Lane</b-button>
+          >Large Vehicle Lane</b-button
+        >
         <b-button
-          @click="smartButtons('Bidirectional Travel Lane'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Bidirectional Travel Lane');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           class="buttonStyle"
           :variant="bidirectionalTravelLaneVarient"
           :disabled="disabled.BidirectionalTravelLane"
-        >Bidirectional Travel Lane</b-button>
+          >Bidirectional Travel Lane</b-button
+        >
         <b-button
-          @click="smartButtons('Turning Lane'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Turning Lane');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           class="buttonStyle"
           :variant="turningLaneVarient"
           :disabled="disabled.TurningLane"
-        >Turning Lane</b-button>
+          >Turning Lane</b-button
+        >
         <b-button
-          @click="smartButtons('Freight Travel Lane'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Freight Travel Lane');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           class="buttonStyle"
           :variant="freightTravelLaneVarient"
           :disabled="disabled.FreightTravelLane"
-        >Freight Travel Lane</b-button>
+          >Freight Travel Lane</b-button
+        >
         <b-button
-          @click="smartButtons('Parking Lane'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Parking Lane');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           class="buttonStyle"
           :variant="parkingLaneVarient"
           :disabled="disabled.ParkingLane"
-        >Parking Lane</b-button>
+          >Parking Lane</b-button
+        >
 
-        <br>
+        <br />
         <v-btn fab dark small color="teal" @click="show('medianInfo')">
-          <v-icon>i</v-icon>
-        </v-btn>Median:
-        <br>
+          <v-icon>i</v-icon> </v-btn
+        >Median:
+        <br />
         <b-button
-          @click="smartButtons('Two-way left-turn Lane'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Two-way left-turn Lane');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           class="buttonStyle"
           :variant="medianVarient"
           :disabled="disabled.TwoWayLeftTurn"
-        >Two-way left-turn Lane</b-button>
+          >Two-way left-turn Lane</b-button
+        >
         <b-button
-          @click="smartButtons('Pedestrian Refuge Island'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Pedestrian Refuge Island');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           class="buttonStyle"
           :variant="medianVarient"
           :disabled="disabled.PedestrianRefugeIsland"
-        >Pedestrian Refuge Island</b-button>
+          >Pedestrian Refuge Island</b-button
+        >
         <b-button
-          @click="smartButtons('Boulevard (Vegetation)'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Boulevard (Vegetation)');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           class="buttonStyle"
           :variant="medianVarient"
           :disabled="disabled.Boulevard"
-        >Boulevard (Vegetation)</b-button>
+          >Boulevard (Vegetation)</b-button
+        >
         <b-button
-          @click="smartButtons('Centre Line'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Centre Line');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           class="buttonStyle"
           :variant="medianVarient"
           :disabled="disabled.CenterLine"
-        >Center Line</b-button>
+          >Center Line</b-button
+        >
         <b-button
-          @click="smartButtons('Infrastructure'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Infrastructure');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           class="buttonStyle"
           :variant="medianVarient"
           :disabled="disabled.Infrastructure"
-        >Infrastructure</b-button>
-        <br>
+          >Infrastructure</b-button
+        >
+        <br />
         <v-btn fab dark small color="green" @click="show('greenInfo')">
-          <v-icon>i</v-icon>
-        </v-btn>Green Infrastructure
-        <br>
+          <v-icon>i</v-icon> </v-btn
+        >Green Infrastructure
+        <br />
         <b-button
-          @click="smartButtons('Swale'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Swale');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           class="buttonStyle"
           :variant="greenVarient"
           :disabled="disabled.Swale"
-        >Swale</b-button>
+          >Swale</b-button
+        >
         <b-button
-          @click="smartButtons('Rain Garden'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Rain Garden');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           class="buttonStyle"
           :variant="greenVarient"
           :disabled="disabled.RainGarden"
-        >Rain Garden</b-button>
+          >Rain Garden</b-button
+        >
         <b-button
-          @click="smartButtons('Permeable Paving'); slideHide = !slideHide; clearUndo();"
+          @click="
+            smartButtons('Permeable Paving');
+            slideHide = !slideHide;
+            clearUndo();
+          "
           class="buttonStyle"
           :variant="greenVarient"
           :disabled="disabled.PermeablePaving"
-        >Permeable Paving</b-button>
-        <br>
-        <br>
+          >Permeable Paving</b-button
+        >
+        <br />
+        <br />
       </div>
       <div id="controls" v-if="!slideHide">
-        <b-button variant="danger" @click="rowReset" id="btnReset">Reset</b-button>
-        <b-button variant="danger" @click="svgDelete" id="btnDelete">Delete</b-button>
+        <b-button variant="danger" @click="rowReset" id="btnReset"
+          >Reset</b-button
+        >
+        <b-button variant="danger" @click="svgDelete" id="btnDelete"
+          >Delete</b-button
+        >
         <b-button variant="danger" @click="undo" id="btnUndo">Undo</b-button>
-        <b-button variant="danger" @click="submit" id="btnSubmit">Submit</b-button>
-        <b-button variant @click="Populate" hidden id="RDPrepopulation">Test</b-button>
+        <b-button variant="danger" @click="submit" id="btnSubmit"
+          >Submit</b-button
+        >
+        <b-button variant @click="Populate" hidden id="RDPrepopulation"
+          >Test</b-button
+        >
         <!-- <b-button variant="success" hidden @click="startInterval(), animationOn=!animationOn" id="solveRoutesBtn" ref="streetViewer">Anime</b-button> -->
       </div>
     </div>
     <div id="crossSection">
-      <br>
+      <br />
       <span style="text-align: center;">
         Remaining Width
-        <span
-          style="background-color: #694393; color: white; padding:5px;"
-        >{{totalWidth}}m</span>
+        <span style="background-color: #694393; color: white; padding:5px;"
+          >{{ totalWidth }}m</span
+        >
       </span>
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -309,7 +492,7 @@
           ></Sidewalk>
           <SidewalkBack
             :title="offset.fill"
-            :x="1500-offset.x-offset.width"
+            :x="1500 - offset.x - offset.width"
             :y="260"
             :width="offset.width"
             :height="100"
@@ -325,7 +508,7 @@
           ></BikeLane>
           <BikeLaneBack
             :title="offset.fill"
-            :x="1500-offset.x-offset.width"
+            :x="1500 - offset.x - offset.width"
             :y="260"
             :width="offset.width"
             :height="100"
@@ -341,7 +524,7 @@
           ></BusLane>
           <BusLaneBack
             :title="offset.title"
-            :x="1500-offset.x-offset.width"
+            :x="1500 - offset.x - offset.width"
             :y="260"
             :width="offset.width"
             :height="100"
@@ -357,7 +540,7 @@
           ></CarLane>
           <CarLaneBack
             :title="offset.title"
-            :x="1500-offset.x-offset.width"
+            :x="1500 - offset.x - offset.width"
             :y="260"
             :width="offset.width"
             :height="100"
@@ -373,7 +556,7 @@
           ></Landscaping>
           <LandscapingBack
             :title="offset.title"
-            :x="1500-offset.x-offset.width"
+            :x="1500 - offset.x - offset.width"
             :y="160"
             :width="offset.width"
             :height="200"
@@ -381,9 +564,9 @@
           ></LandscapingBack>
           <PavedMedian
             :title="offset.title"
-            :x="offset.x-50"
+            :x="offset.x - 50"
             :y="260"
-            :width="offset.width+100"
+            :width="offset.width + 100"
             :height="100"
             preserveAspectRatio="xMidYMax meet"
           ></PavedMedian>
@@ -397,7 +580,7 @@
           ></SharrowLane>
           <SharrowLaneBack
             :title="offset.title"
-            :x="1500-offset.x-offset.width"
+            :x="1500 - offset.x - offset.width"
             :y="260"
             :width="offset.width"
             :height="100"
@@ -407,12 +590,12 @@
             :title="offset.title"
             :x="offset.x"
             :y="260"
-            :width="offset.width*2"
+            :width="offset.width * 2"
             :height="100"
             preserveAspectRatio="xMidYMax meet"
           ></TurnLane>
           <rect
-            @click="sizeLines(index), title = offset.title"
+            @click="sizeLines(index), (title = offset.title)"
             class="svg"
             :fill="offset.fill"
             :x="offset.x"
@@ -424,7 +607,7 @@
           <rect
             class="svg"
             :fill="offset.fill"
-            :x="1500-offset.x-offset.width"
+            :x="1500 - offset.x - offset.width"
             y="90%"
             :width="offset.width"
             height="25"
@@ -459,27 +642,38 @@
           </defs>
 
           <text
-            v-if="index==selectedElementId && selectedElement "
+            v-if="index == selectedElementId && selectedElement"
             @click="changeSize('Deduct', selectedElementId)"
-            :x="offset.x+10"
-            :y="140-7"
-          >-</text>
+            :x="offset.x + 10"
+            :y="140 - 7"
+          >
+            -
+          </text>
           <text
-            v-if="index==selectedElementId && selectedElement"
+            v-if="index == selectedElementId && selectedElement"
             @click="changeSize('Add', selectedElementId)"
-            :x="offset.x+offset.width-20"
-            :y="140-7"
-          >+</text>
+            :x="offset.x + offset.width - 20"
+            :y="140 - 7"
+          >
+            +
+          </text>
           <text
             v-if="selectedElementId != index && !selectedElement"
-            :x="offset.x+offset.width/2-15"
-            :y="140-7"
-          >{{((offset.width).toFixed(2)*100/((width).toFixed(2)*100)).toFixed(1)}}m</text>
+            :x="offset.x + offset.width / 2 - 15"
+            :y="140 - 7"
+          >
+            {{
+              (
+                (offset.width.toFixed(2) * 100) /
+                (width.toFixed(2) * 100)
+              ).toFixed(1)
+            }}m
+          </text>
           <line
             v-if="selectedElementId != index && !selectedElement"
-            :x1="offset.x+3"
+            :x1="offset.x + 3"
             :y1="140"
-            :x2="offset.x+offset.width-3"
+            :x2="offset.x + offset.width - 3"
             :y2="140"
             style="stroke:rgb(255,250,250);stroke-width:2; opacity: 0.8;"
             marker-end="url(#arrow)"
@@ -495,39 +689,62 @@
           ></line>
           <line
             v-if="selectedElementId != index && !selectedElement"
-            :x1="offset.x+offset.width"
+            :x1="offset.x + offset.width"
             y1="90%"
-            :x2="offset.x+offset.width"
+            :x2="offset.x + offset.width"
             :y2="140"
             style="stroke:rgb(255,250,250);stroke-width:2; opacity: 0.5"
           ></line>
           <!-- sum demension lines -->
           <line
-            v-if="selectedElementId != index && !selectedElement && index>1"
-            :x1="offsetList[0].x+1"
+            v-if="selectedElementId != index && !selectedElement && index > 1"
+            :x1="offsetList[0].x + 1"
             y1="90%"
-            :x2="offsetList[0].x+1"
+            :x2="offsetList[0].x + 1"
             :y2="60"
             style="stroke:rgb(255,250,250);stroke-width:2; opacity: 0.9"
           ></line>
           <line
-            v-if="selectedElementId != index && !selectedElement && index>1 && index==offsetList.length-1"
-            :x1="offsetList[index].x+offsetList[index].width"
+            v-if="
+              selectedElementId != index &&
+                !selectedElement &&
+                index > 1 &&
+                index == offsetList.length - 1
+            "
+            :x1="offsetList[index].x + offsetList[index].width"
             y1="90%"
-            :x2="offsetList[index].x+offsetList[index].width"
+            :x2="offsetList[index].x + offsetList[index].width"
             :y2="60"
             style="stroke:rgb(255,250,250);stroke-width:2; opacity: 0.9"
           ></line>
           <text
-            v-if="selectedElementId != index && !selectedElement && index>1 && index==offsetList.length-1"
-            :x="(offsetList[0].x+offsetList[index].x+offsetList[index].width)/2-15"
-            :y="60-7"
-          >{{(startWidth-totalWidth).toFixed(1)}}m</text>
+            v-if="
+              selectedElementId != index &&
+                !selectedElement &&
+                index > 1 &&
+                index == offsetList.length - 1
+            "
+            :x="
+              (offsetList[0].x +
+                offsetList[index].x +
+                offsetList[index].width) /
+                2 -
+                15
+            "
+            :y="60 - 7"
+          >
+            {{ (startWidth - totalWidth).toFixed(1) }}m
+          </text>
           <line
-            v-if="selectedElementId != index && !selectedElement && index>1 && index==offsetList.length-1"
-            :x1="offsetList[0].x+2"
+            v-if="
+              selectedElementId != index &&
+                !selectedElement &&
+                index > 1 &&
+                index == offsetList.length - 1
+            "
+            :x1="offsetList[0].x + 2"
             :y1="60"
-            :x2="offsetList[index].x+offsetList[index].width-1"
+            :x2="offsetList[index].x + offsetList[index].width - 1"
             :y2="60"
             style="stroke:rgb(255,250,250);stroke-width:2; opacity: 0.8;"
             marker-end="url(#cross)"
@@ -535,10 +752,10 @@
           ></line>
           <!-- red lines for selected elements -->
           <line
-            v-if="index==selectedElementId && selectedElement "
-            :x1="offset.x+3"
+            v-if="index == selectedElementId && selectedElement"
+            :x1="offset.x + 3"
             :y1="140"
-            :x2="offset.x+offset.width-3"
+            :x2="offset.x + offset.width - 3"
             :y2="140"
             style="stroke:rgb(247, 28, 0);stroke-width:2; opacity: 0.8;"
             marker-end="url(#arrow)"
@@ -546,7 +763,7 @@
           ></line>
 
           <line
-            v-if="index==selectedElementId && selectedElement"
+            v-if="index == selectedElementId && selectedElement"
             :x1="offset.x"
             y1="90%"
             :x2="offset.x"
@@ -559,65 +776,115 @@
             @mousemove="drago"
             @mouseup="endDrago"
             @mouseleave="endDrago"
-            v-if="index==selectedElementId && selectedElement"
-            :x1="offset.x+offset.width"
+            v-if="index == selectedElementId && selectedElement"
+            :x1="offset.x + offset.width"
             y1="90%"
-            :x2="offset.x+offset.width"
+            :x2="offset.x + offset.width"
             :y2="140"
             style="stroke:rgb(247, 28, 0);stroke-width:14; opacity: 0.8"
           ></line>
           <text
-            v-if="index==selectedElementId && selectedElement"
-            :x="offset.x+offset.width/2-15"
-            :y="140-7"
-          >{{((offset.width).toFixed(2)/((width).toFixed(2))).toFixed(1)}}m</text>
+            v-if="index == selectedElementId && selectedElement"
+            :x="offset.x + offset.width / 2 - 15"
+            :y="140 - 7"
+          >
+            {{ (offset.width.toFixed(2) / width.toFixed(2)).toFixed(1) }}m
+          </text>
         </svg>
       </svg>
     </div>
     <div id="planView">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1500" preserveAspectRatio="none">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 1500 1500"
+        preserveAspectRatio="none"
+      >
         <svg v-for="(offset, key) in offsetList" :key="key">
           <defs>
-            <pattern id="roadTexture" patternUnits="userSpaceOnUse" width="100" height="100">
-              <image xlink:href="./svg/roadTexture.jpg" x="0" y="0" width="100" height="100"></image>
+            <pattern
+              id="roadTexture"
+              patternUnits="userSpaceOnUse"
+              width="100"
+              height="100"
+            >
+              <image
+                xlink:href="./svg/roadTexture.jpg"
+                x="0"
+                y="0"
+                width="100"
+                height="100"
+              ></image>
             </pattern>
-            <pattern id="bikeTexture" patternUnits="userSpaceOnUse" width="100" height="100">
-              <image xlink:href="./svg/bikeTexture.jpg" x="0" y="0" width="100" height="100"></image>
+            <pattern
+              id="bikeTexture"
+              patternUnits="userSpaceOnUse"
+              width="100"
+              height="100"
+            >
+              <image
+                xlink:href="./svg/bikeTexture.jpg"
+                x="0"
+                y="0"
+                width="100"
+                height="100"
+              ></image>
             </pattern>
-            <pattern id="sidewalkTexture" patternUnits="userSpaceOnUse" width="100" height="100">
-              <image xlink:href="./svg/sidewalkTexture.jpg" x="0" y="0" width="100" height="100"></image>
+            <pattern
+              id="sidewalkTexture"
+              patternUnits="userSpaceOnUse"
+              width="100"
+              height="100"
+            >
+              <image
+                xlink:href="./svg/sidewalkTexture.jpg"
+                x="0"
+                y="0"
+                width="100"
+                height="100"
+              ></image>
             </pattern>
-            <pattern id="grassTexture" patternUnits="userSpaceOnUse" width="100" height="100">
-              <image xlink:href="./svg/grassTexture.jpg" x="0" y="0" width="100" height="100"></image>
+            <pattern
+              id="grassTexture"
+              patternUnits="userSpaceOnUse"
+              width="100"
+              height="100"
+            >
+              <image
+                xlink:href="./svg/grassTexture.jpg"
+                x="0"
+                y="0"
+                width="100"
+                height="100"
+              ></image>
             </pattern>
           </defs>
           <!-- Line section// animation section -->
           <CarLineTop
             v-if="offset.title === 'Curb Lane'"
             :title="offset.title"
-            :x="offset.x-95"
-            :y="move*5+Math.floor((Math.random() * 3) + 1)"
+            :x="offset.x - 95"
+            :y="move * 5 + Math.floor(Math.random() * 3 + 1)"
             preserveAspectRatio="xMidYMax meet"
           ></CarLineTop>
           <CarLineTop
             v-if="offset.title === 'Passing Lane'"
             :title="offset.title"
-            :x="offset.x-95"
-            :y="move*9+Math.floor((Math.random() * 3) + 1)-1000"
+            :x="offset.x - 95"
+            :y="move * 9 + Math.floor(Math.random() * 3 + 1) - 1000"
             preserveAspectRatio="xMidYMax meet"
           ></CarLineTop>
           <CarLineBottom
             v-if="offset.title === 'Curb Lane'"
             :title="offset.title"
-            :x="1410-offset.x-offset.width"
-            :y="-move*3+Math.floor((Math.random() * 3) + 1)+1000"
+            :x="1410 - offset.x - offset.width"
+            :y="-move * 3 + Math.floor(Math.random() * 3 + 1) + 1000"
             preserveAspectRatio="xMidYMax meet"
           ></CarLineBottom>
           <CarLineBottom
             v-if="offset.title === 'Passing Lane'"
             :title="offset.title"
-            :x="1410-offset.x-offset.width"
-            :y="-move*7+Math.floor((Math.random() * 3) + 1)+1000"
+            :x="1410 - offset.x - offset.width"
+            :y="-move * 7 + Math.floor(Math.random() * 3 + 1) + 1000"
             preserveAspectRatio="xMidYMax meet"
           ></CarLineBottom>
           <rect
@@ -629,7 +896,7 @@
             :fill="offset.fill"
           ></rect>
           <line
-            v-if="offset.title=='Passing Lane'"
+            v-if="offset.title == 'Passing Lane'"
             :x1="offset.x"
             :x2="offset.x"
             y1="2"
@@ -640,9 +907,9 @@
             stroke-dasharray="100 100"
           ></line>
           <line
-            v-if="offset.title=='Curb Lane'"
-            :x1="offset.x+10"
-            :x2="offset.x+10"
+            v-if="offset.title == 'Curb Lane'"
+            :x1="offset.x + 10"
+            :x2="offset.x + 10"
             y1="2"
             y2="100%"
             stroke="white"
@@ -650,9 +917,9 @@
             stroke-linecap="butt"
           ></line>
           <line
-            v-if="offset.title=='Painted'||offset.title=='Raised'"
-            :x1="offset.x+65"
-            :x2="offset.x+65"
+            v-if="offset.title == 'Painted' || offset.title == 'Raised'"
+            :x1="offset.x + 65"
+            :x2="offset.x + 65"
             y1="2"
             y2="100%"
             stroke="white"
@@ -661,9 +928,9 @@
           ></line>
           <line
             class="line1"
-            v-if="offset.title=='Landscaping (Trees)'"
-            :x1="offset.x+offset.width/2"
-            :x2="offset.x+offset.width/2"
+            v-if="offset.title == 'Landscaping (Trees)'"
+            :x1="offset.x + offset.width / 2"
+            :x2="offset.x + offset.width / 2"
             y1="2"
             y2="100%"
           ></line>
@@ -676,7 +943,7 @@
             preserveAspectRatio="xMidYMax meet"
           ></Sidewalk>
           <line
-            v-if="offset.title=='Two-way left-turn Lane'"
+            v-if="offset.title == 'Two-way left-turn Lane'"
             :x1="offset.x"
             :x2="offset.x"
             y1="2"
@@ -689,19 +956,19 @@
           <CarLineTop
             v-if="offset.title === 'Curb Lane'"
             :title="offset.title"
-            :x="offset.x-95"
-            :y="move*5+Math.floor((Math.random() * 3) + 1)"
+            :x="offset.x - 95"
+            :y="move * 5 + Math.floor(Math.random() * 3 + 1)"
             preserveAspectRatio="xMidYMax meet"
           ></CarLineTop>
           <CarLineTop
             v-if="offset.title === 'Passing Lane'"
             :title="offset.title"
-            :x="offset.x-95"
-            :y="move*9+Math.floor((Math.random() * 3) + 1)-1000"
+            :x="offset.x - 95"
+            :y="move * 9 + Math.floor(Math.random() * 3 + 1) - 1000"
             preserveAspectRatio="xMidYMax meet"
           ></CarLineTop>
           <rect
-            :x="1500-offset.x-offset.width"
+            :x="1500 - offset.x - offset.width"
             :y="5"
             :width="offset.width"
             :height="1500"
@@ -710,20 +977,20 @@
           <CarLineBottom
             v-if="offset.title === 'Curb Lane'"
             :title="offset.title"
-            :x="1410-offset.x-offset.width"
-            :y="-move*3+Math.floor((Math.random() * 3) + 1)+1000"
+            :x="1410 - offset.x - offset.width"
+            :y="-move * 3 + Math.floor(Math.random() * 3 + 1) + 1000"
             preserveAspectRatio="xMidYMax meet"
           ></CarLineBottom>
           <CarLineBottom
             v-if="offset.title === 'Passing Lane'"
             :title="offset.title"
-            :x="1410-offset.x-offset.width"
-            :y="-move*7+Math.floor((Math.random() * 3) + 1)+1000"
+            :x="1410 - offset.x - offset.width"
+            :y="-move * 7 + Math.floor(Math.random() * 3 + 1) + 1000"
             preserveAspectRatio="xMidYMax meet"
           ></CarLineBottom>
           <line
-            v-if="offset.title=='Two-way left-turn Lane'"
-            :x1="1500-offset.x"
+            v-if="offset.title == 'Two-way left-turn Lane'"
+            :x1="1500 - offset.x"
             :x2="offset.x"
             y1="2"
             y2="100%"
@@ -733,9 +1000,9 @@
             stroke-dasharray="100 100"
           ></line>
           <line
-            v-if="offset.title=='Passing Lane'"
-            :x1="1500-offset.x"
-            :x2="1500-offset.x"
+            v-if="offset.title == 'Passing Lane'"
+            :x1="1500 - offset.x"
+            :x2="1500 - offset.x"
             y1="2"
             y2="100%"
             stroke="yellow"
@@ -744,9 +1011,9 @@
             stroke-dasharray="100 100"
           ></line>
           <line
-            v-if="offset.title=='Curb Lane'"
-            :x1="1500-offset.x-10"
-            :x2="1500-offset.x-10"
+            v-if="offset.title == 'Curb Lane'"
+            :x1="1500 - offset.x - 10"
+            :x2="1500 - offset.x - 10"
             y1="2"
             y2="100%"
             stroke="white"
@@ -764,9 +1031,9 @@
             stroke-linecap="butt"
           ></line>
           <line
-            v-if="offset.title=='Painted'||offset.title=='Raised'"
-            :x1="1500-offset.x-65"
-            :x2="1500-offset.x-65"
+            v-if="offset.title == 'Painted' || offset.title == 'Raised'"
+            :x1="1500 - offset.x - 65"
+            :x2="1500 - offset.x - 65"
             y1="2"
             y2="100%"
             stroke="white"
@@ -775,9 +1042,9 @@
           ></line>
           <line
             class="line1"
-            v-if="offset.title=='Landscaping (Trees)'"
-            :x1="1500-offset.x-offset.width/2"
-            :x2="1500-offset.x-offset.width/2"
+            v-if="offset.title == 'Landscaping (Trees)'"
+            :x1="1500 - offset.x - offset.width / 2"
+            :x2="1500 - offset.x - offset.width / 2"
             y1="2"
             y2="100%"
           ></line>

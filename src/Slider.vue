@@ -1,14 +1,16 @@
 <template>
   <div id="slide">
-    <p>How big do you want the {{name}} in meters?</p>
+    <p>How big do you want the {{ name }} in meters?</p>
     <vue-slide-bar
       id="slider"
       v-model="slider.value"
       :data="standards(name)"
       :range="standards(name)"
     ></vue-slide-bar>
-    <div class="errorMessage" v-if="this.slider.value > this.totalWidth">The element is too big!!!</div>
-    <b-button @click="onClick">Add {{name}}</b-button>
+    <div class="errorMessage" v-if="this.slider.value > this.totalWidth">
+      The element is too big!!!
+    </div>
+    <b-button @click="onClick">Add {{ name }}</b-button>
     <b-button @click="backbtn">Back</b-button>
   </div>
 </template>
