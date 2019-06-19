@@ -39,7 +39,6 @@ export default {
     methods:{
         // ???
         onChange(e){
-            console.log("this is what was selected from projectpicker dropdownMenu " + e);
             this.$emit("onChange", e);
         },
         forceRefresh(){
@@ -47,7 +46,6 @@ export default {
             document.getElementById("btnReset").click();
             this.refreshCounter += 1; //we increment this counter to make sure we have a different number for the streetviewer.vue to refresh as much as possible
             this.disabled = false;
-            console.log("The refresh count is " + this.refreshCounter);
         },
         // runs roadwayDesigner on click
         EditProject(){
