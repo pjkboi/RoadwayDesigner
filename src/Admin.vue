@@ -1,43 +1,48 @@
 <template>
-  <div id="admin">
-    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-      <b-form-group
-        id="input-group-1"
-        label="Email address:"
-        label-for="input-1"
-        description="We'll never share your email with anyone else."
-      >
-        <b-form-input
-          id="input-1"
-          v-model="form.email"
-          type="email"
-          required
-          placeholder="Enter email"
-        ></b-form-input>
-      </b-form-group>
-      <b-form-group id="input-group-2" label="Password:" label-for="input-2">
-        <b-form-input
-          id="input-2"
-          v-model="form.password"
-          type="password"
-          required
-          placeholder="Enter Password"
-        ></b-form-input>
-      </b-form-group>
-
-      <b-button type="submit" variant="primary">Submit</b-button>
-      <b-button type="reset" variant="danger">Reset</b-button>
-    </b-form>
-  </div>
+<div id="app">
+  <v-app id="inspire">
+    <v-content>
+      <v-container fluid fill-height>
+        <v-layout align-center justify-center>
+          <v-flex xs12 sm8 md4>
+            <v-card class="elevation-12">
+              <v-toolbar dark color="#694393">
+                <v-toolbar-title>Login form</v-toolbar-title>
+                <v-spacer></v-spacer>
+              </v-toolbar>
+              <v-card-text>
+                <v-form >
+                  <v-text-field
+                    v-model="email"
+                    :error-messages="emailErrors"
+                    label="E-mail"
+                    required
+                    @input="$v.email.$touch()"
+                    @blur="$v.email.$touch()"
+                  ></v-text-field>
+                  <v-text-field v-model="password" label="Password" id="password" type="password" required @input="$v.password.$touch()" @blur="$v.password.$touch()"></v-text-field>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="#694393" style="color:white;" @click="onSubmit">Login</v-btn>
+                    <v-btn color="#694393" style="color:white;" @click="onReset">Clear</v-btn>
+                  </v-card-actions>
+                </v-form>
+              </v-card-text>
+              
+            </v-card>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-content>
+  </v-app>
+</div>
 </template>
 <script>
 export default {
   data() {
     return {
-      form: {
-        email: "",
-        password: ""
-      },
+      email: "",
+      password: "",
       admin: {
         name: "admin@admin.com",
         pw: "admin"
@@ -48,8 +53,8 @@ export default {
   methods: {
     onSubmit(evt) {
       if (
-        this.form.email == this.admin.name &&
-        this.form.password == this.admin.pw
+        this.email == this.admin.name &&
+        this.password == this.admin.pw
       ) {
         this.$emit("Admin", this.show);
       } else {
@@ -60,8 +65,8 @@ export default {
     onReset(evt) {
       evt.preventDefault();
       // Reset our form values
-      this.form.email = "";
-      this.form.password = "";
+      this.email = "";
+      this.password = "";
       // Trick to reset/clear native browser form validation state
       this.show = false;
       this.$nextTick(() => {
