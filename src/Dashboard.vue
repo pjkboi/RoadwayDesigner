@@ -26,11 +26,6 @@
         <line x1="90" x2="1000" y1="370" y2="370"></line>
       </g>
       <g class="labels x-labels">
-        <!-- <text x="100" y="400">Sidewalk</text>
-        <text x="445" y="400">BikeLane</text>
-        <text x="680" y="400">BusLane</text>
-        <text x="915" y="400">TrafficLane</text> -->
-        <!-- <text x="400" y="440" class="label-title">Year</text> -->
       </g>
       <g class="labels y-labels">
         <text x="80" y="15">50000</text>
@@ -39,15 +34,7 @@
         <text x="80" y="229">20000</text>
         <text x="80" y="301">10000</text>
         <text x="80" y="373">0</text> 
-        <!-- <text x="50" y="200" class="label-title">Price</text> -->
       </g>
-      <!-- <g class="data" data-setname="Our first data set">
-        <circle cx="90" cy="192" data-value="7.2" r="4"></circle>
-        <circle cx="240" cy="141" data-value="8.1" r="4"></circle>
-        <circle cx="388" cy="179" data-value="7.7" r="4"></circle>
-        <circle cx="531" cy="200" data-value="6.8" r="4"></circle>
-        <circle cx="677" cy="104" data-value="6.7" r="4"></circle>
-      </g> -->
       </svg>
 
         <div id="sidewalkCapacity">
@@ -109,19 +96,11 @@
       </div>
       </div>
     </div>
-    <!-- <div id="dashMap">
-      <streetViewer></streetViewer>
-    </div> -->
   </div>
-      <!-- <Indicators></Indicators> -->
-      <!-- <button @click="getNewPosition">s</button>
-      <button onclick="">Click me</button> -->
   </div>
 </template> 
 
 <script>
-// import streetViewer from "./streetViewer.vue";
-// import Indicators from "./Indicators.vue";
 import person from "./svg/Person";
 import bike from "./svg/BikeIcon";
 import bus from "./svg/BusIcon";
@@ -130,8 +109,6 @@ import dashboardBack from "./svg/DashboardBackground";
 
 export default {
   components: {
-    // streetViewer,
-    // Indicators,
     person,
     bike,
     bus,
@@ -159,17 +136,6 @@ export default {
       this.offsetx = this.offset.left;
       alert(this.offsetx)
     }
-  },
-  watch:{
-        time: function() 
-    {
-      //console.log(this.time)
-      //console.log(this.move)
-      this.move == 580 ? this.move = -100 : this.move += 1;   
-    }
-  },
-  mounted() {
-    
   }
 };
 </script>

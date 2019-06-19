@@ -28,21 +28,17 @@
   //importing all crucial components from src file
   import navbar from "./navbar.vue";
   import ProjectPicker from "./projectPicker.vue";
-  // import streetViewer from "./streetViewer.vue";
   import RoadwayDesigner from "./RoadwayDesigner.vue";
   import Dropbox from "./Dropbox.vue";
   import Admin from "./Admin.vue"
-  // import test from "./test.vue";
   export default {
     //declaring the components
     components: {
       navbar,
       ProjectPicker,
-      // streetViewer,
       RoadwayDesigner,
       Dropbox,
-      Admin,
-      // test
+      Admin
     },
     name: "app",
     data() {
@@ -157,29 +153,6 @@
             
             console.log("Ids are " + this.getIds);
           }
-
-          // if(convertedData.header[0] == "id")
-          // {
-          //   console.log("length is "+convertedData.body.length);
-          //   for(var i=0;i<convertedData.body.length;i++)
-          //   {
-          //   this.getIds.push(convertedData.body[i]["id"]);
-          //   }
-            
-          //   console.log("Ids are " + this.getIds);
-          // }
-            
-            // for(var i=0;i<convertedData.body.length;i++){
-            //   for(var j=0;j<convertedData.header.length;j++){
-         
-            //     console.log(convertedData.header[j]);
-            //     this.getName.push(convertedData.header[j]); 
-            //     this.getValue.push(convertedData.body[i][this.getName[j]]);
-            //     this.getData[this.getName[j]] = this.getValue[j];
-            //   }
-            //   this.crossSectionArray.push(this.getData);
-            // }
-            // console.log(this.crossSectionArray);
         }
     }
   };

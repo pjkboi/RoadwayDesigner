@@ -42,18 +42,7 @@
     <b-progress height="20px" :max="max">
       <b-progress-bar variant="dark" :value="calculateCar" :label="calculateCar+' people/h'"></b-progress-bar>
     </b-progress>
-    <!-- <person :value="calculatePeople+calculateBikeLane+calculateTransit+calculateCar"></person>
-    <person2 :value="calculatePeople+calculateBikeLane+calculateTransit+calculateCar"></person2>
-    <person3 :value="calculatePeople+calculateBikeLane+calculateTransit+calculateCar"></person3>
-    <person4 :value="calculatePeople+calculateBikeLane+calculateTransit+calculateCar"></person4> -->
     <p>Total capacity: {{calculatePeople+calculateBikeLane+calculateTransit+calculateCar}} people/h</p>
-    <!-- Sidewalk: {{calculatePeople}}/h
-    <br/>
-        Bike Lane: {{calculateBikeLane}}/h
-    <br />
-        Transit Lane: {{calculateTransit}}/h
-    <br />
-    Vehicle Lane: {{calculateCar}}/h-->
   </div>
 </template>
 

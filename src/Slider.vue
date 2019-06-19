@@ -4,9 +4,6 @@
         <vue-slide-bar  id="slider" v-model="slider.value"
         :data="standards(name)"
         :range="standards(name)">
-        <!-- <template slot="tooltip" slot-scope="tooltip">
-        <img src="static/vue-slide-bar/rectangle-slider.svg">
-        </template> -->
         </vue-slide-bar>
         <div class="errorMessage" v-if="this.slider.value > this.totalWidth">
           The element is too big!!!
@@ -184,7 +181,6 @@ export default {
       this.$emit("backbtn", this.back);
     },
     onClick() {
-      console.log("this is from the slider vue " + this.name);
       this.$emit("onClick", this.slider.value);
     },
     standards(name) {

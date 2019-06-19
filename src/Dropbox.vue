@@ -112,13 +112,6 @@ export default {
             e.preventDefault();
             e.dataTransfer.dropEffect = 'copy';
         }
-        /*Testing only*
-        var drop=document.getElementById("drop");
-        if(drop.addEventListener) {
-            drop.addEventListener('dragenter', handleDragover, false);
-            drop.addEventListener('dragover', handleDragover, false);
-            drop.addEventListener('drop', handleDrop, false);
-        }*/
     }
 }
 </script>

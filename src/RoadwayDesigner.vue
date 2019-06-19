@@ -106,12 +106,8 @@
         <span style="background-color: #694393; color: white; padding:5px;">{{totalWidth}}m</span>
       </span>
       <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 1500 400" preserveAspectRatio="none">
-        <!-- <leftBuilding :y="90" :x="0" :width="window.width*this.ratioSvg" :height="window.height*ratioSvg*5.71" ></leftBuilding>
-        <RightBuilding :width="window.width*this.ratioSvg" :y="90" :x="1425" :height="window.height*ratioSvg*5.71"></RightBuilding>-->
         <rect fill="#6b6c6d" :x="0" :y="385" :width="1500" :height="100"></rect>
         <rect fill="black" :x="0" :y="385" :width="1500" :height="2"></rect>
-        <!-- <rect class="svg" fill="grey" x="0" y="90%" width="100" height="25"></rect>
-        <rect class="svg" fill="grey" x="1400" y="90%" width="100" height="25"></rect>-->
         <svg v-for="(offset, index) in offsetList" :key="index">
           <Sidewalk 
             :title="offset.fill"
@@ -378,9 +374,6 @@
         </svg>
         
       </svg>
-       <!-- <div class="slidecontainer">
-          <input type="range" min="1" max="10" v-model="sliderValue" @input="changeWidth" class="slider" id="myRange">
-      </div> -->
     </div>
     <div id="planView">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1500" preserveAspectRatio="none">
@@ -596,11 +589,9 @@
 </template>
 <script>
 import projectPicker from "./projectPicker";
-// import locateButton from "./LocateButton";
 import rowElement from "./Buttons";
 import svgElement from "./svg/svg.vue";
 import indicator from "./Indicators.vue";
-// import streetViewer from "./streetViewer.vue";
 import BikeLane from "./svg/BikeLane";
 import BikeLaneBack from "./svg/BikeLaneBack";
 import BusLane from "./svg/BusLane";
@@ -635,8 +626,6 @@ export default {
     rowElement,
     svgElement,
     indicator,
-    // locateButton,
-    // streetViewer,
     BikeLane,
     BikeLaneBack,
     BusLane,
@@ -766,16 +755,8 @@ export default {
       widthArray:[],
     };
   },
-  created() {
-    //this.selectedParam = this.$route.params.selected;
-    //     setTimeout(() => {
-    //   this.$vs.loading.close();
-    // }, 2000);
-  },
   watch: {
     time: function() {
-      //console.log(this.time)
-      //console.log(this.move)
       this.move == 1480 ? (this.move = -100) : (this.move += 1);
     }
   },
@@ -784,14 +765,12 @@ export default {
       this.selectedElementRange = range;
       alert(this.selectedElementRange);
     },
-    ///////////////////////////////////////////////////////////////////////////////////////////]/
     startDrago(evt) {
       this.tempObjectWidth = this.offsetList[this.selectedElementId].width;
        if (evt.target.classList.contains('draggable')) {
         this.selectedElementDrag = evt.target;
         this.offsetDrag = this.getMousePosition(evt);
-        this.offsetDrag.x -= parseFloat(this.selectedElementDrag.getAttributeNS(null, "x1"));
-        console.log(this.offsetDrag.x);          
+        this.offsetDrag.x -= parseFloat(this.selectedElementDrag.getAttributeNS(null, "x1"));       
        }
      },
      drago(evt) {
@@ -800,10 +779,8 @@ export default {
         var coord = this.getMousePosition(evt);
         this.selectedElementDrag.setAttributeNS(null, "x1", coord.x - this.offsetDrag.x);
         this.selectedElementDrag.setAttributeNS(null, "x2", coord.x - this.offsetDrag.x);
-        //alert('success');
         var newX = coord.x - this.offsetDrag.x;
         this.dragAdjust(newX);
-        console.log(this.selectedElementDrag.x1)
         }
       },
      endDrago(evt) {
@@ -811,33 +788,22 @@ export default {
      },
       dragAdjust(newX) {
       
-      //this.offsetList[this.selectedElementId].width = this.offsetList[this.selectedElementId].width+( newX - (this.offsetList[this.selectedElementId].x+this.offsetList[this.selectedElementId].width));
       var modOfObjectWidth = (this.offsetList[this.selectedElementId].width+( newX - (this.offsetList[this.selectedElementId].x+this.offsetList[this.selectedElementId].width)) - this.tempObjectWidth)% this.width;
-      //var divOfObjectWidth = (this.offsetList[this.selectedElementId].width - this.tempObjectWidth)% this.width;
       if (modOfObjectWidth < 0)
       {
         var numOfTimes = parseInt(modOfObjectWidth/(this.width*0.1)); // idk how to name this shit
         for (var i = 0; i > numOfTimes; i--)
         {
           this.changeSize("Deduct", this.selectedElementId);
-          console.log(this.selectedElementId);
-          console.log("hi");
         }
-        console.log(numOfTimes);
       }else if ( modOfObjectWidth > 0)
       {
          var numOfTimes = parseInt(modOfObjectWidth/(this.width*0.1)); // idk how to call this shit
         for (var i = 0; i < numOfTimes; i++)
         {
           this.changeSize("Add", this.selectedElementId);
-          console.log(this.selectedElementId);
-          console.log("hi");
         }
-        console.log(numOfTimes);
       }
-      //console.log(tempObjectWidth - this.offsetList[this.selectedElementId].width);
-      console.log(modOfObjectWidth);
-      console.log(this.offsetList[this.selectedElementId].width);
      },
      getMousePosition(evt) {
        var svg = evt.target;
@@ -855,9 +821,6 @@ export default {
       }
       this.data.push(this.titleArray);
       this.data.push(this.widthArray);
-      console.log(this.data);
-      /* generate workbook object from table */
-      // /* generate file and force a download*/
       var worksheet = XLSX.utils.aoa_to_sheet(this.data);
       var new_workbook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(new_workbook, worksheet, "SheetJS");
@@ -888,21 +851,15 @@ export default {
           selectedElement = evt.target;
      offset = getMousePosition(evt);
     offset.x -= parseFloat(selectedElement.getAttributeNS(null, "x1"));
-                  console.log(selectedElement);
         }
 
       }
       function drag(evt) {
         if (selectedElement) {
-          console.log("selectedElement");
             evt.preventDefault();
             var coord = getMousePosition(evt);
             selectedElement.setAttributeNS(null, "x1", coord.x - offset.x);
             selectedElement.setAttributeNS(null, "x2", coord.x - offset.x);
-            // var x1 = parseFloat(selectedElement.getAttributeNS(null, "x1"));
-            // var x2 = parseFloat(selectedElement.getAttributeNS(null, "x2"));
-            // selectedElement.setAttributeNS(null, "x1", x1 + 1); //
-            // selectedElement.setAttributeNS(null, "x2", x2 + 1); //
           }
       }
       function endDrag(evt) {
@@ -928,14 +885,12 @@ export default {
       this.offsetList[this.offsetList.length-1].width = add;
       this.totalWidth = parseFloat((((this.totalWidth*10)/10) - (((this.sliderValue/10)*10)/10)).toFixed(1));
       this.tempSlider = this.sliderValue;
-      console.log((tempWidth+(this.sliderValue/10)));
       }
       else if(this.sliderValue<=this.tempSlider){
       var sub = (tempWidth-(this.sliderValue/10))*this.width;
       this.offsetList[this.offsetList.length-1].width = sub;
       this.totalWidth = parseFloat((((this.totalWidth*10)/10) + (((this.sliderValue/10)*10)/10)).toFixed(1));
       this.tempSlider = this.sliderValue;
-      console.log(sub);
       }
     },
     wait(ms){
@@ -949,30 +904,22 @@ export default {
       this.undoDelete.splice(0, this.undoDelete.length);
     },
     undo(){
-      console.log(this.undoDelete);
       if(this.undoDelete.length == 0 && this.undoReset == 0){
-        //alert("Theres nothing to undo");
         this.svgDelete();
       }
       else if(this.undoReset != 0){
-        //this.dementionReset();
         for(var i = 0;i<this.undoReset.length;i++){
           var lastOffset = this.undoReset[i];
-          console.log(lastOffset.width);
           this.offsetList.push(this.undoReset[i]);
           this.totalWidth = parseFloat(((this.totalWidth*10 - (lastOffset.width*10/(this.width*10))*10)/10).toFixed(1));
           this.streetElementData.push(this.undoReset[i].title);
           this.smartButtons(this.streetElementData[i]);
         }
         this.undoReset.splice(0, this.undoReset.length);
-        //this.updateTotal(num, this.color, this.streetElementData[this.streetElementData.length-1]);
       }
       else if(this.undoDelete.length != 0){
-        //this.dementionReset();
         var lastOffset = this.undoDelete[this.undoDelete.length - 1];
         this.offsetList.push(lastOffset);
-        //let num = (lastOffset.width/this.width)*10/10;
-        //this.totalWidth = (((this.totalWidth*10)/10) + (((lastOffset.width/this.width)*10)/10));
         this.totalWidth = parseFloat(((this.totalWidth*10 - (lastOffset.width*10/(this.width*10))*10)/10).toFixed(1));
         this.streetElementData.push(this.undoDelete[this.undoDelete.length - 1].title);
         this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
@@ -983,14 +930,12 @@ export default {
     show (infoType) {
       this.$modal.show('hello-world');
       this.infoType = infoType;
-      console.log("heey");
     },
     hide () {
       this.$modal.hide('hello-world');
     },
     sliderName(name){
       this.name=name;
-      console.log(this.name);
     },
     Populate(){
       this.startWidth = (this.getData.row)*10/10;
@@ -1001,10 +946,7 @@ export default {
         if(this.getData[x]!=0){
           if(x!="id"&&x!="row"&&x!="name"){
             this.totalWidth = (parseFloat(this.totalWidth).toFixed(1))*10/10;
-            //this.totalWidth = math.format(this.totalWidth, {precision: 14});
-            console.log(x);
             this.svgPopulate(x);
-            console.log(this.streetElementData);
             this.updateTotal((this.getData[x]*10/10),this.color,this.streetElementData[this.streetElementData.length-1]);
           }
         }
@@ -1032,8 +974,6 @@ export default {
       this.totalWidth = parseFloat((((this.getData.RoadWidth/2)+this.sidewalkWidth)+0.1).toFixed(1));
       this.width = this.width/this.totalWidth;
       if (this.totalWidth!=0) {
-        console.log(this.defaultPopulate);
-        console.log(this.populateValues);
         switch(this.getData.ROADSEGM_1){
         case "LEFT":
           this.populateValues.fill = "url(#sidewalkTexture)";
@@ -1047,7 +987,6 @@ export default {
                 this.defaultPopulate[0].title
           );
           this.slideHide = !this.slideHide;
-          //this.naming(this.defaultPopulate[0].title);
           break;
         case "RIGHT":
           this.populateValues.fill = "url(#sidewalkTexture)";
@@ -1061,7 +1000,6 @@ export default {
                 this.defaultPopulate[0].title
           );
          this.slideHide = !this.slideHide;
-          //this.naming(this.defaultPopulate[0].title);
           break;
         default: 
           //clear the object of the sidewalk
@@ -1100,23 +1038,8 @@ export default {
         this.defaultPopulate[i].title
         );
       this.slideHide= false;
-      // this.smartButtons();
-      // this.populateValues.fill = "white";
-      // this.populateValues.width = "";
-      // this.populateValues.title = "Centre Line";
-        // this.info();
-        // for (var i = 0; i < objectLength; i++) {
-        //           this.updateTotal(
-        //     this.defaultPopulate[i].width,
-        //     this.defaultPopulate[i].fill,
-        //     this.defaultPopulate[i].title
-        //   );
-        //   this.naming(this.defaultPopulate[i].title);
-        //   this.smartButtons();
-        // }
       }
       else {
-        console.log("we in the else " + this.totalWidth);
         this.rowReset();
       }
     },
@@ -1124,7 +1047,6 @@ export default {
       this.streetElementData.pop();
       this.smartButtons(this.streetElementData[this.streetElementData.length - 1]); 
       this.slideHide = passed;
-      console.log(this.streetElementData[this.streetElementData.length - 1]);
     },
     changeSize(type, id) {
       if (type == "Add"&& this.totalWidth != 0) {
@@ -1171,7 +1093,6 @@ export default {
       }
     },
     info() {
-      console.log(this.offsetList);
       for (var i = 0; i < this.defaultPopulate.length; i++) {
         this.updateTotal(
           this.defaultPopulate[i].width,
@@ -1194,7 +1115,6 @@ export default {
       }
     },
     svgPopulate(nameString) {
-      console.log(nameString);
       switch (nameString) {
         case "Commercial Use Extension":
         case "Residential":
@@ -1398,25 +1318,8 @@ export default {
           this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
           break;
       }
-      console.log(this.color);
-      //this.slideHide = !this.slideHide;
-    },
-    streetViewerCall() {
-      // if (this.totalWidth != 0) {
-      //   alert("There is still space remaining. Resize existing elements.");
-      // } else {
-      document.getElementById("solveRoutesBtn").click();
-      
-      // }
-      //this.$modal.hide("hello-row");
-    },
-    clearButton() {
-      document.getElementById("clearBtn").click();
     },
     disableAll() {
-      // for (var i in this.disabled) {
-      //   this.disabled.i = true;
-      // }
       this.disabled.CommercialExtension = true;
       this.disabled.Residential = true;
       this.disabled.Commercial = true;
@@ -1453,7 +1356,6 @@ export default {
       this.disabled.Swale = true;
       this.disabled.RainGarden = true;
       this.disabled.PermeablePaving = true;
-      console.log(this.disabled);
     },
     processLastElements() {
       var remainingSpace = false;
@@ -1874,31 +1776,24 @@ export default {
     },
     updateTotal(num, colour, title) {
       num = num*10/10;
-      console.log(title);
       this.slideHide = !this.slideHide;
       let height = num * this.ratio2D;
       if (num > this.totalWidth) {
         alert("no more room");
       } else {
-        //this.width = num * this.width;
         let width = (this.width * num)*10/10;
         this.tempWidth.push(num);
-        //this.totalWidth = Math.round((this.totalWidth - num) * 10) / 10;
         this.totalWidth = ((this.totalWidth*10) - (num*10))/10;
-        //console.log("tempwidth is " + this.tempWidth[this.counter]);
-        //this.counter++;
+
         
         if (this.offsetList.length == 0) {
-          console.log("Offsetlist = 0");
           this.offsetList.push({
             title: title,
             x: 0,
             fill: colour,
             width: width // this.window.width * this.ratioSvg  width of the building
           });
-          console.log(this.offsetList.color);
         } else {
-          console.log("Offsetlist != 0");
           const lastOffset = this.offsetList[this.offsetList.length - 1];
           this.offsetList.push({
             x: lastOffset.x + lastOffset.width,
@@ -1911,8 +1806,6 @@ export default {
       
     },
     svgDelete() {
-      // this.undoDelete.splice(0, this.undoDelete.length);
-      //this.undoDelete = this.offsetList;
       this.centerLineBool = false;
       if (this.offsetList.length == 0){
         alert("Youre at the beginning"); 
@@ -1927,12 +1820,10 @@ export default {
         const lastOffset = this.offsetList[this.offsetList.length - 1];
         this.offsetList.pop(lastOffset);
         this.counter--;
-        //this.totalWidth = (((this.totalWidth*10)/10) + (((lastOffset.width/this.width)*10)/10));
         this.totalWidth = parseFloat((((this.totalWidth*10) + ((lastOffset.width*10)/(this.width*10))*10)/10).toFixed(1));
         this.tempWidth.pop();
         this.streetElementData.pop();
         this.smartButtons(this.streetElementData[this.streetElementData.length-1]);
-        //this.totalWidth += tempWidth;
       }
     },
     rowReset() {
@@ -1949,24 +1840,9 @@ export default {
         console.log(this.getData.row);
         this.totalWidth=this.getData.row;
       }
-      //this.totalWidth = parseFloat((((this.getData.RoadWidth/2)+this.sidewalkWidth)+0.1).toFixed(1));
-      //var removeIndex = apps.map(function(item) { return item.id; }).indexOf(37);
-      
-
-      //delete this.populateValues;
-      // for (var attr in this.populateValues) {
-      //   delete this.populateValues[attr];
-      //   console.log("PPPPPPPPPPP " + this.populateValues);
-      // }
-      // console.log("PPPPPPPPPPP " + this.populateValues.fill);
       this.offsetList.splice(0, this.offsetList.length);
       this.streetElementData.splice(0, this.streetElementData.length);
       this.smartButtons();
-      // this.offsetList2D.splice(0, this.offsetList2D.length);
-      // for (var i = 0; i < this.buttonArray.length; i++) {
-      //   this.buttonArray[i].disabled = true;
-      // }
-      // this.buttonArray[0].disabled = false;
     }
   }
 };

@@ -6,22 +6,14 @@
         <b-form-select v-model="selectID" id="dropDownPicker" @change="onChange($event)" :options="getIds"> <!-- dop down menu project location-->
         </b-form-select>
         <div id="map"> <!-- map section -->
-            <!-- <streetViewer :selected="selected" :key="refreshCounter"></streetViewer>  -->
-            <!-- add :selected="selected" to the streetviewer component. This is for the use of querrying arcGIS online-->
         </div>
-        <!-- <b-button id="submitBtn" @click="forceRefresh">Submit</b-button> -->
         <b-button id="nextBtn" @click="EditProject" :disabled="disabled">Edit Project</b-button>
         
     </div>
 </template>
 <script>
-// importing streetViewer component
-// import streetViewer from "./streetViewer.vue";
 
 export default {
-    components:{
-        // streetViewer
-    },
     props:{
         getIds: Array
     },
@@ -46,9 +38,6 @@ export default {
     },
     methods:{
         // ???
-        // streetViewerCommunication(){
-        //     document.getElementById("dropDownPicker").click();
-        // },
         onChange(e){
             console.log("this is what was selected from projectpicker dropdownMenu " + e);
             this.$emit("onChange", e);
@@ -64,7 +53,6 @@ export default {
         EditProject(){
             this.$emit("EditProject", "roadwayDesigner"); //This passes the string 'roadwayDesigner' back to the app.vue component to allow for the divs to switch
             
-            //this.disabled = true;
         }
     }
 }

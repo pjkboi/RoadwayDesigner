@@ -117,7 +117,6 @@ export default {
     onClick() {
       this.isHidden = !this.isHidden;
       this.$emit("onClick", this.slider.value);
-      // $modal.hide("standards-slider");
     },
     standards(name) {
       for (var i = 0; i < this.standardsArray.length; i++) {
