@@ -69,7 +69,13 @@ export default {
     },
     // runs roadwayDesigner on click
     EditProject() {
-      this.$emit("EditProject", "roadwayDesigner"); //This passes the string 'roadwayDesigner' back to the app.vue component to allow for the divs to switch
+        if(this.selectID==null||this.selectID==0){
+            alert("No project selected");
+        }
+        else{
+            this.$emit("EditProject", "roadwayDesigner"); //This passes the string 'roadwayDesigner' back to the app.vue component to allow for the divs to switch
+        }
+        
     }
   }
 };
