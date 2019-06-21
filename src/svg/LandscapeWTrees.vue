@@ -1,6 +1,6 @@
 <template>
   <svg
-    v-if="title === 'Landscaping (Trees)'"
+    v-if="title === 'sdwlk_landbuff_veg'"
     :x="x"
     :y="y"
     :width="width"
