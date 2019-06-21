@@ -859,28 +859,28 @@
           </defs>
           <!-- Line section// animation section -->
           <CarLineTop
-            v-if="offset.title === 'Curb Lane'"
+            v-if="offset.title === 'curb_ln'"
             :title="offset.title"
             :x="offset.x - 95"
             :y="move * 5 + Math.floor(Math.random() * 3 + 1)"
             preserveAspectRatio="xMidYMax meet"
           ></CarLineTop>
           <CarLineTop
-            v-if="offset.title === 'Passing Lane'"
+            v-if="offset.title === 'pass_ln'"
             :title="offset.title"
             :x="offset.x - 95"
             :y="move * 9 + Math.floor(Math.random() * 3 + 1) - 1000"
             preserveAspectRatio="xMidYMax meet"
           ></CarLineTop>
           <CarLineBottom
-            v-if="offset.title === 'Curb Lane'"
+            v-if="offset.title === 'curb_ln'"
             :title="offset.title"
             :x="1410 - offset.x - offset.width"
             :y="-move * 3 + Math.floor(Math.random() * 3 + 1) + 1000"
             preserveAspectRatio="xMidYMax meet"
           ></CarLineBottom>
           <CarLineBottom
-            v-if="offset.title === 'Passing Lane'"
+            v-if="offset.title === 'pass_ln'"
             :title="offset.title"
             :x="1410 - offset.x - offset.width"
             :y="-move * 7 + Math.floor(Math.random() * 3 + 1) + 1000"
@@ -895,7 +895,7 @@
             :fill="offset.fill"
           ></rect>
           <line
-            v-if="offset.title == 'Passing Lane'"
+            v-if="offset.title == 'pass_ln'"
             :x1="offset.x"
             :x2="offset.x"
             y1="2"
@@ -906,7 +906,7 @@
             stroke-dasharray="100 100"
           ></line>
           <line
-            v-if="offset.title == 'Curb Lane'"
+            v-if="offset.title == 'curb_ln'"
             :x1="offset.x + 10"
             :x2="offset.x + 10"
             y1="2"
@@ -916,7 +916,7 @@
             stroke-linecap="butt"
           ></line>
           <line
-            v-if="offset.title == 'Painted' || offset.title == 'Raised'"
+            v-if="offset.title == 'cycl_lane' || offset.title == 'raise_cycl_trac'"
             :x1="offset.x + 65"
             :x2="offset.x + 65"
             y1="2"
@@ -927,7 +927,7 @@
           ></line>
           <line
             class="line1"
-            v-if="offset.title == 'Landscaping (Trees)'"
+            v-if="offset.title == 'sdwlk_landbuff_veg'"
             :x1="offset.x + offset.width / 2"
             :x2="offset.x + offset.width / 2"
             y1="2"
@@ -953,14 +953,14 @@
             stroke-dasharray="100 100"
           ></line>
           <CarLineTop
-            v-if="offset.title === 'Curb Lane'"
+            v-if="offset.title === 'curb_ln'"
             :title="offset.title"
             :x="offset.x - 95"
             :y="move * 5 + Math.floor(Math.random() * 3 + 1)"
             preserveAspectRatio="xMidYMax meet"
           ></CarLineTop>
           <CarLineTop
-            v-if="offset.title === 'Passing Lane'"
+            v-if="offset.title === 'pass_ln'"
             :title="offset.title"
             :x="offset.x - 95"
             :y="move * 9 + Math.floor(Math.random() * 3 + 1) - 1000"
@@ -974,14 +974,14 @@
             :fill="offset.fill"
           ></rect>
           <CarLineBottom
-            v-if="offset.title === 'Curb Lane'"
+            v-if="offset.title === 'curb_ln'"
             :title="offset.title"
             :x="1410 - offset.x - offset.width"
             :y="-move * 3 + Math.floor(Math.random() * 3 + 1) + 1000"
             preserveAspectRatio="xMidYMax meet"
           ></CarLineBottom>
           <CarLineBottom
-            v-if="offset.title === 'Passing Lane'"
+            v-if="offset.title === 'pass_ln'"
             :title="offset.title"
             :x="1410 - offset.x - offset.width"
             :y="-move * 7 + Math.floor(Math.random() * 3 + 1) + 1000"
@@ -999,7 +999,7 @@
             stroke-dasharray="100 100"
           ></line>
           <line
-            v-if="offset.title == 'Passing Lane'"
+            v-if="offset.title == 'pass_ln'"
             :x1="1500 - offset.x"
             :x2="1500 - offset.x"
             y1="2"
@@ -1010,7 +1010,7 @@
             stroke-dasharray="100 100"
           ></line>
           <line
-            v-if="offset.title == 'Curb Lane'"
+            v-if="offset.title == 'curb_ln'"
             :x1="1500 - offset.x - 10"
             :x2="1500 - offset.x - 10"
             y1="2"
@@ -1030,7 +1030,7 @@
             stroke-linecap="butt"
           ></line>
           <line
-            v-if="offset.title == 'Painted' || offset.title == 'Raised'"
+            v-if="offset.title == 'cycl_lane' || offset.title == 'raise_cycl_trac'"
             :x1="1500 - offset.x - 65"
             :x2="1500 - offset.x - 65"
             y1="2"
@@ -1041,7 +1041,7 @@
           ></line>
           <line
             class="line1"
-            v-if="offset.title == 'Landscaping (Trees)'"
+            v-if="offset.title == 'sdwlk_landbuff_veg'"
             :x1="1500 - offset.x - offset.width / 2"
             :x2="1500 - offset.x - offset.width / 2"
             y1="2"
@@ -1277,32 +1277,37 @@ export default {
       };
     },
     submit() {
-      var date = new Date();
-      var titleName = "name";
-      var rowName = "row";
-      var saveName = "SheetJs"+date.toString();
-      var rowWidth = this.startWidth - this.totalWidth;
-      this.titleArray.push(titleName);
-      this.titleArray.push(rowName);
-      this.widthArray.push(saveName);
-      this.widthArray.push(rowWidth);
-      for (var i = 0; i < this.offsetList.length; i++) {
-        this.titleArray.push(this.offsetList[i].title);
-        var width = this.offsetList[i].width / this.width;
-        this.widthArray.push(width);
+      if(this.totalWidth!=0){
+        alert("Finish the design first");
       }
-      this.data.push(this.titleArray);
-      this.data.push(this.widthArray);
-      var worksheet = XLSX.utils.aoa_to_sheet(this.data);
-      var new_workbook = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(new_workbook, worksheet, "SheetJS");
-      if (confirm("This will download the spreadsheet")) {
-        XLSX.writeFile(new_workbook, saveName+".xlsx");
+      else{
+        var date = new Date();
+        var titleName = "name";
+        var rowName = "row";
+        var saveName = "SheetJs"+date.toString();
+        var rowWidth = this.startWidth - this.totalWidth;
+        this.titleArray.push(titleName);
+        this.titleArray.push(rowName);
+        this.widthArray.push(saveName);
+        this.widthArray.push(rowWidth);
+        for (var i = 0; i < this.offsetList.length; i++) {
+          this.titleArray.push(this.offsetList[i].title);
+          var width = this.offsetList[i].width / this.width;
+          this.widthArray.push(width);
+        }
+        this.data.push(this.titleArray);
+        this.data.push(this.widthArray);
+        var worksheet = XLSX.utils.aoa_to_sheet(this.data);
+        var new_workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(new_workbook, worksheet, "SheetJS");
+        if (confirm("This will download the spreadsheet")) {
+          XLSX.writeFile(new_workbook, saveName+".xlsx");
+        }
+        this.titleArray.splice(0, this.titleArray.length);
+        this.widthArray.splice(0, this.widthArray.length);
+        this.data.splice(0, this.data.length);
       }
-
-      this.titleArray.splice(0, this.titleArray.length);
-      this.widthArray.splice(0, this.widthArray.length);
-      this.data.splice(0, this.data.length);
+      
     },
     changeWidth() {
       if (this.sliderValue == 0) {
@@ -1387,9 +1392,6 @@ export default {
     },
     hide() {
       this.$modal.hide("hello-world");
-    },
-    sliderName(name) {
-      this.name = name;
     },
     Populate() {
       this.startWidth = (this.getData.row * 10) / 10;
@@ -1573,226 +1575,99 @@ export default {
           break;
         case "comm_ext": //0
           this.color = "url(#sidewalkTexture)";
-          this.streetElementData.push("Commercial Use Extension");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "sdwlk_path_res": //0
           this.color = "url(#sidewalkTexture)";
-          this.streetElementData.push("Residential");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "sdwlk_path_comm": //0
           this.color = "url(#sidewalkTexture)";
-          this.streetElementData.push("Commercial");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "sdwlk_str_frntr": //0
           this.color = "url(#sidewalkTexture)";
-          this.streetElementData.push("Street Furniture Zone");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "sdwlk_landbuff_util": //0
           this.color = "url(#sidewalkTexture)";
-          this.streetElementData.push("Utilities");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "sdwlk_landbuff": //0
           this.color = "url(#sidewalkTexture)";
-          this.streetElementData.push("No Vegetation");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "sdwlk_landbuff_veg": //0
           this.color = "url(#grassTexture)";
-          this.streetElementData.push("Vegetation");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "ped_isl": //0
           this.color = "url(#sidewalkTexture)";
-          this.streetElementData.push("Pedestrian Refuge Island");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "cycl_lane": //0
           this.color = "url(#bikeTexture)";
-          this.streetElementData.push("Cycle Lane");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "cycl_trac": //0
           this.color = "url(#bikeTexture)";
-          this.streetElementData.push("Cycle Track");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "cycl_str": //0
           this.color = "url(#bikeTexture)";
-          this.streetElementData.push("Cycle Street");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "prot_cycl_trac": //0
           this.color = "url(#bikeTexture)";
-          this.streetElementData.push("Protected Cycle Track");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "bi_cycl_trac": //0
           this.color = "url(#bikeTexture)";
-          this.streetElementData.push("Bidirectional Cycle Track");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "raise_cycl_trac": //0
           this.color = "url(#bikeTexture)";
-          this.streetElementData.push("Raised Cycle Track");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "curbuff_cycl_lane": //0
           this.color = "url(#bikeTexture)";
-          this.streetElementData.push("Curbside Buffered Cycle Lane");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "contra_cycle_str": //0
           this.color = "url(#bikeTexture)";
-          this.streetElementData.push("Contraflow Cycle Street");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "tran_stp": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push("Transit Stop");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "side_ded_transln": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push("Side Running Dedicated Transit Lane");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "cent_transln_cntbrd": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push(
-            "Centre Running Transit Lane - Centre Boarding"
-          );
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "cent_transln_pssgr": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push(
-            "Centre Running Transit Lane – Side Boarding"
-          );
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "shr_transln": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push("Shared Transit Lane");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "curb_ln": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push("Curb Lane");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "pass_ln": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push("Passing Lane");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "lrg_veh_ln": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push("Large Vehicle Lane");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "bi_trav_ln": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push("Bidirectional Travel Lane");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "turn_ln": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push("Turning Lane");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "frt_trav_ln": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push("Freight Travel Lane");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "park_ln": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push("Parking Lane");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "swale": //0
           this.color = "url(#grassTexture)";
-          this.streetElementData.push("Swale");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "rain_gdn": //0
           this.color = "url(#grassTexture)";
-          this.streetElementData.push("Rain Garden");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "perm_pav": //0
           this.color = "url(#sidewalkTexture)";
-          this.streetElementData.push("Permeable Paving");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
       }
+      this.smartButtons(nameString);
     },
     disableAll() {
       this.disabled.CommercialExtension = true;
@@ -1857,8 +1732,6 @@ export default {
         this.disabled.Commercial = false;
         this.disabled.Residential = false;
         this.disabled.Swale = false;
-        this.streetElementData.push(elementCategory);
-        this.svgPopulate(elementCategory);
       } else {
         if (
           this.streetElementData[this.streetElementData.length - 1] ==
@@ -1871,8 +1744,8 @@ export default {
           this.svgPopulate(elementCategory);
         }
       }
-      switch (elementCategory) {
-        case "Commercial Use Extension":
+      switch (this.streetElementData[this.streetElementData.length - 1]) {
+        case "comm_ext":
           this.disableAll();
           this.commercialExtensionVarient = "outline-secondary";
           this.residentialVarient = "outline-secondary";
@@ -1893,7 +1766,7 @@ export default {
           this.greenVarient = "outline-success";
           this.disabled.Commercial = false;
           break;
-        case "Residential":
+        case "sdwlk_path_res":
           this.disableAll();
           this.commercialExtensionVarient = "outline-secondary";
           this.residentialVarient = "outline-secondary";
@@ -1934,7 +1807,7 @@ export default {
           this.disabled.PermeablePaving = false;
 
           break;
-        case "Commercial":
+        case "sdwlk_path_comm":
           this.disableAll();
           this.commercialExtensionVarient = "outline-secondary";
           this.residentialVarient = "outline-secondary";
@@ -1975,7 +1848,7 @@ export default {
           this.disabled.RainGarden = false;
           this.disabled.PermeablePaving = false;
           break;
-        case "Street Furniture Zone":
+        case "sdwlk_str_frntr":
           this.disableAll();
           this.commercialExtensionVarient = "outline-secondary";
           this.residentialVarient = "outline-secondary";
@@ -2015,9 +1888,9 @@ export default {
           this.disabled.RainGarden = false;
           this.disabled.PermeablePaving = false;
           break;
-        case "Utilities":
-        case "No Vegetation":
-        case "Vegetation":
+        case "sdwlk_landbuff_util":
+        case "sdwlk_landbuff":
+        case "sdwlk_landbuff_veg":
           this.disableAll();
           if (
             this.streetElementData[this.streetElementData.length - 1] ==
@@ -2081,14 +1954,14 @@ export default {
           }
 
           break;
-        case "Cycle Lane":
-        case "Cycle Track":
-        case "Cycle Street":
-        case "Protected Cycle Track":
-        case "Bidirectional Cycle Track":
-        case "Raised Cycle Track":
-        case "Curbside Buffered Cycle Lane":
-        case "Contraflow Cycle Street":
+        case "cycl_lane":
+        case "cycl_trac":
+        case "cycl_str":
+        case "prot_cycl_trac":
+        case "bi_cycl_trac":
+        case "raise_cycl_trac":
+        case "curbuff_cycl_lane":
+        case "contra_cycle_str":
           this.disableAll();
           if (
             this.streetElementData[this.streetElementData.length - 1] ==
@@ -2148,9 +2021,9 @@ export default {
             this.disabled.PermeablePaving = false;
           }
           break;
-        case "Shared Transit Lane":
-        case "Transit Stop":
-        case "Side Running Dedicated Transit Lane":
+        case "shr_transln":
+        case "tran_stp":
+        case "side_ded_transln":
           this.disableAll();
           this.commercialExtensionVarient = "outline-secondary";
           this.residentialVarient = "outline-secondary";
@@ -2173,11 +2046,13 @@ export default {
           this.disabled.ParkingLane = false;
 
           break;
-        case "Curb Lane":
-        case "Passing Lane":
-        case "Parking Lane":
-        case "Freight Travel Lane":
-        case "Large Vehicle Lane":
+        case "curb_ln":
+        case "pass_ln":
+        case "turn_ln":
+        case "park_ln":
+        case "frt_trav_ln":
+        case "bi_trav_ln":
+        case "lrg_veh_ln":
           this.disableAll();
           this.commercialExtensionVarient = "outline-secondary";
           this.residentialVarient = "outline-secondary";
@@ -2215,15 +2090,15 @@ export default {
           }
           break;
         case "Two-way left-turn Lane":
-        case "Centre Running Transit Lane - Centre Boarding":
-        case "Centre Running Transit Lane – Side Boarding":
-        case "Pedestrian Refuge Island":
+        case "cent_transln_cntbrd":
+        case "cent_transln_pssgr":
+        case "ped_isl":
         case "Boulevard (Vegetation)":
         case "Centre Line":
         case "Infrastructure":
-        case "Swale":
-        case "Rain Garden":
-        case "Permeable Paving":
+        case "swale":
+        case "rain_gdn":
+        case "perm_pav":
           this.disableAll();
           this.commercialExtensionVarient = "outline-secondary";
           this.residentialVarient = "outline-secondary";
@@ -2280,7 +2155,6 @@ export default {
       } else if (this.offsetList.length == 1) this.rowReset();
       else {
         this.undoDelete.push(this.offsetList[this.offsetList.length - 1]);
-
         this.undoCounter = this.offsetList.length;
         this.dementionReset();
         const lastOffset = this.offsetList[this.offsetList.length - 1];
