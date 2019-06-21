@@ -1,10 +1,11 @@
 <template>
   <svg
     v-if="
-      title === 'Transit' ||
-        title === 'Shared Transit Lane' ||
-        title === 'Transit Stop' ||
-        title === 'Side Running Dedicated Transit Lane'
+      title === 'tran_stp' ||
+      title === 'side_ded_transln' ||
+      title === 'cent_transln_cntbrd' ||
+      title === 'shr_transln' ||
+      title === 'cent_transln_pssgr'
     "
     :x="x"
     :y="y"

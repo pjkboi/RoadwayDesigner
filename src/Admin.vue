@@ -14,13 +14,10 @@
                 <v-form >
                   <v-text-field
                     v-model="email"
-                    :error-messages="emailErrors"
                     label="E-mail"
                     required
-                    @input="$v.email.$touch()"
-                    @blur="$v.email.$touch()"
                   ></v-text-field>
-                  <v-text-field v-model="password" label="Password" id="password" type="password" required @input="$v.password.$touch()" @blur="$v.password.$touch()"></v-text-field>
+                  <v-text-field v-model="password" label="Password" id="password" type="password" required></v-text-field>
                   <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn color="#694393" style="color:white;" @click="onSubmit">Login</v-btn>
