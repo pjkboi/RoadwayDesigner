@@ -10,8 +10,9 @@
         :totalWidth="this.totalWidth"
         :name="this.name"
         :title="this.title"
-        v-on:onClick="updateTotal($event, color, name)"
+        v-on:onClick="updateTotal($event, name)"
         v-on:backbtn="back($event)"
+        v-on:title="getRange($event)"
         :style="{ height: window.height * 0.3 + 'px' }"
       ></slider>
       <div id="elementBtn" v-if="!slideHide">
@@ -94,7 +95,7 @@
         >No Vegetation</b-button>
         <b-button
           @click="
-            smartButtons('Vegetation');
+            smartButtons('sdwlk_landbuff_veg');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -1114,7 +1115,8 @@ export default {
       data: [],
       titleArray: [],
       widthArray: [],
-      title: ""
+      title: null,
+      selectedElementRange: null
     };
   },
   watch: {
@@ -1142,7 +1144,7 @@ export default {
         this.dragAdjust(newX);
         }
       },
-     endDrago(evt) {
+     endDrago() {
        this.selectedElementDrag = null;
      },
       dragAdjust(newX) {
@@ -1192,10 +1194,9 @@ export default {
        this.totalWidth = ((this.totalWidth*10) + 1) / 10;
        if((this.offsetList.length - 1) != id)
          {
-           var i;
-           for (i = id+1; i < this.offsetList.length; i++)
+           for (var j = id+1; j < this.offsetList.length; j++)
            {
-             const modifiedOffset = this.offsetList[i];
+             const modifiedOffset = this.offsetList[j];
              modifiedOffset.x = modifiedOffset.x - this.width/10;
            }
          }
@@ -1342,88 +1343,6 @@ export default {
       this.selectedElement = false;
       this.selectedElementId = null;
     },
-    RDPrepopulation() {
-      this.width = 750;
-      if (this.getData.Shape__Area == null) {
-        this.sidewalkWidth = 0;
-        this.slideHide = !this.slideHide;
-      } else {
-        this.sidewalkWidth = parseFloat(
-          (this.getData.Shape__Area / this.getData.Shape__Length).toFixed(1)
-        );
-      }
-      this.totalWidth = parseFloat(
-        (this.getData.RoadWidth / 2 + this.sidewalkWidth + 0.1).toFixed(1)
-      );
-      this.width = this.width / this.totalWidth;
-      if (this.totalWidth != 0) {
-        switch (this.getData.ROADSEGM_1) {
-          case "LEFT":
-            this.populateValues.fill = "url(#sidewalkTexture)";
-            this.populateValues.width = this.sidewalkWidth;
-            this.populateValues.title = "Sidewalk";
-            this.defaultPopulate.push(this.populateValues);
-            this.streetElementData.push(this.populateValues.title);
-            this.updateTotal(
-              this.defaultPopulate[0].width,
-              this.defaultPopulate[0].fill,
-              this.defaultPopulate[0].title
-            );
-            this.slideHide = !this.slideHide;
-            break;
-          case "RIGHT":
-            this.populateValues.fill = "url(#sidewalkTexture)";
-            this.populateValues.width = this.sidewalkWidth;
-            this.populateValues.title = "Sidewalk";
-            this.defaultPopulate.push(this.populateValues);
-            this.streetElementData.push(this.populateValues.title);
-            this.updateTotal(
-              this.defaultPopulate[0].width,
-              this.defaultPopulate[0].fill,
-              this.defaultPopulate[0].title
-            );
-            this.slideHide = !this.slideHide;
-            break;
-          default:
-            //clear the object of the sidewalk
-            this.defaultPopulate.pop();
-            break;
-        }
-        var roadWidth = this.getData.RoadWidth / this.getData.NumberofLa;
-        var numberofLanes = this.getData.NumberofLa / 2;
-        for (var i = 0; i < numberofLanes; i++) {
-          if (i == 0) {
-            this.populateValues.fill = "url(#roadTexture)";
-            this.populateValues.width = roadWidth;
-            this.populateValues.title = "Curb Lane";
-          } else {
-            this.populateValues.fill = "url(#roadTexture)";
-            this.populateValues.width = roadWidth;
-            this.populateValues.title = "Passing Lane";
-          }
-          this.defaultPopulate.push(this.populateValues);
-          this.streetElementData.push(this.populateValues.title);
-
-          this.updateTotal(
-            this.defaultPopulate[i].width,
-            this.defaultPopulate[i].fill,
-            this.defaultPopulate[i].title
-          );
-        }
-        this.populateValues.fill = "white";
-        this.populateValues.width = 0.1;
-        this.populateValues.title = "Centre Line";
-        this.defaultPopulate.push(this.populateValues);
-        this.updateTotal(
-          this.defaultPopulate[i].width,
-          this.defaultPopulate[i].fill,
-          this.defaultPopulate[i].title
-        );
-        this.slideHide = false;
-      } else {
-        this.rowReset();
-      }
-    },
     back(passed) {
       this.streetElementData.pop();
       this.smartButtons(
@@ -1483,10 +1402,10 @@ export default {
           this.color = "url(#sidewalkTexture)";
           break;
         case "sdwlk_landbuff_util": //0
-          this.color = "url(#sidewalkTexture)";
+          this.color = "url(#grassTexture)";
           break;
         case "sdwlk_landbuff": //0
-          this.color = "url(#sidewalkTexture)";
+          this.color = "url(#grassTexture)";
           break;
         case "sdwlk_landbuff_veg": //0
           this.color = "url(#grassTexture)";
@@ -2017,7 +1936,7 @@ export default {
           break;
       }
     },
-    updateTotal(num, colour, title) {
+    updateTotal(num, title) {
       num = (num * 10) / 10;
       this.slideHide = !this.slideHide;
       if (num > this.totalWidth) {
@@ -2031,7 +1950,7 @@ export default {
           this.offsetList.push({
             title: title,
             x: 0,
-            fill: colour,
+            fill: this.color,
             width: width // this.window.width * this.ratioSvg  width of the building
           });
         } else {
@@ -2039,7 +1958,7 @@ export default {
           this.offsetList.push({
             x: lastOffset.x + lastOffset.width,
             title: title,
-            fill: colour,
+            fill: this.color,
             width: width
           });
         }
