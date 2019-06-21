@@ -1,10 +1,15 @@
 <template>
   <svg
     v-if="
-      title === 'Painted' ||
-        title === 'Raised' ||
-        title === 'Curb Serparated' ||
-        title === 'url(#bikeTexture)'
+      title === 'cycl_lane' ||
+      title === 'cycl_trac' ||
+      title === 'cycl_str' ||
+      title === 'prot_cycl_trac' ||
+      title === 'bi_cycl_trac' ||
+      title === 'raise_cycl_trac' ||
+      title === 'curbuff_cycl_lane' ||
+      title === 'contra_cycle_str' ||
+      title === 'url(#bikeTexture)'
     "
     :x="x"
     :y="y"

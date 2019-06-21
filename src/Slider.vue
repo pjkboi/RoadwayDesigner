@@ -1,16 +1,18 @@
 <template>
   <div id="slide">
-    <p>How big do you want the {{ name }} in meters?</p>
+    <p>How big do you want the {{name}} in meters?</p>
     <vue-slide-bar
       id="slider"
       v-model="slider.value"
       :data="standards(name)"
       :range="standards(name)"
-    ></vue-slide-bar>
-    <div class="errorMessage" v-if="this.slider.value > this.totalWidth">
-      The element is too big!!!
-    </div>
-    <b-button @click="onClick">Add {{ name }}</b-button>
+    >
+      <!-- <template slot="tooltip" slot-scope="tooltip">
+        <img src="static/vue-slide-bar/rectangle-slider.svg">
+      </template>-->
+    </vue-slide-bar>
+    <div class="errorMessage" v-if="this.slider.value > this.totalWidth">The element is too big!!!</div>
+    <b-button @click="onClick">Add {{name}}</b-button>
     <b-button @click="backbtn">Back</b-button>
   </div>
 </template>
@@ -22,25 +24,27 @@ export default {
   },
   props: {
     name: String,
-    totalWidth: Number
+    totalWidth: Number,
+    title: String
   },
   data() {
     return {
       back: false,
+      standarts: null,
       slider: {
         value: 1
       },
       standardsArray: [
         {
-          title: "Commercial Use Extension",
+          title: "comm_ext",
           roadStandard: [1, 2, 3, 4]
         },
         {
-          title: "Residential",
+          title: "sdwlk_path_res",
           roadStandard: [1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4]
         },
         {
-          title: "Commercial",
+          title: "sdwlk_path_comm",
           roadStandard: [
             2.4,
             2.5,
@@ -67,126 +71,108 @@ export default {
           ]
         },
         {
-          title: "Street Furniture Zone",
+          title: "sdwlk_str_frntr",
           roadStandard: [0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5]
         },
         {
-          title: "Utilities",
+          title: "sdwlk_landbuff_util",
           roadStandard: [0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5]
         },
         {
-          title: "No Vegetation",
+          title: "sdwlk_landbuff",
           roadStandard: [1.5, 1.6, 1.7, 1.8, 1.9, 2]
         },
         {
-          title: "Vegetation",
+          title: "sdwlk_landbuff_veg",
           roadStandard: [1.5, 1.6, 1.7, 1.8, 1.9, 2]
         },
         {
-          title: "Pedestrian Refuge Island",
+          title: "ped_isl",
           roadStandard: [1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4]
         },
         {
-          title: "Cycle Lane",
+          title: "cycl_lane",
           roadStandard: [1.8, 1.9, 2]
         },
         {
-          title: "Cycle Track",
+          title: "cycl_trac",
           roadStandard: [1.8, 1.9, 2]
         },
         {
-          title: "Cycle Street",
+          title: "cycl_str",
           roadStandard: [2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3]
         },
         {
-          title: "Protected Cycle Track",
+          title: "prot_cycl_trac",
           roadStandard: [1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2]
         },
         {
-          title: "Bidirectional Cycle Track",
+          title: "bi_cycl_trac",
           roadStandard: [1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2]
         },
         {
-          title: "Raised Cycle Track",
+          title: "raise_cycl_trac",
           roadStandard: [1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2]
         },
         {
-          title: "Curbside Buffered Cycle Lane",
+          title: "curbuff_cycl_lane",
           roadStandard: [1, 1.2, 1.2]
         },
         {
-          title: "Contraflow Cycle Street",
+          title: "contra_cycle_str",
           roadStandard: [3.5, 4, 4.5, 5, 5.5, 6]
         },
         {
-          title: "Transit Stop",
+          title: "tran_stp",
           roadStandard: [2, 2.1, 2.2, 2.3, 2.4, 2.5]
         },
         {
-          title: "Side Running Dedicated Transit Lane",
+          title: "side_ded_transln",
           roadStandard: [3, 3.1, 3.2, 3.3]
         },
         {
-          title: "Centre Running Transit Lane - Centre Boarding",
+          title: "cent_transln_cntbrd",
           roadStandard: [3.3, 3.4, 3.5]
         },
         {
-          title: "Centre Running Transit Lane – Side Boarding",
+          title: "cent_transln_pssgr",
           roadStandard: [10, 10.5, 11, 11.5, 12, 12.5]
         },
         {
-          title: "Shared Transit Lane",
+          title: "shr_transln",
           roadStandard: [5.5, 5.6, 5.7, 5.8, 5.9, 6]
         },
         {
-          title: "Curb Lane",
+          title: "curb_ln",
           roadStandard: [3.4, 3.5, 3.6, 3.7]
         },
         {
-          title: "Passing Lane",
+          title: "pass_ln",
           roadStandard: [3, 3.1, 3.2, 3.3, 3.4]
         },
         {
-          title: "Large Vehicle Lane",
+          title: "lrg_veh_ln",
           roadStandard: [3, 3.1, 3.2, 3.3, 3.4, 3.5]
         },
         {
-          title: "Bidirectional Travel Lane",
+          title: "bi_trav_ln",
           roadStandard: [4.8, 4.9, 5, 5.1, 5.2, 5.3, 5.4, 5.5]
         },
         {
-          title: "Turning Lane",
+          title: "turn_ln",
           roadStandard: [3, 3.1, 3.2, 3.3, 3.4, 3.5]
         },
         {
-          title: "Freight Travel Lane",
+          title: "frt_trav_ln",
           roadStandard: [3.3]
         },
         {
-          title: "Parking Lane",
+          title: "park_ln",
           roadStandard: [1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5]
         },
         {
           title: "Two-way left-turn Lane",
           roadStandard: [1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5]
-        },
-        {
-          title: "Refuge",
-          roadStandard: [
-            1.8,
-            1.9,
-            2,
-            2.1,
-            2.2,
-            2.3,
-            2.4,
-            2.5,
-            2.6,
-            2.7,
-            2.8,
-            2.9,
-            3
-          ]
         },
         {
           title: "Boulevard (Vegetation)",
@@ -201,28 +187,43 @@ export default {
           roadStandard: [1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6]
         },
         {
-          title: "Swale",
+          title: "swale",
           roadStandard: [0.5, 1, 1.5]
         },
         {
-          title: "Rain Garden",
+          title: "rain_gdn",
           roadStandard: [1, 1.1, 1.2, 1.3, 1.4, 1.5]
         },
         {
-          title: "Permeable Paving",
+          title: "perm_pav",
           roadStandard: [0.6, 0.7, 0.8, 0.9, 1]
         }
       ]
     };
+  },
+  watch: {
+    title: function() {
+      for (var i = 0; i < this.standardsArray.length; i++) {
+        if (this.standardsArray[i].title == this.title) {
+          this.standarts = this.standardsArray[i].roadStandard;
+        }
+      }
+      this.$emit("title", this.standarts);
+    }
   },
   methods: {
     backbtn() {
       this.$emit("backbtn", this.back);
     },
     onClick() {
+      for (var i = 0; i < this.standardsArray.length; i++) {
+        if (this.standardsArray[i].title == this.title) {
+          this.standarts = this.standardsArray[i].roadStandard;
+        }
+      }
       this.$emit("onClick", this.slider.value);
     },
-    standards() {
+    standards(name) {
       for (var i = 0; i < this.standardsArray.length; i++) {
         if (this.name === this.standardsArray[i].title) {
           return this.standardsArray[i].roadStandard;

@@ -9,6 +9,7 @@
         v-if="slideHide"
         :totalWidth="this.totalWidth"
         :name="this.name"
+        :title="this.title"
         v-on:onClick="updateTotal($event, color, name)"
         v-on:backbtn="back($event)"
         :style="{ height: window.height * 0.3 + 'px' }"
@@ -18,12 +19,12 @@
           <p>Select Road Element:</p>
         </b>
         <v-btn fab dark small color="grey" @click="show('sidewalkInfo')">
-          <v-icon>i</v-icon> </v-btn
-        >Sidewalk Elements:
-        <br />
+          <v-icon>i</v-icon>
+        </v-btn>Sidewalk Elements:
+        <br>
         <b-button
           @click="
-            smartButtons('Commercial Use Extension');
+            smartButtons('comm_ext');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -31,11 +32,10 @@
           class="buttonStyle"
           :variant="commercialExtensionVarient"
           :disabled="disabled.CommercialExtension"
-          >Commercial Use Extension</b-button
-        >
+        >Commercial Use Extension</b-button>
         <b-button
           @click="
-            smartButtons('Residential');
+            smartButtons('sdwlk_path_res');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -43,11 +43,10 @@
           class="buttonStyle"
           :variant="residentialVarient"
           :disabled="disabled.Residential"
-          >Residential</b-button
-        >
+        >Residential</b-button>
         <b-button
           @click="
-            smartButtons('Commercial');
+            smartButtons('sdwlk_path_comm');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -55,11 +54,10 @@
           class="buttonStyle"
           :variant="commercialVarient"
           :disabled="disabled.Commercial"
-          >Commercial</b-button
-        >
+        >Commercial</b-button>
         <b-button
           @click="
-            smartButtons('Street Furniture Zone');
+            smartButtons('sdwlk_str_frntr');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -67,17 +65,15 @@
           class="buttonStyle"
           :variant="furnitureVarient"
           :disabled="disabled.StreetFurniture"
-          >Street Furniture Zone</b-button
-        >
-        <!-- <b-button @click="naming('Line'), smartButtons()" class="buttonStyle" :variant="'outline-secondary'"  >Line</b-button> -->
-        <br />
+        >Street Furniture Zone</b-button>
+        <br>
         <v-btn fab dark small color="green" @click="show('bufferInfo')">
-          <v-icon>i</v-icon> </v-btn
-        >Buffer Zone:
-        <br />
+          <v-icon>i</v-icon>
+        </v-btn>Buffer Zone:
+        <br>
         <b-button
           @click="
-            smartButtons('Utilities');
+            smartButtons('sdwlk_landbuff_util');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -85,19 +81,17 @@
           class="buttonStyle"
           :variant="bufferVarient"
           :disabled="disabled.Utilities"
-          >Utilities</b-button
-        >
+        >Utilities</b-button>
         <b-button
           @click="
-            smartButtons('No Vegetation');
+            smartButtons('sdwlk_landbuff');
             slideHide = !slideHide;
             clearUndo();
           "
           class="buttonStyle"
           :variant="bufferVarient"
           :disabled="disabled.NoVegetation"
-          >No Vegetation</b-button
-        >
+        >No Vegetation</b-button>
         <b-button
           @click="
             smartButtons('Vegetation');
@@ -108,249 +102,228 @@
           class="buttonStyle"
           :variant="bufferVarient"
           :disabled="disabled.Vegetation"
-          >Vegetation</b-button
-        >
-        <br />
+        >Vegetation</b-button>
+        <br>
         <v-btn fab dark small color="blue" @click="show('cycleInfo')">
-          <v-icon>i</v-icon> </v-btn
-        >Cycling Elements:
-        <br />
+          <v-icon>i</v-icon>
+        </v-btn>Cycling Elements:
+        <br>
         <b-button
           @click="
-            smartButtons('Cycle Lane');
+            smartButtons('cycl_lane');
             slideHide = !slideHide;
             clearUndo();
           "
           class="buttonStyle"
           :variant="cycleVarient"
           :disabled="disabled.CycleLane"
-          >Cycle Lane</b-button
-        >
+        >Cycle Lane</b-button>
         <b-button
           @click="
-            smartButtons('Cycle Track');
+            smartButtons('cycl_trac');
             slideHide = !slideHide;
             clearUndo();
           "
           class="buttonStyle"
           :variant="cycleVarient"
           :disabled="disabled.CycleTrack"
-          >Cycle Track</b-button
-        >
+        >Cycle Track</b-button>
         <b-button
           @click="
-            smartButtons('Cycle Street');
+            smartButtons('cycl_str');
             slideHide = !slideHide;
             clearUndo();
           "
           class="buttonStyle"
           :variant="cycleVarient"
           :disabled="disabled.CycleStreet"
-          >Cycle Street</b-button
-        >
+        >Cycle Street</b-button>
         <b-button
           @click="
-            smartButtons('Protected Cycle Track');
+            smartButtons('prot_cycl_trac');
             slideHide = !slideHide;
             clearUndo();
           "
           class="buttonStyle"
           :variant="cycleVarient"
           :disabled="disabled.ProtectedCycleTrack"
-          >Protected Cycle Track</b-button
-        >
+        >Protected Cycle Track</b-button>
         <b-button
           @click="
-            smartButtons('Bidirectional Cycle Track');
+            smartButtons('bi_cycl_trac');
             slideHide = !slideHide;
             clearUndo();
           "
           class="buttonStyle"
           :variant="cycleVarient"
           :disabled="disabled.BidirectionalCycleTrack"
-          >Bidirectional Cycle Track</b-button
-        >
+        >Bidirectional Cycle Track</b-button>
         <b-button
           @click="
-            smartButtons('Raised Cycle Track');
+            smartButtons('raise_cycl_trac');
             slideHide = !slideHide;
             clearUndo();
           "
           class="buttonStyle"
           :variant="cycleVarient"
           :disabled="disabled.RaisedCycleTrack"
-          >Raised Cycle Track</b-button
-        >
+        >Raised Cycle Track</b-button>
         <b-button
           @click="
-            smartButtons('Curbside Buffered Cycle Lane');
+            smartButtons('curbuff_cycl_lane');
             slideHide = !slideHide;
             clearUndo();
           "
           class="buttonStyle"
           :variant="cycleVarient"
           :disabled="disabled.CurbsideBufferedCycleLane"
-          >Curbside Buffered Cycle Lane</b-button
-        >
+        >Curbside Buffered Cycle Lane</b-button>
         <b-button
           @click="
-            smartButtons('Contraflow Cycle Street');
+            smartButtons('contra_cycle_str');
             slideHide = !slideHide;
             clearUndo();
           "
           class="buttonStyle"
           :variant="cycleVarient"
           :disabled="disabled.ContraflowCycleStreet"
-          >Contraflow Cycle Street</b-button
-        >
-        <br />
+        >Contraflow Cycle Street</b-button>
+        <br>
         <v-btn fab dark small color="orange" @click="show('transitInfo')">
-          <v-icon>i</v-icon> </v-btn
-        >Transit Elements:
-        <br />
+          <v-icon>i</v-icon>
+        </v-btn>Transit Elements:
+        <br>
         <b-button
           @click="
-            smartButtons('Shared Transit Lane');
+            smartButtons('shr_transln');
             slideHide = !slideHide;
             clearUndo();
           "
           class="buttonStyle"
           :variant="transitVarient"
           :disabled="disabled.SharedTransitLane"
-          >Shared Transit Lane</b-button
-        >
+        >Shared Transit Lane</b-button>
         <b-button
           @click="
-            smartButtons('Transit Stop');
+            smartButtons('tran_stp');
             slideHide = !slideHide;
             clearUndo();
           "
           class="buttonStyle"
           :variant="transitVarient"
           :disabled="disabled.TransitStop"
-          >Transit Stop</b-button
-        >
+        >Transit Stop</b-button>
         <b-button
           @click="
-            smartButtons('Side Running Dedicated Transit Lane');
+            smartButtons('side_ded_transln');
             slideHide = !slideHide;
             clearUndo();
           "
           class="buttonStyle"
           :variant="transitVarient"
           :disabled="disabled.SideRunningDedicatedTransitLane"
-          >Side Running Dedicated Transit Lane</b-button
-        >
+        >Side Running Dedicated Transit Lane</b-button>
         <b-button
           @click="
-            smartButtons('Centre Running Transit Lane - Centre Boarding');
+            smartButtons('cent_transln_cntbrd');
             slideHide = !slideHide;
             clearUndo();
           "
           class="buttonStyle"
           :variant="centertransitVarient"
           :disabled="disabled.CenterRunningTransitLaneCenterBoarding"
-          >Centre Running Transit Lane - Centre Board</b-button
-        >
+        >Centre Running Transit Lane - Centre Board</b-button>
         <b-button
           @click="
-            smartButtons('Centre Running Transit Lane – Side Boarding');
+            smartButtons('cent_transln_pssgr');
             slideHide = !slideHide;
             clearUndo();
           "
           class="buttonStyle"
           :variant="centertransitVarient"
           :disabled="disabled.CenterRunningTransitLaneSideBoarding"
-          >Centre Running Transit Lane – Side Board</b-button
-        >
-        <br />
+        >Centre Running Transit Lane – Side Board</b-button>
+        <br>
         <v-btn fab dark small color="black" @click="show('roadInfo')">
-          <v-icon>i</v-icon> </v-btn
-        >Vehicle Lanes:
-        <br />
+          <v-icon>i</v-icon>
+        </v-btn>Vehicle Lanes:
+        <br>
         <b-button
           @click="
-            smartButtons('Curb Lane');
+            smartButtons('curb_ln');
             slideHide = !slideHide;
             clearUndo();
           "
           class="buttonStyle"
           :variant="curbLaneVarient"
           :disabled="disabled.CurbLane"
-          >Curb Lane</b-button
-        >
+        >Curb Lane</b-button>
         <b-button
           @click="
-            smartButtons('Passing Lane');
+            smartButtons('pass_ln');
             slideHide = !slideHide;
             clearUndo();
           "
           class="buttonStyle"
           :variant="passingLaneVarient"
           :disabled="disabled.PassingLane"
-          >Passing Lane</b-button
-        >
+        >Passing Lane</b-button>
         <b-button
           @click="
-            smartButtons('Large Vehicle Lane');
+            smartButtons('lrg_veh_ln');
             slideHide = !slideHide;
             clearUndo();
           "
           class="buttonStyle"
           :variant="largeVehicleLaneVarient"
           :disabled="disabled.LargeVehicleLane"
-          >Large Vehicle Lane</b-button
-        >
+        >Large Vehicle Lane</b-button>
         <b-button
           @click="
-            smartButtons('Bidirectional Travel Lane');
+            smartButtons('bi_trav_ln');
             slideHide = !slideHide;
             clearUndo();
           "
           class="buttonStyle"
           :variant="bidirectionalTravelLaneVarient"
           :disabled="disabled.BidirectionalTravelLane"
-          >Bidirectional Travel Lane</b-button
-        >
+        >Bidirectional Travel Lane</b-button>
         <b-button
           @click="
-            smartButtons('Turning Lane');
+            smartButtons('turn_ln');
             slideHide = !slideHide;
             clearUndo();
           "
           class="buttonStyle"
           :variant="turningLaneVarient"
           :disabled="disabled.TurningLane"
-          >Turning Lane</b-button
-        >
+        >Turning Lane</b-button>
         <b-button
           @click="
-            smartButtons('Freight Travel Lane');
+            smartButtons('frt_trav_ln');
             slideHide = !slideHide;
             clearUndo();
           "
           class="buttonStyle"
           :variant="freightTravelLaneVarient"
           :disabled="disabled.FreightTravelLane"
-          >Freight Travel Lane</b-button
-        >
+        >Freight Travel Lane</b-button>
         <b-button
           @click="
-            smartButtons('Parking Lane');
+            smartButtons('park_ln');
             slideHide = !slideHide;
             clearUndo();
           "
           class="buttonStyle"
           :variant="parkingLaneVarient"
           :disabled="disabled.ParkingLane"
-          >Parking Lane</b-button
-        >
+        >Parking Lane</b-button>
 
-        <br />
+        <br>
         <v-btn fab dark small color="teal" @click="show('medianInfo')">
-          <v-icon>i</v-icon> </v-btn
-        >Median:
-        <br />
+          <v-icon>i</v-icon>
+        </v-btn>Median:
+        <br>
         <b-button
           @click="
             smartButtons('Two-way left-turn Lane');
@@ -360,19 +333,17 @@
           class="buttonStyle"
           :variant="medianVarient"
           :disabled="disabled.TwoWayLeftTurn"
-          >Two-way left-turn Lane</b-button
-        >
+        >Two-way left-turn Lane</b-button>
         <b-button
           @click="
-            smartButtons('Pedestrian Refuge Island');
+            smartButtons('ped_isl');
             slideHide = !slideHide;
             clearUndo();
           "
           class="buttonStyle"
           :variant="medianVarient"
           :disabled="disabled.PedestrianRefugeIsland"
-          >Pedestrian Refuge Island</b-button
-        >
+        >Pedestrian Refuge Island</b-button>
         <b-button
           @click="
             smartButtons('Boulevard (Vegetation)');
@@ -382,8 +353,7 @@
           class="buttonStyle"
           :variant="medianVarient"
           :disabled="disabled.Boulevard"
-          >Boulevard (Vegetation)</b-button
-        >
+        >Boulevard (Vegetation)</b-button>
         <b-button
           @click="
             smartButtons('Centre Line');
@@ -393,8 +363,7 @@
           class="buttonStyle"
           :variant="medianVarient"
           :disabled="disabled.CenterLine"
-          >Center Line</b-button
-        >
+        >Center Line</b-button>
         <b-button
           @click="
             smartButtons('Infrastructure');
@@ -404,73 +373,61 @@
           class="buttonStyle"
           :variant="medianVarient"
           :disabled="disabled.Infrastructure"
-          >Infrastructure</b-button
-        >
-        <br />
+        >Infrastructure</b-button>
+        <br>
         <v-btn fab dark small color="green" @click="show('greenInfo')">
-          <v-icon>i</v-icon> </v-btn
-        >Green Infrastructure
-        <br />
+          <v-icon>i</v-icon>
+        </v-btn>Green Infrastructure
+        <br>
         <b-button
           @click="
-            smartButtons('Swale');
+            smartButtons('swale');
             slideHide = !slideHide;
             clearUndo();
           "
           class="buttonStyle"
           :variant="greenVarient"
           :disabled="disabled.Swale"
-          >Swale</b-button
-        >
+        >Swale</b-button>
         <b-button
           @click="
-            smartButtons('Rain Garden');
+            smartButtons('rain_gdn');
             slideHide = !slideHide;
             clearUndo();
           "
           class="buttonStyle"
           :variant="greenVarient"
           :disabled="disabled.RainGarden"
-          >Rain Garden</b-button
-        >
+        >Rain Garden</b-button>
         <b-button
           @click="
-            smartButtons('Permeable Paving');
+            smartButtons('perm_pav');
             slideHide = !slideHide;
             clearUndo();
           "
           class="buttonStyle"
           :variant="greenVarient"
           :disabled="disabled.PermeablePaving"
-          >Permeable Paving</b-button
-        >
-        <br />
-        <br />
+        >Permeable Paving</b-button>
+        <br>
+        <br>
       </div>
       <div id="controls" v-if="!slideHide">
-        <b-button variant="danger" @click="rowReset" id="btnReset"
-          >Reset</b-button
-        >
-        <b-button variant="danger" @click="svgDelete" id="btnDelete"
-          >Delete</b-button
-        >
+        <b-button variant="danger" @click="rowReset" id="btnReset">Reset</b-button>
+        <b-button variant="danger" @click="svgDelete" id="btnDelete">Delete</b-button>
         <b-button variant="danger" @click="undo" id="btnUndo">Undo</b-button>
-        <b-button variant="danger" @click="submit" id="btnSubmit"
-          >Submit</b-button
-        >
-        <b-button variant @click="Populate" hidden id="RDPrepopulation"
-          >Test</b-button
-        >
+        <b-button variant="danger" @click="submit" id="btnSubmit">Submit</b-button>
+        <b-button variant @click="Populate" hidden id="RDPrepopulation">Test</b-button>
         <!-- <b-button variant="success" hidden @click="startInterval(), animationOn=!animationOn" id="solveRoutesBtn" ref="streetViewer">Anime</b-button> -->
       </div>
     </div>
     <div id="crossSection">
-      <br />
+      <br>
       <span style="text-align: center;">
         Remaining Width
-        <span style="background-color: #694393; color: white; padding:5px;"
-          >{{ totalWidth }}m</span
-        >
+        <span
+          style="background-color: #694393; color: white; padding:5px;"
+        >{{ totalWidth }}m</span>
       </span>
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -478,6 +435,10 @@
         height="100%"
         viewBox="0 0 1500 400"
         preserveAspectRatio="none"
+        @mousedown="startDrago"
+        @mousemove="drago"
+        @mouseup="endDrago"
+        @mouseleave="endDrago"
       >
         <rect fill="#6b6c6d" :x="0" :y="385" :width="1500" :height="100"></rect>
         <rect fill="black" :x="0" :y="385" :width="1500" :height="2"></rect>
@@ -646,27 +607,23 @@
             @click="changeSize('Deduct', selectedElementId)"
             :x="offset.x + 10"
             :y="140 - 7"
-          >
-            -
-          </text>
+          >-</text>
           <text
             v-if="index == selectedElementId && selectedElement"
             @click="changeSize('Add', selectedElementId)"
             :x="offset.x + offset.width - 20"
             :y="140 - 7"
-          >
-            +
-          </text>
+          >+</text>
           <text
             v-if="selectedElementId != index && !selectedElement"
             :x="offset.x + offset.width / 2 - 15"
             :y="140 - 7"
           >
             {{
-              (
-                (offset.width.toFixed(2) * 100) /
-                (width.toFixed(2) * 100)
-              ).toFixed(1)
+            (
+            (offset.width.toFixed(2) * 100) /
+            (width.toFixed(2) * 100)
+            ).toFixed(1)
             }}m
           </text>
           <line
@@ -732,9 +689,7 @@
                 15
             "
             :y="60 - 7"
-          >
-            {{ (startWidth - totalWidth).toFixed(1) }}m
-          </text>
+          >{{ (startWidth - totalWidth).toFixed(1) }}m</text>
           <line
             v-if="
               selectedElementId != index &&
@@ -770,118 +725,71 @@
             :y2="140"
             style="stroke:rgb(247, 28, 0);stroke-width:2; opacity: 0.8"
           ></line>
-          <line
-            class="draggable"
-            @mousedown="startDrago"
-            @mousemove="drago"
-            @mouseup="endDrago"
-            @mouseleave="endDrago"
-            v-if="index == selectedElementId && selectedElement"
-            :x1="offset.x + offset.width"
-            y1="90%"
-            :x2="offset.x + offset.width"
-            :y2="140"
-            style="stroke:rgb(247, 28, 0);stroke-width:14; opacity: 0.8"
-          ></line>
+       <line
+        class="draggable"
+        v-if="index==selectedElementId && selectedElement"   
+          :x1="offset.x+offset.width"
+          y1="90%"
+          :x2="offset.x+offset.width"
+          :y2="140"
+          style="stroke:rgb(247, 28, 0);stroke-width:2; opacity: 0.8"
+        ></line>
+        <rect
+        class="draggable"
+         v-if="index==selectedElementId && selectedElement"         
+         :x="offset.x+offset.width-10"
+         y="55%" width="20"
+         height="20"
+         rx="5"/>
           <text
             v-if="index == selectedElementId && selectedElement"
             :x="offset.x + offset.width / 2 - 15"
             :y="140 - 7"
-          >
-            {{ (offset.width.toFixed(2) / width.toFixed(2)).toFixed(1) }}m
-          </text>
+          >{{ (offset.width.toFixed(2) / width.toFixed(2)).toFixed(1) }}m</text>
         </svg>
       </svg>
     </div>
     <div id="planView">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1500 1500"
-        preserveAspectRatio="none"
-      >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1500" preserveAspectRatio="none">
         <svg v-for="(offset, key) in offsetList" :key="key">
           <defs>
-            <pattern
-              id="roadTexture"
-              patternUnits="userSpaceOnUse"
-              width="100"
-              height="100"
-            >
-              <image
-                xlink:href="./svg/roadTexture.jpg"
-                x="0"
-                y="0"
-                width="100"
-                height="100"
-              ></image>
+            <pattern id="roadTexture" patternUnits="userSpaceOnUse" width="100" height="100">
+              <image xlink:href="./svg/roadTexture.jpg" x="0" y="0" width="100" height="100"></image>
             </pattern>
-            <pattern
-              id="bikeTexture"
-              patternUnits="userSpaceOnUse"
-              width="100"
-              height="100"
-            >
-              <image
-                xlink:href="./svg/bikeTexture.jpg"
-                x="0"
-                y="0"
-                width="100"
-                height="100"
-              ></image>
+            <pattern id="bikeTexture" patternUnits="userSpaceOnUse" width="100" height="100">
+              <image xlink:href="./svg/bikeTexture.jpg" x="0" y="0" width="100" height="100"></image>
             </pattern>
-            <pattern
-              id="sidewalkTexture"
-              patternUnits="userSpaceOnUse"
-              width="100"
-              height="100"
-            >
-              <image
-                xlink:href="./svg/sidewalkTexture.jpg"
-                x="0"
-                y="0"
-                width="100"
-                height="100"
-              ></image>
+            <pattern id="sidewalkTexture" patternUnits="userSpaceOnUse" width="100" height="100">
+              <image xlink:href="./svg/sidewalkTexture.jpg" x="0" y="0" width="100" height="100"></image>
             </pattern>
-            <pattern
-              id="grassTexture"
-              patternUnits="userSpaceOnUse"
-              width="100"
-              height="100"
-            >
-              <image
-                xlink:href="./svg/grassTexture.jpg"
-                x="0"
-                y="0"
-                width="100"
-                height="100"
-              ></image>
+            <pattern id="grassTexture" patternUnits="userSpaceOnUse" width="100" height="100">
+              <image xlink:href="./svg/grassTexture.jpg" x="0" y="0" width="100" height="100"></image>
             </pattern>
           </defs>
           <!-- Line section// animation section -->
           <CarLineTop
-            v-if="offset.title === 'Curb Lane'"
+            v-if="offset.title === 'curb_ln'"
             :title="offset.title"
             :x="offset.x - 95"
             :y="move * 5 + Math.floor(Math.random() * 3 + 1)"
             preserveAspectRatio="xMidYMax meet"
           ></CarLineTop>
           <CarLineTop
-            v-if="offset.title === 'Passing Lane'"
+            v-if="offset.title === 'pass_ln'"
             :title="offset.title"
             :x="offset.x - 95"
             :y="move * 9 + Math.floor(Math.random() * 3 + 1) - 1000"
             preserveAspectRatio="xMidYMax meet"
           ></CarLineTop>
           <CarLineBottom
-            v-if="offset.title === 'Curb Lane'"
+            v-if="offset.title === 'curb_ln'"
             :title="offset.title"
             :x="1410 - offset.x - offset.width"
             :y="-move * 3 + Math.floor(Math.random() * 3 + 1) + 1000"
             preserveAspectRatio="xMidYMax meet"
           ></CarLineBottom>
           <CarLineBottom
-            v-if="offset.title === 'Passing Lane'"
+            v-if="offset.title === 'pass_ln'"
             :title="offset.title"
             :x="1410 - offset.x - offset.width"
             :y="-move * 7 + Math.floor(Math.random() * 3 + 1) + 1000"
@@ -896,7 +804,7 @@
             :fill="offset.fill"
           ></rect>
           <line
-            v-if="offset.title == 'Passing Lane'"
+            v-if="offset.title == 'pass_ln'"
             :x1="offset.x"
             :x2="offset.x"
             y1="2"
@@ -907,7 +815,7 @@
             stroke-dasharray="100 100"
           ></line>
           <line
-            v-if="offset.title == 'Curb Lane'"
+            v-if="offset.title == 'curb_ln'"
             :x1="offset.x + 10"
             :x2="offset.x + 10"
             y1="2"
@@ -917,7 +825,7 @@
             stroke-linecap="butt"
           ></line>
           <line
-            v-if="offset.title == 'Painted' || offset.title == 'Raised'"
+            v-if="offset.title == 'cycl_lane' || offset.title == 'raise_cycl_trac'"
             :x1="offset.x + 65"
             :x2="offset.x + 65"
             y1="2"
@@ -928,7 +836,7 @@
           ></line>
           <line
             class="line1"
-            v-if="offset.title == 'Landscaping (Trees)'"
+            v-if="offset.title == 'sdwlk_landbuff_veg'"
             :x1="offset.x + offset.width / 2"
             :x2="offset.x + offset.width / 2"
             y1="2"
@@ -954,14 +862,14 @@
             stroke-dasharray="100 100"
           ></line>
           <CarLineTop
-            v-if="offset.title === 'Curb Lane'"
+            v-if="offset.title === 'curb_ln'"
             :title="offset.title"
             :x="offset.x - 95"
             :y="move * 5 + Math.floor(Math.random() * 3 + 1)"
             preserveAspectRatio="xMidYMax meet"
           ></CarLineTop>
           <CarLineTop
-            v-if="offset.title === 'Passing Lane'"
+            v-if="offset.title === 'pass_ln'"
             :title="offset.title"
             :x="offset.x - 95"
             :y="move * 9 + Math.floor(Math.random() * 3 + 1) - 1000"
@@ -975,14 +883,14 @@
             :fill="offset.fill"
           ></rect>
           <CarLineBottom
-            v-if="offset.title === 'Curb Lane'"
+            v-if="offset.title === 'curb_ln'"
             :title="offset.title"
             :x="1410 - offset.x - offset.width"
             :y="-move * 3 + Math.floor(Math.random() * 3 + 1) + 1000"
             preserveAspectRatio="xMidYMax meet"
           ></CarLineBottom>
           <CarLineBottom
-            v-if="offset.title === 'Passing Lane'"
+            v-if="offset.title === 'pass_ln'"
             :title="offset.title"
             :x="1410 - offset.x - offset.width"
             :y="-move * 7 + Math.floor(Math.random() * 3 + 1) + 1000"
@@ -1000,7 +908,7 @@
             stroke-dasharray="100 100"
           ></line>
           <line
-            v-if="offset.title == 'Passing Lane'"
+            v-if="offset.title == 'pass_ln'"
             :x1="1500 - offset.x"
             :x2="1500 - offset.x"
             y1="2"
@@ -1011,7 +919,7 @@
             stroke-dasharray="100 100"
           ></line>
           <line
-            v-if="offset.title == 'Curb Lane'"
+            v-if="offset.title == 'curb_ln'"
             :x1="1500 - offset.x - 10"
             :x2="1500 - offset.x - 10"
             y1="2"
@@ -1031,7 +939,7 @@
             stroke-linecap="butt"
           ></line>
           <line
-            v-if="offset.title == 'Painted' || offset.title == 'Raised'"
+            v-if="offset.title == 'cycl_lane' || offset.title == 'raise_cycl_trac'"
             :x1="1500 - offset.x - 65"
             :x2="1500 - offset.x - 65"
             y1="2"
@@ -1042,7 +950,7 @@
           ></line>
           <line
             class="line1"
-            v-if="offset.title == 'Landscaping (Trees)'"
+            v-if="offset.title == 'sdwlk_landbuff_veg'"
             :x1="1500 - offset.x - offset.width / 2"
             :x2="1500 - offset.x - offset.width / 2"
             y1="2"
@@ -1205,7 +1113,8 @@ export default {
       infoType: null,
       data: [],
       titleArray: [],
-      widthArray: []
+      widthArray: [],
+      title: ""
     };
   },
   watch: {
@@ -1219,82 +1128,109 @@ export default {
       alert(this.selectedElementRange);
     },
     startDrago(evt) {
-      this.tempObjectWidth = this.offsetList[this.selectedElementId].width;
-      if (evt.target.classList.contains("draggable")) {
+       if (evt.target.classList.contains('draggable')) {
         this.selectedElementDrag = evt.target;
         this.offsetDrag = this.getMousePosition(evt);
-        this.offsetDrag.x -= parseFloat(
-          this.selectedElementDrag.getAttributeNS(null, "x1")
-        );
-      }
-    },
-    drago(evt) {
-      if (this.selectedElementDrag) {
+        this.offsetDrag.x -= parseFloat(this.selectedElementDrag.getAttributeNS(null, "x"));
+       }
+     },
+     drago(evt) {
+       if (this.selectedElementDrag) {
         evt.preventDefault();
         var coord = this.getMousePosition(evt);
-        this.selectedElementDrag.setAttributeNS(
-          null,
-          "x1",
-          coord.x - this.offsetDrag.x
-        );
-        this.selectedElementDrag.setAttributeNS(
-          null,
-          "x2",
-          coord.x - this.offsetDrag.x
-        );
         var newX = coord.x - this.offsetDrag.x;
         this.dragAdjust(newX);
-      }
-    },
-    endDrago() {
-      this.selectedElementDrag = null;
-    },
-    dragAdjust(newX) {
-      var modOfObjectWidth =
-        (this.offsetList[this.selectedElementId].width +
-          (newX -
-            (this.offsetList[this.selectedElementId].x +
-              this.offsetList[this.selectedElementId].width)) -
-          this.tempObjectWidth) %
-        this.width;
-      if (modOfObjectWidth < 0) {
-        var numOfTimes = parseInt(modOfObjectWidth / (this.width * 0.1)); // idk how to name this shit
-        for (var i = 0; i > numOfTimes; i--) {
-          this.changeSize("Deduct", this.selectedElementId);
         }
-      } else if (modOfObjectWidth > 0) {
-        numOfTimes = parseInt(modOfObjectWidth / (this.width * 0.1)); // idk how to call this shit
-        for (i = 0; i < numOfTimes; i++) {
-          this.changeSize("Add", this.selectedElementId);
-        }
+      },
+     endDrago(evt) {
+       this.selectedElementDrag = null;
+     },
+      dragAdjust(newX) {
+      var numOfTimes = parseInt((newX-(this.offsetList[this.selectedElementId].x + this.offsetList[this.selectedElementId].width))/(this.width/10));
+      if(numOfTimes ==1){
+        this.changeSize("Add", this.selectedElementId);
+        numOfTimes=0;
       }
-    },
-    getMousePosition(evt) {
-      var svg = evt.target;
-      var CTM = svg.getScreenCTM();
-      return {
-        x: (evt.clientX - CTM.e) / CTM.a,
-        y: (evt.clientY - CTM.f) / CTM.d
-      };
+      else if (numOfTimes ==-2){
+        this.changeSize("Deduct", this.selectedElementId);
+        numOfTimes=0;
+      }
+      else{
+        numOfTimes=0;
+      }
+     },
+     getMousePosition(evt) {
+       var svg = evt.target;
+       var CTM = svg.getScreenCTM();
+       return {
+         x: (evt.clientX - CTM.e) / CTM.a,
+         y: (evt.clientY - CTM.f) / CTM.d
+       };
+     },
+     changeSize(type, id) {
+
+      if (type == "Add"&& this.totalWidth != 0 && ((this.offsetList[id].width/this.width)<this.selectedElementRange[this.selectedElementRange.length-1])) {
+       const lastOffset = this.offsetList[id];
+
+       lastOffset.width = lastOffset.width + this.width/10;
+
+       this.totalWidth = ((this.totalWidth*10) - 1) / 10;
+
+       if((this.offsetList.length - 1) != id)
+         {
+           var i;
+           for (i = id+1; i < this.offsetList.length; i++)
+           {
+             const modifiedOffset = this.offsetList[i];
+             modifiedOffset.x = modifiedOffset.x + this.width/10;
+           }
+         }
+
+     } else if (type == "Deduct"  && ((this.offsetList[id].width/this.width)>this.selectedElementRange[0])) {
+       const lastOffset = this.offsetList[id];
+       lastOffset.width = lastOffset.width - this.width/10;
+       this.totalWidth = ((this.totalWidth*10) + 1) / 10;
+       if((this.offsetList.length - 1) != id)
+         {
+           var i;
+           for (i = id+1; i < this.offsetList.length; i++)
+           {
+             const modifiedOffset = this.offsetList[i];
+             modifiedOffset.x = modifiedOffset.x - this.width/10;
+           }
+         }
+     }
     },
     submit() {
-      for (var i = 0; i < this.offsetList.length; i++) {
-        this.titleArray.push(this.offsetList[i].title);
-        var width = this.offsetList[i].width / this.width;
-        this.widthArray.push(width);
+      if (this.totalWidth != 0) {
+        alert("Finish the design first");
+      } else {
+        var date = new Date();
+        var titleName = "name";
+        var rowName = "row";
+        var saveName = "SheetJs" + date.toString();
+        var rowWidth = this.startWidth - this.totalWidth;
+        this.titleArray.push(titleName);
+        this.titleArray.push(rowName);
+        this.widthArray.push(saveName);
+        this.widthArray.push(rowWidth);
+        for (var i = 0; i < this.offsetList.length; i++) {
+          this.titleArray.push(this.offsetList[i].title);
+          var width = this.offsetList[i].width / this.width;
+          this.widthArray.push(width);
+        }
+        this.data.push(this.titleArray);
+        this.data.push(this.widthArray);
+        var worksheet = XLSX.utils.aoa_to_sheet(this.data);
+        var new_workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(new_workbook, worksheet, "SheetJS");
+        if (confirm("This will download the spreadsheet")) {
+          XLSX.writeFile(new_workbook, saveName + ".xlsx");
+        }
+        this.titleArray.splice(0, this.titleArray.length);
+        this.widthArray.splice(0, this.widthArray.length);
+        this.data.splice(0, this.data.length);
       }
-      this.data.push(this.titleArray);
-      this.data.push(this.widthArray);
-      var worksheet = XLSX.utils.aoa_to_sheet(this.data);
-      var new_workbook = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(new_workbook, worksheet, "SheetJS");
-      if (confirm("This will download the spreadsheet")) {
-        XLSX.writeFile(new_workbook, "sheetjs.xlsx");
-      }
-
-      this.titleArray.splice(0, this.titleArray.length);
-      this.widthArray.splice(0, this.widthArray.length);
-      this.data.splice(0, this.data.length);
     },
     changeWidth() {
       if (this.sliderValue == 0) {
@@ -1379,9 +1315,6 @@ export default {
     },
     hide() {
       this.$modal.hide("hello-world");
-    },
-    sliderName(name) {
-      this.name = name;
     },
     Populate() {
       this.startWidth = (this.getData.row * 10) / 10;
@@ -1498,32 +1431,6 @@ export default {
       );
       this.slideHide = passed;
     },
-    changeSize(type, id) {
-      if (type == "Add" && this.totalWidth != 0) {
-        const lastOffset = this.offsetList[id];
-
-        lastOffset.width = lastOffset.width + this.width / 10;
-
-        this.totalWidth = (this.totalWidth * 10 - 1) / 10;
-
-        if (this.offsetList.length - 1 != id) {
-          for (var i = id + 1; i < this.offsetList.length; i++) {
-            const modifiedOffset = this.offsetList[i];
-            modifiedOffset.x = modifiedOffset.x + this.width / 10;
-          }
-        }
-      } else if (type == "Deduct") {
-        const lastOffset = this.offsetList[id];
-        lastOffset.width = lastOffset.width - this.width / 10;
-        this.totalWidth = (this.totalWidth * 10 + 1) / 10;
-        if (this.offsetList.length - 1 != id) {
-          for (var j = id + 1; j < this.offsetList.length; j++) {
-            const modifiedOffset = this.offsetList[j];
-            modifiedOffset.x = modifiedOffset.x - this.width / 10;
-          }
-        }
-      }
-    },
     sizeLines(id) {
       if (id == this.selectedElementId) {
         this.selectedElement = false;
@@ -1559,274 +1466,105 @@ export default {
     },
     svgPopulate(nameString) {
       switch (nameString) {
-        case "Commercial Use Extension":
-        case "Residential":
-        case "Commercial":
-        case "Street Furniture Zone":
-        case "Pedestrian Refuge Island":
-          this.color = "url(#sidewalkTexture)";
-          break;
-        case "Utilities":
-        case "No Vegetation":
-        case "Vegetation":
-        case "Boulevard (Vegetation)":
-        case "Swale":
-        case "Rain Garden":
-          this.color = "url(#grassTexture)";
-          break;
-        case "Cycle Lane":
-        case "Cycle Track":
-        case "Cycle Street":
-        case "Protected Cycle Track":
-        case "Bidirectional Cycle Track":
-        case "Raised Cycle Track":
-        case "Curbside Buffered Cycle Lane":
-        case "Contraflow Cycle Street":
-          this.color = "url(#bikeTexture)";
-          break;
-        case "Shared Transit Lane":
-        case "Transit Stop":
-        case "Side Running Dedicated Transit Lane":
-        case "Centre Running Transit Lane - Centre Boarding":
-        case "Centre Running Transit Lane – Side Boarding":
-        case "Curb Lane":
-        case "Passing Lane":
-        case "Large Vehicle Lane":
-        case "Bidirectional Travel Lane":
-        case "Turning Lane":
-        case "Freight Travel Lane":
-        case "Parking Lane":
-        case "Two-way left-turn Lane":
-        case "Infrastructure":
-        case "Permeable Paving":
-          this.color = "url(#roadTexture)";
-          break;
         case "Line":
         case "Centre Line":
           this.color = "white";
           break;
         case "comm_ext": //0
           this.color = "url(#sidewalkTexture)";
-          this.streetElementData.push("Commercial Use Extension");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "sdwlk_path_res": //0
           this.color = "url(#sidewalkTexture)";
-          this.streetElementData.push("Residential");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "sdwlk_path_comm": //0
           this.color = "url(#sidewalkTexture)";
-          this.streetElementData.push("Commercial");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "sdwlk_str_frntr": //0
           this.color = "url(#sidewalkTexture)";
-          this.streetElementData.push("Street Furniture Zone");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "sdwlk_landbuff_util": //0
           this.color = "url(#sidewalkTexture)";
-          this.streetElementData.push("Utilities");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "sdwlk_landbuff": //0
           this.color = "url(#sidewalkTexture)";
-          this.streetElementData.push("No Vegetation");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "sdwlk_landbuff_veg": //0
           this.color = "url(#grassTexture)";
-          this.streetElementData.push("Vegetation");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "ped_isl": //0
           this.color = "url(#sidewalkTexture)";
-          this.streetElementData.push("Pedestrian Refuge Island");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "cycl_lane": //0
           this.color = "url(#bikeTexture)";
-          this.streetElementData.push("Cycle Lane");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "cycl_trac": //0
           this.color = "url(#bikeTexture)";
-          this.streetElementData.push("Cycle Track");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "cycl_str": //0
           this.color = "url(#bikeTexture)";
-          this.streetElementData.push("Cycle Street");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "prot_cycl_trac": //0
           this.color = "url(#bikeTexture)";
-          this.streetElementData.push("Protected Cycle Track");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "bi_cycl_trac": //0
           this.color = "url(#bikeTexture)";
-          this.streetElementData.push("Bidirectional Cycle Track");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "raise_cycl_trac": //0
           this.color = "url(#bikeTexture)";
-          this.streetElementData.push("Raised Cycle Track");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "curbuff_cycl_lane": //0
           this.color = "url(#bikeTexture)";
-          this.streetElementData.push("Curbside Buffered Cycle Lane");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "contra_cycle_str": //0
           this.color = "url(#bikeTexture)";
-          this.streetElementData.push("Contraflow Cycle Street");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "tran_stp": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push("Transit Stop");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "side_ded_transln": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push("Side Running Dedicated Transit Lane");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "cent_transln_cntbrd": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push(
-            "Centre Running Transit Lane - Centre Boarding"
-          );
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "cent_transln_pssgr": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push(
-            "Centre Running Transit Lane – Side Boarding"
-          );
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "shr_transln": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push("Shared Transit Lane");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "curb_ln": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push("Curb Lane");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "pass_ln": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push("Passing Lane");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "lrg_veh_ln": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push("Large Vehicle Lane");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "bi_trav_ln": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push("Bidirectional Travel Lane");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "turn_ln": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push("Turning Lane");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "frt_trav_ln": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push("Freight Travel Lane");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "park_ln": //0
           this.color = "url(#roadTexture)";
-          this.streetElementData.push("Parking Lane");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "swale": //0
           this.color = "url(#grassTexture)";
-          this.streetElementData.push("Swale");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "rain_gdn": //0
           this.color = "url(#grassTexture)";
-          this.streetElementData.push("Rain Garden");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
         case "perm_pav": //0
           this.color = "url(#sidewalkTexture)";
-          this.streetElementData.push("Permeable Paving");
-          this.smartButtons(
-            this.streetElementData[this.streetElementData.length - 1]
-          );
           break;
       }
+      this.smartButtons(nameString);
     },
     disableAll() {
       this.disabled.CommercialExtension = true;
@@ -1891,8 +1629,6 @@ export default {
         this.disabled.Commercial = false;
         this.disabled.Residential = false;
         this.disabled.Swale = false;
-        this.streetElementData.push(elementCategory);
-        this.svgPopulate(elementCategory);
       } else {
         if (
           this.streetElementData[this.streetElementData.length - 1] ==
@@ -1905,8 +1641,8 @@ export default {
           this.svgPopulate(elementCategory);
         }
       }
-      switch (elementCategory) {
-        case "Commercial Use Extension":
+      switch (this.streetElementData[this.streetElementData.length - 1]) {
+        case "comm_ext":
           this.disableAll();
           this.commercialExtensionVarient = "outline-secondary";
           this.residentialVarient = "outline-secondary";
@@ -1927,7 +1663,7 @@ export default {
           this.greenVarient = "outline-success";
           this.disabled.Commercial = false;
           break;
-        case "Residential":
+        case "sdwlk_path_res":
           this.disableAll();
           this.commercialExtensionVarient = "outline-secondary";
           this.residentialVarient = "outline-secondary";
@@ -1968,7 +1704,7 @@ export default {
           this.disabled.PermeablePaving = false;
 
           break;
-        case "Commercial":
+        case "sdwlk_path_comm":
           this.disableAll();
           this.commercialExtensionVarient = "outline-secondary";
           this.residentialVarient = "outline-secondary";
@@ -2009,7 +1745,7 @@ export default {
           this.disabled.RainGarden = false;
           this.disabled.PermeablePaving = false;
           break;
-        case "Street Furniture Zone":
+        case "sdwlk_str_frntr":
           this.disableAll();
           this.commercialExtensionVarient = "outline-secondary";
           this.residentialVarient = "outline-secondary";
@@ -2049,9 +1785,9 @@ export default {
           this.disabled.RainGarden = false;
           this.disabled.PermeablePaving = false;
           break;
-        case "Utilities":
-        case "No Vegetation":
-        case "Vegetation":
+        case "sdwlk_landbuff_util":
+        case "sdwlk_landbuff":
+        case "sdwlk_landbuff_veg":
           this.disableAll();
           if (
             this.streetElementData[this.streetElementData.length - 1] ==
@@ -2115,14 +1851,14 @@ export default {
           }
 
           break;
-        case "Cycle Lane":
-        case "Cycle Track":
-        case "Cycle Street":
-        case "Protected Cycle Track":
-        case "Bidirectional Cycle Track":
-        case "Raised Cycle Track":
-        case "Curbside Buffered Cycle Lane":
-        case "Contraflow Cycle Street":
+        case "cycl_lane":
+        case "cycl_trac":
+        case "cycl_str":
+        case "prot_cycl_trac":
+        case "bi_cycl_trac":
+        case "raise_cycl_trac":
+        case "curbuff_cycl_lane":
+        case "contra_cycle_str":
           this.disableAll();
           if (
             this.streetElementData[this.streetElementData.length - 1] ==
@@ -2182,9 +1918,9 @@ export default {
             this.disabled.PermeablePaving = false;
           }
           break;
-        case "Shared Transit Lane":
-        case "Transit Stop":
-        case "Side Running Dedicated Transit Lane":
+        case "shr_transln":
+        case "tran_stp":
+        case "side_ded_transln":
           this.disableAll();
           this.commercialExtensionVarient = "outline-secondary";
           this.residentialVarient = "outline-secondary";
@@ -2207,11 +1943,13 @@ export default {
           this.disabled.ParkingLane = false;
 
           break;
-        case "Curb Lane":
-        case "Passing Lane":
-        case "Parking Lane":
-        case "Freight Travel Lane":
-        case "Large Vehicle Lane":
+        case "curb_ln":
+        case "pass_ln":
+        case "turn_ln":
+        case "park_ln":
+        case "frt_trav_ln":
+        case "bi_trav_ln":
+        case "lrg_veh_ln":
           this.disableAll();
           this.commercialExtensionVarient = "outline-secondary";
           this.residentialVarient = "outline-secondary";
@@ -2249,15 +1987,15 @@ export default {
           }
           break;
         case "Two-way left-turn Lane":
-        case "Centre Running Transit Lane - Centre Boarding":
-        case "Centre Running Transit Lane – Side Boarding":
-        case "Pedestrian Refuge Island":
+        case "cent_transln_cntbrd":
+        case "cent_transln_pssgr":
+        case "ped_isl":
         case "Boulevard (Vegetation)":
         case "Centre Line":
         case "Infrastructure":
-        case "Swale":
-        case "Rain Garden":
-        case "Permeable Paving":
+        case "swale":
+        case "rain_gdn":
+        case "perm_pav":
           this.disableAll();
           this.commercialExtensionVarient = "outline-secondary";
           this.residentialVarient = "outline-secondary";
@@ -2314,7 +2052,6 @@ export default {
       } else if (this.offsetList.length == 1) this.rowReset();
       else {
         this.undoDelete.push(this.offsetList[this.offsetList.length - 1]);
-
         this.undoCounter = this.offsetList.length;
         this.dementionReset();
         const lastOffset = this.offsetList[this.offsetList.length - 1];
