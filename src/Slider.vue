@@ -7,9 +7,6 @@
       :data="standards(name)"
       :range="standards(name)"
     >
-      <!-- <template slot="tooltip" slot-scope="tooltip">
-        <img src="static/vue-slide-bar/rectangle-slider.svg">
-      </template>-->
     </vue-slide-bar>
     <div class="errorMessage" v-if="this.slider.value > this.totalWidth">The element is too big!!!</div>
     <b-button @click="onClick">Add {{name}}</b-button>
@@ -223,7 +220,7 @@ export default {
       }
       this.$emit("onClick", this.slider.value);
     },
-    standards(name) {
+    standards() {
       for (var i = 0; i < this.standardsArray.length; i++) {
         if (this.name === this.standardsArray[i].title) {
           return this.standardsArray[i].roadStandard;
