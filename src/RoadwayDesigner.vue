@@ -23,7 +23,7 @@
         <br />
         <b-button
           @click="
-            smartButtons('Commercial Use Extension');
+            smartButtons('comm_ext');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -35,7 +35,7 @@
         >
         <b-button
           @click="
-            smartButtons('Residential');
+            smartButtons('sdwlk_path_res');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -47,7 +47,7 @@
         >
         <b-button
           @click="
-            smartButtons('Commercial');
+            smartButtons('sdwlk_path_comm');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -59,7 +59,7 @@
         >
         <b-button
           @click="
-            smartButtons('Street Furniture Zone');
+            smartButtons('sdwlk_str_frntr');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -69,7 +69,6 @@
           :disabled="disabled.StreetFurniture"
           >Street Furniture Zone</b-button
         >
-        <!-- <b-button @click="naming('Line'), smartButtons()" class="buttonStyle" :variant="'outline-secondary'"  >Line</b-button> -->
         <br />
         <v-btn fab dark small color="green" @click="show('bufferInfo')">
           <v-icon>i</v-icon> </v-btn
@@ -77,7 +76,7 @@
         <br />
         <b-button
           @click="
-            smartButtons('Utilities');
+            smartButtons('sdwlk_landbuff_util');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -89,7 +88,7 @@
         >
         <b-button
           @click="
-            smartButtons('No Vegetation');
+            smartButtons('sdwlk_landbuff');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -117,7 +116,7 @@
         <br />
         <b-button
           @click="
-            smartButtons('Cycle Lane');
+            smartButtons('cycl_lane');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -128,7 +127,7 @@
         >
         <b-button
           @click="
-            smartButtons('Cycle Track');
+            smartButtons('cycl_trac');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -139,7 +138,7 @@
         >
         <b-button
           @click="
-            smartButtons('Cycle Street');
+            smartButtons('cycl_str');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -150,7 +149,7 @@
         >
         <b-button
           @click="
-            smartButtons('Protected Cycle Track');
+            smartButtons('prot_cycl_trac');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -161,7 +160,7 @@
         >
         <b-button
           @click="
-            smartButtons('Bidirectional Cycle Track');
+            smartButtons('bi_cycl_trac');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -172,7 +171,7 @@
         >
         <b-button
           @click="
-            smartButtons('Raised Cycle Track');
+            smartButtons('raise_cycl_trac');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -183,7 +182,7 @@
         >
         <b-button
           @click="
-            smartButtons('Curbside Buffered Cycle Lane');
+            smartButtons('curbuff_cycl_lane');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -194,7 +193,7 @@
         >
         <b-button
           @click="
-            smartButtons('Contraflow Cycle Street');
+            smartButtons('contra_cycle_str');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -210,7 +209,7 @@
         <br />
         <b-button
           @click="
-            smartButtons('Shared Transit Lane');
+            smartButtons('shr_transln');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -221,7 +220,7 @@
         >
         <b-button
           @click="
-            smartButtons('Transit Stop');
+            smartButtons('tran_stp');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -232,7 +231,7 @@
         >
         <b-button
           @click="
-            smartButtons('Side Running Dedicated Transit Lane');
+            smartButtons('side_ded_transln');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -243,7 +242,7 @@
         >
         <b-button
           @click="
-            smartButtons('Centre Running Transit Lane - Centre Boarding');
+            smartButtons('cent_transln_cntbrd');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -254,7 +253,7 @@
         >
         <b-button
           @click="
-            smartButtons('Centre Running Transit Lane – Side Boarding');
+            smartButtons('cent_transln_pssgr');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -270,7 +269,7 @@
         <br />
         <b-button
           @click="
-            smartButtons('Curb Lane');
+            smartButtons('curb_ln');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -281,7 +280,7 @@
         >
         <b-button
           @click="
-            smartButtons('Passing Lane');
+            smartButtons('pass_ln');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -292,7 +291,7 @@
         >
         <b-button
           @click="
-            smartButtons('Large Vehicle Lane');
+            smartButtons('lrg_veh_ln');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -303,7 +302,7 @@
         >
         <b-button
           @click="
-            smartButtons('Bidirectional Travel Lane');
+            smartButtons('bi_trav_ln');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -314,7 +313,7 @@
         >
         <b-button
           @click="
-            smartButtons('Turning Lane');
+            smartButtons('turn_ln');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -325,7 +324,7 @@
         >
         <b-button
           @click="
-            smartButtons('Freight Travel Lane');
+            smartButtons('frt_trav_ln');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -336,7 +335,7 @@
         >
         <b-button
           @click="
-            smartButtons('Parking Lane');
+            smartButtons('park_ln');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -364,7 +363,7 @@
         >
         <b-button
           @click="
-            smartButtons('Pedestrian Refuge Island');
+            smartButtons('ped_isl');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -413,7 +412,7 @@
         <br />
         <b-button
           @click="
-            smartButtons('Swale');
+            smartButtons('swale');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -424,7 +423,7 @@
         >
         <b-button
           @click="
-            smartButtons('Rain Garden');
+            smartButtons('rain_gdn');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -435,7 +434,7 @@
         >
         <b-button
           @click="
-            smartButtons('Permeable Paving');
+            smartButtons('perm_pav');
             slideHide = !slideHide;
             clearUndo();
           "
@@ -1278,6 +1277,15 @@ export default {
       };
     },
     submit() {
+      var date = new Date();
+      var titleName = "name";
+      var rowName = "row";
+      var saveName = "SheetJs"+date.toString();
+      var rowWidth = this.startWidth - this.totalWidth;
+      this.titleArray.push(titleName);
+      this.titleArray.push(rowName);
+      this.widthArray.push(saveName);
+      this.widthArray.push(rowWidth);
       for (var i = 0; i < this.offsetList.length; i++) {
         this.titleArray.push(this.offsetList[i].title);
         var width = this.offsetList[i].width / this.width;
@@ -1289,7 +1297,7 @@ export default {
       var new_workbook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(new_workbook, worksheet, "SheetJS");
       if (confirm("This will download the spreadsheet")) {
-        XLSX.writeFile(new_workbook, "sheetjs.xlsx");
+        XLSX.writeFile(new_workbook, saveName+".xlsx");
       }
 
       this.titleArray.splice(0, this.titleArray.length);
@@ -1559,48 +1567,6 @@ export default {
     },
     svgPopulate(nameString) {
       switch (nameString) {
-        case "Commercial Use Extension":
-        case "Residential":
-        case "Commercial":
-        case "Street Furniture Zone":
-        case "Pedestrian Refuge Island":
-          this.color = "url(#sidewalkTexture)";
-          break;
-        case "Utilities":
-        case "No Vegetation":
-        case "Vegetation":
-        case "Boulevard (Vegetation)":
-        case "Swale":
-        case "Rain Garden":
-          this.color = "url(#grassTexture)";
-          break;
-        case "Cycle Lane":
-        case "Cycle Track":
-        case "Cycle Street":
-        case "Protected Cycle Track":
-        case "Bidirectional Cycle Track":
-        case "Raised Cycle Track":
-        case "Curbside Buffered Cycle Lane":
-        case "Contraflow Cycle Street":
-          this.color = "url(#bikeTexture)";
-          break;
-        case "Shared Transit Lane":
-        case "Transit Stop":
-        case "Side Running Dedicated Transit Lane":
-        case "Centre Running Transit Lane - Centre Boarding":
-        case "Centre Running Transit Lane – Side Boarding":
-        case "Curb Lane":
-        case "Passing Lane":
-        case "Large Vehicle Lane":
-        case "Bidirectional Travel Lane":
-        case "Turning Lane":
-        case "Freight Travel Lane":
-        case "Parking Lane":
-        case "Two-way left-turn Lane":
-        case "Infrastructure":
-        case "Permeable Paving":
-          this.color = "url(#roadTexture)";
-          break;
         case "Line":
         case "Centre Line":
           this.color = "white";

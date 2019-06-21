@@ -1,16 +1,18 @@
 <template>
   <div id="slide">
-    <p>How big do you want the {{ name }} in meters?</p>
+    <p>How big do you want the {{name}} in meters?</p>
     <vue-slide-bar
       id="slider"
       v-model="slider.value"
       :data="standards(name)"
       :range="standards(name)"
-    ></vue-slide-bar>
-    <div class="errorMessage" v-if="this.slider.value > this.totalWidth">
-      The element is too big!!!
-    </div>
-    <b-button @click="onClick">Add {{ name }}</b-button>
+    >
+      <!-- <template slot="tooltip" slot-scope="tooltip">
+        <img src="static/vue-slide-bar/rectangle-slider.svg">
+      </template>-->
+    </vue-slide-bar>
+    <div class="errorMessage" v-if="this.slider.value > this.totalWidth">The element is too big!!!</div>
+    <b-button @click="onClick">Add {{name}}</b-button>
     <b-button @click="backbtn">Back</b-button>
   </div>
 </template>
@@ -22,11 +24,13 @@ export default {
   },
   props: {
     name: String,
-    totalWidth: Number
+    totalWidth: Number,
+    title: String
   },
   data() {
     return {
       back: false,
+      standarts: null,
       slider: {
         value: 1
       },
@@ -215,14 +219,29 @@ export default {
       ]
     };
   },
+  watch: {
+    title: function() {
+      for (var i = 0; i < this.standardsArray.length; i++) {
+        if (this.standardsArray[i].title == this.title) {
+          this.standarts = this.standardsArray[i].roadStandard;
+        }
+      }
+      this.$emit("title", this.standarts);
+    }
+  },
   methods: {
     backbtn() {
       this.$emit("backbtn", this.back);
     },
     onClick() {
+      for (var i = 0; i < this.standardsArray.length; i++) {
+        if (this.standardsArray[i].title == this.title) {
+          this.standarts = this.standardsArray[i].roadStandard;
+        }
+      }
       this.$emit("onClick", this.slider.value);
     },
-    standards() {
+    standards(name) {
       for (var i = 0; i < this.standardsArray.length; i++) {
         if (this.name === this.standardsArray[i].title) {
           return this.standardsArray[i].roadStandard;
