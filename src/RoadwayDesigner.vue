@@ -9,6 +9,7 @@
         v-if="slideHide"
         :totalWidth="this.totalWidth"
         :name="this.name"
+        :title="this.title"
         v-on:onClick="updateTotal($event, color, name)"
         v-on:backbtn="back($event)"
         :style="{ height: window.height * 0.3 + 'px' }"
@@ -18,9 +19,9 @@
           <p>Select Road Element:</p>
         </b>
         <v-btn fab dark small color="grey" @click="show('sidewalkInfo')">
-          <v-icon>i</v-icon> </v-btn
-        >Sidewalk Elements:
-        <br />
+          <v-icon>i</v-icon>
+        </v-btn>Sidewalk Elements:
+        <br>
         <b-button
           @click="
             smartButtons('comm_ext');
@@ -31,8 +32,7 @@
           class="buttonStyle"
           :variant="commercialExtensionVarient"
           :disabled="disabled.CommercialExtension"
-          >Commercial Use Extension</b-button
-        >
+        >Commercial Use Extension</b-button>
         <b-button
           @click="
             smartButtons('sdwlk_path_res');
@@ -43,8 +43,7 @@
           class="buttonStyle"
           :variant="residentialVarient"
           :disabled="disabled.Residential"
-          >Residential</b-button
-        >
+        >Residential</b-button>
         <b-button
           @click="
             smartButtons('sdwlk_path_comm');
@@ -55,8 +54,7 @@
           class="buttonStyle"
           :variant="commercialVarient"
           :disabled="disabled.Commercial"
-          >Commercial</b-button
-        >
+        >Commercial</b-button>
         <b-button
           @click="
             smartButtons('sdwlk_str_frntr');
@@ -67,13 +65,12 @@
           class="buttonStyle"
           :variant="furnitureVarient"
           :disabled="disabled.StreetFurniture"
-          >Street Furniture Zone</b-button
-        >
-        <br />
+        >Street Furniture Zone</b-button>
+        <br>
         <v-btn fab dark small color="green" @click="show('bufferInfo')">
-          <v-icon>i</v-icon> </v-btn
-        >Buffer Zone:
-        <br />
+          <v-icon>i</v-icon>
+        </v-btn>Buffer Zone:
+        <br>
         <b-button
           @click="
             smartButtons('sdwlk_landbuff_util');
@@ -84,8 +81,7 @@
           class="buttonStyle"
           :variant="bufferVarient"
           :disabled="disabled.Utilities"
-          >Utilities</b-button
-        >
+        >Utilities</b-button>
         <b-button
           @click="
             smartButtons('sdwlk_landbuff');
@@ -95,8 +91,7 @@
           class="buttonStyle"
           :variant="bufferVarient"
           :disabled="disabled.NoVegetation"
-          >No Vegetation</b-button
-        >
+        >No Vegetation</b-button>
         <b-button
           @click="
             smartButtons('Vegetation');
@@ -107,13 +102,12 @@
           class="buttonStyle"
           :variant="bufferVarient"
           :disabled="disabled.Vegetation"
-          >Vegetation</b-button
-        >
-        <br />
+        >Vegetation</b-button>
+        <br>
         <v-btn fab dark small color="blue" @click="show('cycleInfo')">
-          <v-icon>i</v-icon> </v-btn
-        >Cycling Elements:
-        <br />
+          <v-icon>i</v-icon>
+        </v-btn>Cycling Elements:
+        <br>
         <b-button
           @click="
             smartButtons('cycl_lane');
@@ -123,8 +117,7 @@
           class="buttonStyle"
           :variant="cycleVarient"
           :disabled="disabled.CycleLane"
-          >Cycle Lane</b-button
-        >
+        >Cycle Lane</b-button>
         <b-button
           @click="
             smartButtons('cycl_trac');
@@ -134,8 +127,7 @@
           class="buttonStyle"
           :variant="cycleVarient"
           :disabled="disabled.CycleTrack"
-          >Cycle Track</b-button
-        >
+        >Cycle Track</b-button>
         <b-button
           @click="
             smartButtons('cycl_str');
@@ -145,8 +137,7 @@
           class="buttonStyle"
           :variant="cycleVarient"
           :disabled="disabled.CycleStreet"
-          >Cycle Street</b-button
-        >
+        >Cycle Street</b-button>
         <b-button
           @click="
             smartButtons('prot_cycl_trac');
@@ -156,8 +147,7 @@
           class="buttonStyle"
           :variant="cycleVarient"
           :disabled="disabled.ProtectedCycleTrack"
-          >Protected Cycle Track</b-button
-        >
+        >Protected Cycle Track</b-button>
         <b-button
           @click="
             smartButtons('bi_cycl_trac');
@@ -167,8 +157,7 @@
           class="buttonStyle"
           :variant="cycleVarient"
           :disabled="disabled.BidirectionalCycleTrack"
-          >Bidirectional Cycle Track</b-button
-        >
+        >Bidirectional Cycle Track</b-button>
         <b-button
           @click="
             smartButtons('raise_cycl_trac');
@@ -178,8 +167,7 @@
           class="buttonStyle"
           :variant="cycleVarient"
           :disabled="disabled.RaisedCycleTrack"
-          >Raised Cycle Track</b-button
-        >
+        >Raised Cycle Track</b-button>
         <b-button
           @click="
             smartButtons('curbuff_cycl_lane');
@@ -189,8 +177,7 @@
           class="buttonStyle"
           :variant="cycleVarient"
           :disabled="disabled.CurbsideBufferedCycleLane"
-          >Curbside Buffered Cycle Lane</b-button
-        >
+        >Curbside Buffered Cycle Lane</b-button>
         <b-button
           @click="
             smartButtons('contra_cycle_str');
@@ -200,13 +187,12 @@
           class="buttonStyle"
           :variant="cycleVarient"
           :disabled="disabled.ContraflowCycleStreet"
-          >Contraflow Cycle Street</b-button
-        >
-        <br />
+        >Contraflow Cycle Street</b-button>
+        <br>
         <v-btn fab dark small color="orange" @click="show('transitInfo')">
-          <v-icon>i</v-icon> </v-btn
-        >Transit Elements:
-        <br />
+          <v-icon>i</v-icon>
+        </v-btn>Transit Elements:
+        <br>
         <b-button
           @click="
             smartButtons('shr_transln');
@@ -216,8 +202,7 @@
           class="buttonStyle"
           :variant="transitVarient"
           :disabled="disabled.SharedTransitLane"
-          >Shared Transit Lane</b-button
-        >
+        >Shared Transit Lane</b-button>
         <b-button
           @click="
             smartButtons('tran_stp');
@@ -227,8 +212,7 @@
           class="buttonStyle"
           :variant="transitVarient"
           :disabled="disabled.TransitStop"
-          >Transit Stop</b-button
-        >
+        >Transit Stop</b-button>
         <b-button
           @click="
             smartButtons('side_ded_transln');
@@ -238,8 +222,7 @@
           class="buttonStyle"
           :variant="transitVarient"
           :disabled="disabled.SideRunningDedicatedTransitLane"
-          >Side Running Dedicated Transit Lane</b-button
-        >
+        >Side Running Dedicated Transit Lane</b-button>
         <b-button
           @click="
             smartButtons('cent_transln_cntbrd');
@@ -249,8 +232,7 @@
           class="buttonStyle"
           :variant="centertransitVarient"
           :disabled="disabled.CenterRunningTransitLaneCenterBoarding"
-          >Centre Running Transit Lane - Centre Board</b-button
-        >
+        >Centre Running Transit Lane - Centre Board</b-button>
         <b-button
           @click="
             smartButtons('cent_transln_pssgr');
@@ -260,13 +242,12 @@
           class="buttonStyle"
           :variant="centertransitVarient"
           :disabled="disabled.CenterRunningTransitLaneSideBoarding"
-          >Centre Running Transit Lane – Side Board</b-button
-        >
-        <br />
+        >Centre Running Transit Lane – Side Board</b-button>
+        <br>
         <v-btn fab dark small color="black" @click="show('roadInfo')">
-          <v-icon>i</v-icon> </v-btn
-        >Vehicle Lanes:
-        <br />
+          <v-icon>i</v-icon>
+        </v-btn>Vehicle Lanes:
+        <br>
         <b-button
           @click="
             smartButtons('curb_ln');
@@ -276,8 +257,7 @@
           class="buttonStyle"
           :variant="curbLaneVarient"
           :disabled="disabled.CurbLane"
-          >Curb Lane</b-button
-        >
+        >Curb Lane</b-button>
         <b-button
           @click="
             smartButtons('pass_ln');
@@ -287,8 +267,7 @@
           class="buttonStyle"
           :variant="passingLaneVarient"
           :disabled="disabled.PassingLane"
-          >Passing Lane</b-button
-        >
+        >Passing Lane</b-button>
         <b-button
           @click="
             smartButtons('lrg_veh_ln');
@@ -298,8 +277,7 @@
           class="buttonStyle"
           :variant="largeVehicleLaneVarient"
           :disabled="disabled.LargeVehicleLane"
-          >Large Vehicle Lane</b-button
-        >
+        >Large Vehicle Lane</b-button>
         <b-button
           @click="
             smartButtons('bi_trav_ln');
@@ -309,8 +287,7 @@
           class="buttonStyle"
           :variant="bidirectionalTravelLaneVarient"
           :disabled="disabled.BidirectionalTravelLane"
-          >Bidirectional Travel Lane</b-button
-        >
+        >Bidirectional Travel Lane</b-button>
         <b-button
           @click="
             smartButtons('turn_ln');
@@ -320,8 +297,7 @@
           class="buttonStyle"
           :variant="turningLaneVarient"
           :disabled="disabled.TurningLane"
-          >Turning Lane</b-button
-        >
+        >Turning Lane</b-button>
         <b-button
           @click="
             smartButtons('frt_trav_ln');
@@ -331,8 +307,7 @@
           class="buttonStyle"
           :variant="freightTravelLaneVarient"
           :disabled="disabled.FreightTravelLane"
-          >Freight Travel Lane</b-button
-        >
+        >Freight Travel Lane</b-button>
         <b-button
           @click="
             smartButtons('park_ln');
@@ -342,14 +317,13 @@
           class="buttonStyle"
           :variant="parkingLaneVarient"
           :disabled="disabled.ParkingLane"
-          >Parking Lane</b-button
-        >
+        >Parking Lane</b-button>
 
-        <br />
+        <br>
         <v-btn fab dark small color="teal" @click="show('medianInfo')">
-          <v-icon>i</v-icon> </v-btn
-        >Median:
-        <br />
+          <v-icon>i</v-icon>
+        </v-btn>Median:
+        <br>
         <b-button
           @click="
             smartButtons('Two-way left-turn Lane');
@@ -359,8 +333,7 @@
           class="buttonStyle"
           :variant="medianVarient"
           :disabled="disabled.TwoWayLeftTurn"
-          >Two-way left-turn Lane</b-button
-        >
+        >Two-way left-turn Lane</b-button>
         <b-button
           @click="
             smartButtons('ped_isl');
@@ -370,8 +343,7 @@
           class="buttonStyle"
           :variant="medianVarient"
           :disabled="disabled.PedestrianRefugeIsland"
-          >Pedestrian Refuge Island</b-button
-        >
+        >Pedestrian Refuge Island</b-button>
         <b-button
           @click="
             smartButtons('Boulevard (Vegetation)');
@@ -381,8 +353,7 @@
           class="buttonStyle"
           :variant="medianVarient"
           :disabled="disabled.Boulevard"
-          >Boulevard (Vegetation)</b-button
-        >
+        >Boulevard (Vegetation)</b-button>
         <b-button
           @click="
             smartButtons('Centre Line');
@@ -392,8 +363,7 @@
           class="buttonStyle"
           :variant="medianVarient"
           :disabled="disabled.CenterLine"
-          >Center Line</b-button
-        >
+        >Center Line</b-button>
         <b-button
           @click="
             smartButtons('Infrastructure');
@@ -403,13 +373,12 @@
           class="buttonStyle"
           :variant="medianVarient"
           :disabled="disabled.Infrastructure"
-          >Infrastructure</b-button
-        >
-        <br />
+        >Infrastructure</b-button>
+        <br>
         <v-btn fab dark small color="green" @click="show('greenInfo')">
-          <v-icon>i</v-icon> </v-btn
-        >Green Infrastructure
-        <br />
+          <v-icon>i</v-icon>
+        </v-btn>Green Infrastructure
+        <br>
         <b-button
           @click="
             smartButtons('swale');
@@ -419,8 +388,7 @@
           class="buttonStyle"
           :variant="greenVarient"
           :disabled="disabled.Swale"
-          >Swale</b-button
-        >
+        >Swale</b-button>
         <b-button
           @click="
             smartButtons('rain_gdn');
@@ -430,8 +398,7 @@
           class="buttonStyle"
           :variant="greenVarient"
           :disabled="disabled.RainGarden"
-          >Rain Garden</b-button
-        >
+        >Rain Garden</b-button>
         <b-button
           @click="
             smartButtons('perm_pav');
@@ -441,35 +408,26 @@
           class="buttonStyle"
           :variant="greenVarient"
           :disabled="disabled.PermeablePaving"
-          >Permeable Paving</b-button
-        >
-        <br />
-        <br />
+        >Permeable Paving</b-button>
+        <br>
+        <br>
       </div>
       <div id="controls" v-if="!slideHide">
-        <b-button variant="danger" @click="rowReset" id="btnReset"
-          >Reset</b-button
-        >
-        <b-button variant="danger" @click="svgDelete" id="btnDelete"
-          >Delete</b-button
-        >
+        <b-button variant="danger" @click="rowReset" id="btnReset">Reset</b-button>
+        <b-button variant="danger" @click="svgDelete" id="btnDelete">Delete</b-button>
         <b-button variant="danger" @click="undo" id="btnUndo">Undo</b-button>
-        <b-button variant="danger" @click="submit" id="btnSubmit"
-          >Submit</b-button
-        >
-        <b-button variant @click="Populate" hidden id="RDPrepopulation"
-          >Test</b-button
-        >
+        <b-button variant="danger" @click="submit" id="btnSubmit">Submit</b-button>
+        <b-button variant @click="Populate" hidden id="RDPrepopulation">Test</b-button>
         <!-- <b-button variant="success" hidden @click="startInterval(), animationOn=!animationOn" id="solveRoutesBtn" ref="streetViewer">Anime</b-button> -->
       </div>
     </div>
     <div id="crossSection">
-      <br />
+      <br>
       <span style="text-align: center;">
         Remaining Width
-        <span style="background-color: #694393; color: white; padding:5px;"
-          >{{ totalWidth }}m</span
-        >
+        <span
+          style="background-color: #694393; color: white; padding:5px;"
+        >{{ totalWidth }}m</span>
       </span>
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -477,6 +435,10 @@
         height="100%"
         viewBox="0 0 1500 400"
         preserveAspectRatio="none"
+        @mousedown="startDrago"
+        @mousemove="drago"
+        @mouseup="endDrago"
+        @mouseleave="endDrago"
       >
         <rect fill="#6b6c6d" :x="0" :y="385" :width="1500" :height="100"></rect>
         <rect fill="black" :x="0" :y="385" :width="1500" :height="2"></rect>
@@ -645,27 +607,23 @@
             @click="changeSize('Deduct', selectedElementId)"
             :x="offset.x + 10"
             :y="140 - 7"
-          >
-            -
-          </text>
+          >-</text>
           <text
             v-if="index == selectedElementId && selectedElement"
             @click="changeSize('Add', selectedElementId)"
             :x="offset.x + offset.width - 20"
             :y="140 - 7"
-          >
-            +
-          </text>
+          >+</text>
           <text
             v-if="selectedElementId != index && !selectedElement"
             :x="offset.x + offset.width / 2 - 15"
             :y="140 - 7"
           >
             {{
-              (
-                (offset.width.toFixed(2) * 100) /
-                (width.toFixed(2) * 100)
-              ).toFixed(1)
+            (
+            (offset.width.toFixed(2) * 100) /
+            (width.toFixed(2) * 100)
+            ).toFixed(1)
             }}m
           </text>
           <line
@@ -731,9 +689,7 @@
                 15
             "
             :y="60 - 7"
-          >
-            {{ (startWidth - totalWidth).toFixed(1) }}m
-          </text>
+          >{{ (startWidth - totalWidth).toFixed(1) }}m</text>
           <line
             v-if="
               selectedElementId != index &&
@@ -769,92 +725,45 @@
             :y2="140"
             style="stroke:rgb(247, 28, 0);stroke-width:2; opacity: 0.8"
           ></line>
-          <line
-            class="draggable"
-            @mousedown="startDrago"
-            @mousemove="drago"
-            @mouseup="endDrago"
-            @mouseleave="endDrago"
-            v-if="index == selectedElementId && selectedElement"
-            :x1="offset.x + offset.width"
-            y1="90%"
-            :x2="offset.x + offset.width"
-            :y2="140"
-            style="stroke:rgb(247, 28, 0);stroke-width:14; opacity: 0.8"
-          ></line>
+       <line
+        class="draggable"
+        v-if="index==selectedElementId && selectedElement"   
+          :x1="offset.x+offset.width"
+          y1="90%"
+          :x2="offset.x+offset.width"
+          :y2="140"
+          style="stroke:rgb(247, 28, 0);stroke-width:2; opacity: 0.8"
+        ></line>
+        <rect
+        class="draggable"
+         v-if="index==selectedElementId && selectedElement"         
+         :x="offset.x+offset.width-10"
+         y="55%" width="20"
+         height="20"
+         rx="5"/>
           <text
             v-if="index == selectedElementId && selectedElement"
             :x="offset.x + offset.width / 2 - 15"
             :y="140 - 7"
-          >
-            {{ (offset.width.toFixed(2) / width.toFixed(2)).toFixed(1) }}m
-          </text>
+          >{{ (offset.width.toFixed(2) / width.toFixed(2)).toFixed(1) }}m</text>
         </svg>
       </svg>
     </div>
     <div id="planView">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1500 1500"
-        preserveAspectRatio="none"
-      >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 1500" preserveAspectRatio="none">
         <svg v-for="(offset, key) in offsetList" :key="key">
           <defs>
-            <pattern
-              id="roadTexture"
-              patternUnits="userSpaceOnUse"
-              width="100"
-              height="100"
-            >
-              <image
-                xlink:href="./svg/roadTexture.jpg"
-                x="0"
-                y="0"
-                width="100"
-                height="100"
-              ></image>
+            <pattern id="roadTexture" patternUnits="userSpaceOnUse" width="100" height="100">
+              <image xlink:href="./svg/roadTexture.jpg" x="0" y="0" width="100" height="100"></image>
             </pattern>
-            <pattern
-              id="bikeTexture"
-              patternUnits="userSpaceOnUse"
-              width="100"
-              height="100"
-            >
-              <image
-                xlink:href="./svg/bikeTexture.jpg"
-                x="0"
-                y="0"
-                width="100"
-                height="100"
-              ></image>
+            <pattern id="bikeTexture" patternUnits="userSpaceOnUse" width="100" height="100">
+              <image xlink:href="./svg/bikeTexture.jpg" x="0" y="0" width="100" height="100"></image>
             </pattern>
-            <pattern
-              id="sidewalkTexture"
-              patternUnits="userSpaceOnUse"
-              width="100"
-              height="100"
-            >
-              <image
-                xlink:href="./svg/sidewalkTexture.jpg"
-                x="0"
-                y="0"
-                width="100"
-                height="100"
-              ></image>
+            <pattern id="sidewalkTexture" patternUnits="userSpaceOnUse" width="100" height="100">
+              <image xlink:href="./svg/sidewalkTexture.jpg" x="0" y="0" width="100" height="100"></image>
             </pattern>
-            <pattern
-              id="grassTexture"
-              patternUnits="userSpaceOnUse"
-              width="100"
-              height="100"
-            >
-              <image
-                xlink:href="./svg/grassTexture.jpg"
-                x="0"
-                y="0"
-                width="100"
-                height="100"
-              ></image>
+            <pattern id="grassTexture" patternUnits="userSpaceOnUse" width="100" height="100">
+              <image xlink:href="./svg/grassTexture.jpg" x="0" y="0" width="100" height="100"></image>
             </pattern>
           </defs>
           <!-- Line section// animation section -->
@@ -1204,7 +1113,8 @@ export default {
       infoType: null,
       data: [],
       titleArray: [],
-      widthArray: []
+      widthArray: [],
+      title: ""
     };
   },
   watch: {
@@ -1218,73 +1128,87 @@ export default {
       alert(this.selectedElementRange);
     },
     startDrago(evt) {
-      this.tempObjectWidth = this.offsetList[this.selectedElementId].width;
-      if (evt.target.classList.contains("draggable")) {
+       if (evt.target.classList.contains('draggable')) {
         this.selectedElementDrag = evt.target;
         this.offsetDrag = this.getMousePosition(evt);
-        this.offsetDrag.x -= parseFloat(
-          this.selectedElementDrag.getAttributeNS(null, "x1")
-        );
-      }
-    },
-    drago(evt) {
-      if (this.selectedElementDrag) {
+        this.offsetDrag.x -= parseFloat(this.selectedElementDrag.getAttributeNS(null, "x"));
+       }
+     },
+     drago(evt) {
+       if (this.selectedElementDrag) {
         evt.preventDefault();
         var coord = this.getMousePosition(evt);
-        this.selectedElementDrag.setAttributeNS(
-          null,
-          "x1",
-          coord.x - this.offsetDrag.x
-        );
-        this.selectedElementDrag.setAttributeNS(
-          null,
-          "x2",
-          coord.x - this.offsetDrag.x
-        );
         var newX = coord.x - this.offsetDrag.x;
         this.dragAdjust(newX);
-      }
-    },
-    endDrago() {
-      this.selectedElementDrag = null;
-    },
-    dragAdjust(newX) {
-      var modOfObjectWidth =
-        (this.offsetList[this.selectedElementId].width +
-          (newX -
-            (this.offsetList[this.selectedElementId].x +
-              this.offsetList[this.selectedElementId].width)) -
-          this.tempObjectWidth) %
-        this.width;
-      if (modOfObjectWidth < 0) {
-        var numOfTimes = parseInt(modOfObjectWidth / (this.width * 0.1)); // idk how to name this shit
-        for (var i = 0; i > numOfTimes; i--) {
-          this.changeSize("Deduct", this.selectedElementId);
         }
-      } else if (modOfObjectWidth > 0) {
-        numOfTimes = parseInt(modOfObjectWidth / (this.width * 0.1)); // idk how to call this shit
-        for (i = 0; i < numOfTimes; i++) {
-          this.changeSize("Add", this.selectedElementId);
-        }
+      },
+     endDrago(evt) {
+       this.selectedElementDrag = null;
+     },
+      dragAdjust(newX) {
+      var numOfTimes = parseInt((newX-(this.offsetList[this.selectedElementId].x + this.offsetList[this.selectedElementId].width))/(this.width/10));
+      if(numOfTimes ==1){
+        this.changeSize("Add", this.selectedElementId);
+        numOfTimes=0;
       }
-    },
-    getMousePosition(evt) {
-      var svg = evt.target;
-      var CTM = svg.getScreenCTM();
-      return {
-        x: (evt.clientX - CTM.e) / CTM.a,
-        y: (evt.clientY - CTM.f) / CTM.d
-      };
-    },
-    submit() {
-      if(this.totalWidth!=0){
-        alert("Finish the design first");
+      else if (numOfTimes ==-2){
+        this.changeSize("Deduct", this.selectedElementId);
+        numOfTimes=0;
       }
       else{
+        numOfTimes=0;
+      }
+     },
+     getMousePosition(evt) {
+       var svg = evt.target;
+       var CTM = svg.getScreenCTM();
+       return {
+         x: (evt.clientX - CTM.e) / CTM.a,
+         y: (evt.clientY - CTM.f) / CTM.d
+       };
+     },
+     changeSize(type, id) {
+
+      if (type == "Add"&& this.totalWidth != 0 && ((this.offsetList[id].width/this.width)<this.selectedElementRange[this.selectedElementRange.length-1])) {
+       const lastOffset = this.offsetList[id];
+
+       lastOffset.width = lastOffset.width + this.width/10;
+
+       this.totalWidth = ((this.totalWidth*10) - 1) / 10;
+
+       if((this.offsetList.length - 1) != id)
+         {
+           var i;
+           for (i = id+1; i < this.offsetList.length; i++)
+           {
+             const modifiedOffset = this.offsetList[i];
+             modifiedOffset.x = modifiedOffset.x + this.width/10;
+           }
+         }
+
+     } else if (type == "Deduct"  && ((this.offsetList[id].width/this.width)>this.selectedElementRange[0])) {
+       const lastOffset = this.offsetList[id];
+       lastOffset.width = lastOffset.width - this.width/10;
+       this.totalWidth = ((this.totalWidth*10) + 1) / 10;
+       if((this.offsetList.length - 1) != id)
+         {
+           var i;
+           for (i = id+1; i < this.offsetList.length; i++)
+           {
+             const modifiedOffset = this.offsetList[i];
+             modifiedOffset.x = modifiedOffset.x - this.width/10;
+           }
+         }
+     }
+    },
+    submit() {
+      if (this.totalWidth != 0) {
+        alert("Finish the design first");
+      } else {
         var date = new Date();
         var titleName = "name";
         var rowName = "row";
-        var saveName = "SheetJs"+date.toString();
+        var saveName = "SheetJs" + date.toString();
         var rowWidth = this.startWidth - this.totalWidth;
         this.titleArray.push(titleName);
         this.titleArray.push(rowName);
@@ -1301,13 +1225,12 @@ export default {
         var new_workbook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(new_workbook, worksheet, "SheetJS");
         if (confirm("This will download the spreadsheet")) {
-          XLSX.writeFile(new_workbook, saveName+".xlsx");
+          XLSX.writeFile(new_workbook, saveName + ".xlsx");
         }
         this.titleArray.splice(0, this.titleArray.length);
         this.widthArray.splice(0, this.widthArray.length);
         this.data.splice(0, this.data.length);
       }
-      
     },
     changeWidth() {
       if (this.sliderValue == 0) {
@@ -1507,32 +1430,6 @@ export default {
         this.streetElementData[this.streetElementData.length - 1]
       );
       this.slideHide = passed;
-    },
-    changeSize(type, id) {
-      if (type == "Add" && this.totalWidth != 0) {
-        const lastOffset = this.offsetList[id];
-
-        lastOffset.width = lastOffset.width + this.width / 10;
-
-        this.totalWidth = (this.totalWidth * 10 - 1) / 10;
-
-        if (this.offsetList.length - 1 != id) {
-          for (var i = id + 1; i < this.offsetList.length; i++) {
-            const modifiedOffset = this.offsetList[i];
-            modifiedOffset.x = modifiedOffset.x + this.width / 10;
-          }
-        }
-      } else if (type == "Deduct") {
-        const lastOffset = this.offsetList[id];
-        lastOffset.width = lastOffset.width - this.width / 10;
-        this.totalWidth = (this.totalWidth * 10 + 1) / 10;
-        if (this.offsetList.length - 1 != id) {
-          for (var j = id + 1; j < this.offsetList.length; j++) {
-            const modifiedOffset = this.offsetList[j];
-            modifiedOffset.x = modifiedOffset.x - this.width / 10;
-          }
-        }
-      }
     },
     sizeLines(id) {
       if (id == this.selectedElementId) {
