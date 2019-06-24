@@ -10,9 +10,10 @@
         :totalWidth="this.totalWidth"
         :name="this.name"
         :title="this.title"
+        v-on:title="getRange($event)"
         v-on:onClick="updateTotal($event, name)"
         v-on:backbtn="back($event)"
-        v-on:title="getRange($event)"
+
         :style="{ height: window.height * 0.3 + 'px' }"
       ></slider>
       <div id="elementBtn" v-if="!slideHide">
@@ -557,7 +558,7 @@
             preserveAspectRatio="xMidYMax meet"
           ></TurnLane>
           <rect
-            @click="sizeLines(index), (title = offset.title)"
+            @click="sizeLines(index)" 
             class="svg"
             :fill="offset.fill"
             :x="offset.x"
@@ -1116,7 +1117,7 @@ export default {
       titleArray: [],
       widthArray: [],
       title: null,
-      selectedElementRange: null
+      selectedElementRange: []
     };
   },
   watch: {
@@ -1127,7 +1128,6 @@ export default {
   methods: {
     getRange(range) {
       this.selectedElementRange = range;
-      alert(this.selectedElementRange);
     },
     startDrago(evt) {
        if (evt.target.classList.contains('draggable')) {
@@ -1170,8 +1170,8 @@ export default {
        };
      },
      changeSize(type, id) {
-
-      if (type == "Add"&& this.totalWidth != 0 && ((this.offsetList[id].width/this.width)<this.selectedElementRange[this.selectedElementRange.length-1])) {
+       console.log(this.offsetList[id].standards);
+      if (type == "Add"&& this.totalWidth != 0 && ((this.offsetList[id].width/this.width)<this.offsetList[id].standards[this.offsetList[id].standards.length-1])) {
        const lastOffset = this.offsetList[id];
 
        lastOffset.width = lastOffset.width + this.width/10;
@@ -1188,7 +1188,7 @@ export default {
            }
          }
 
-     } else if (type == "Deduct"  && ((this.offsetList[id].width/this.width)>this.selectedElementRange[0])) {
+     } else if (type == "Deduct"  && ((this.offsetList[id].width/this.width)>this.offsetList[id].standards[0])) {
        const lastOffset = this.offsetList[id];
        lastOffset.width = lastOffset.width - this.width/10;
        this.totalWidth = ((this.totalWidth*10) + 1) / 10;
@@ -1947,19 +1947,23 @@ export default {
         this.totalWidth = (this.totalWidth * 10 - num * 10) / 10;
 
         if (this.offsetList.length == 0) {
+          console.log(this.selectedElementRange);
           this.offsetList.push({
             title: title,
             x: 0,
             fill: this.color,
-            width: width // this.window.width * this.ratioSvg  width of the building
+            width: width,// this.window.width * this.ratioSvg  width of the building
+            standards: this.selectedElementRange 
           });
         } else {
+          console.log(this.selectedElementRange);
           const lastOffset = this.offsetList[this.offsetList.length - 1];
           this.offsetList.push({
             x: lastOffset.x + lastOffset.width,
             title: title,
             fill: this.color,
-            width: width
+            width: width,
+            standards: this.selectedElementRange
           });
         }
       }

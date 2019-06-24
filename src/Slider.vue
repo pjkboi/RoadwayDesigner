@@ -9,7 +9,7 @@
     >
     </vue-slide-bar>
     <div class="errorMessage" v-if="this.slider.value > this.totalWidth">The element is too big!!!</div>
-    <b-button @click="onClick">Add {{name}}</b-button>
+    <b-button @click="getRange(),onClick()">Add {{name}}</b-button>
     <b-button @click="backbtn">Back</b-button>
   </div>
 </template>
@@ -198,26 +198,19 @@ export default {
       ]
     };
   },
-  watch: {
-    title: function() {
+  methods: {
+    getRange(){
       for (var i = 0; i < this.standardsArray.length; i++) {
-        if (this.standardsArray[i].title == this.title) {
+        if (this.standardsArray[i].title == this.name) {
           this.standarts = this.standardsArray[i].roadStandard;
         }
       }
       this.$emit("title", this.standarts);
-    }
-  },
-  methods: {
+    },
     backbtn() {
       this.$emit("backbtn", this.back);
     },
     onClick() {
-      for (var i = 0; i < this.standardsArray.length; i++) {
-        if (this.standardsArray[i].title == this.title) {
-          this.standarts = this.standardsArray[i].roadStandard;
-        }
-      }
       this.$emit("onClick", this.slider.value);
     },
     standards() {
